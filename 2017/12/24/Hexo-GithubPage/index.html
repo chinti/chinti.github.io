@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/mw690/a31d1330gy1fmsvgrobbjj207808dt8n.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/a31d1330gy1fmsvnmizfmj20ts07vq3c.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/a31d1330gy1fmswfds2p6j20hm01u0sn.jpg">
-<meta property="og:updated_time" content="2017-12-25T05:47:49.170Z">
+<meta property="og:updated_time" content="2017-12-25T05:49:06.172Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo+GithubPage">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;在了解到博客后一直想用它进行一些学习上的记录，但是由于各种各样的原因计划一直搁浅了。不过在接下来的时间，继大半年前接触到一些浅显的前端技术后将进行比较系统的学习，所以借着机会将博客搭建完成。其实网上关于搭建个人博客的教程很多，但是呢作为Markdown程序员的开篇之作还是很适宜的。">
@@ -337,8 +337,9 @@
 <ul>
 <li>生成公钥私钥<br><code>ssh-keygen -t rsa -C &quot;你的邮箱地址&quot;</code>，然后敲三下回车不用输入密码，之后会生成两个文件，分别为 <code>id_rsa</code>和<code>id_rsa.pub</code>，Windows10环境下，你可以在<code>C:\Users\username\.ssh</code>中找到。</li>
 <li>添加公钥到Github<br>用记事本打开<code>id_rsa.pub</code>，将内容复制，然后打开你的Github主页。在右上角头像处——&gt;<code>Setting</code>，进入个人设置界面。<br><img src="https://ws1.sinaimg.cn/mw690/a31d1330gy1fmsvgrobbjj207808dt8n.jpg" alt="Github主页"><br>进入<code>Setting</code>页面后，点击<code>SSH and GPG keys</code>进入子页面，然后点击<code>New SSH key</code>按钮。<br><img src="https://ws1.sinaimg.cn/large/a31d1330gy1fmsvnmizfmj20ts07vq3c.jpg" alt="设置界面"><br>最后，将公钥<code>id_rsa.pub</code>的内容粘贴到<code>Key</code>处，点击<code>Add SSH key</code>。</li>
-<li>验证<br>在git bash中输入：<code>ssh -T git@github.com</code>，等待提示。<br><img src="https://ws1.sinaimg.cn/large/a31d1330gy1fmswfds2p6j20hm01u0sn.jpg" alt="成功提示"><br><br><br><strong>3. NexT主题下载</strong><br>在GitBash下输入：<br><code>cd your-hexo-site</code><br><code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code><br>your-hexo-site 就是你的博客文件夹。<br>然后修改，Hexo配置文件启用主题。<br>进入博客根目录，执行：<code>vim _config.yml</code>,找到<code>theme：</code>，将它改为<code>theme: next</code>即可。</li>
+<li>验证<br>在git bash中输入：<code>ssh -T git@github.com</code>，等待提示。<br><img src="https://ws1.sinaimg.cn/large/a31d1330gy1fmswfds2p6j20hm01u0sn.jpg" alt="成功提示"><br><br></li>
 </ul>
+<p><strong>3. NexT主题下载</strong><br>在GitBash下输入：<br><code>cd your-hexo-site</code><br><code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code><br>your-hexo-site 就是你的博客文件夹。<br>然后修改，Hexo配置文件启用主题。<br>进入博客根目录，执行：<code>vim _config.yml</code>,找到<code>theme：</code>，将它改为<code>theme: next</code>即可。</p>
 <h2 id="使用Hexo部分"><a href="#使用Hexo部分" class="headerlink" title="使用Hexo部分"></a><strong>使用Hexo部分</strong></h2><p><strong>1. 常用命令</strong></p>
 <ul>
 <li>清除生成的文件和缓存：<code>hexo clean</code></li>
