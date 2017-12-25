@@ -93,7 +93,8 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/mw690/a31d1330gy1fmsvgrobbjj207808dt8n.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/a31d1330gy1fmsvnmizfmj20ts07vq3c.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/a31d1330gy1fmswfds2p6j20hm01u0sn.jpg">
-<meta property="og:updated_time" content="2017-12-25T06:02:35.366Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/a31d1330gy1fmt04w9vfij219h0ac0tn.jpg">
+<meta property="og:updated_time" content="2017-12-25T06:39:44.374Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo+GithubPage">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;在了解到博客后一直想用它进行一些学习上的记录，但是由于各种各样的原因计划一直搁浅了。不过在接下来的时间，继大半年前接触到一些浅显的前端技术后将进行比较系统的学习，所以借着机会将博客搭建完成。其实网上关于搭建个人博客的教程很多，但是呢作为Markdown程序员的开篇之作还是很适宜的。">
@@ -370,7 +371,7 @@
 <li>新建页面：<code>hexo new page &quot;title&quot;</code></li>
 <li>部署： <code>hexo d</code> 等待片刻你可以在浏览器输入：<em><code>username</code></em><code>.github.io</code>看看效果。</li>
 </ul>
-<p><strong>2. 常用Markdown语法</strong><br>在新建文章后可以发现在_post文件夹下出现了一个md文件，你可以对它进行编辑。可以采用vim直接编写，也可以通过一些实时观看效果的编辑器进行编写，可以自己百度。本人使用的是Cmd Markdown。这里仅介绍一些常用的Markdown语法。</p>
+<p><strong>2. 常用Markdown语法</strong><br>&#160; &#160; &#160;&#160;在新建文章后可以发现在_post文件夹下出现了一个md文件，你可以对它进行编辑。可以采用vim直接编写，也可以通过一些实时观看效果的编辑器进行编写，可以自己百度。本人使用的是Cmd Markdown。这里仅介绍一些常用的Markdown语法。</p>
 <ul>
 <li>标题：<code># 一级标题</code> <code>## 二级标题</code>类推可得最多六级标题</li>
 <li>列表：无序列表<code>- 文字</code> 有序列表<code>1. 文字</code></li>
@@ -381,7 +382,19 @@
 <li>空行：<code>&lt;br /&gt;</code></li>
 <li>空格：<code>&amp;#160; &amp;#160; &amp;#160;&amp;#160;</code></li>
 </ul>
-<p>了解以上这些，写出一篇文章应该可以了，更加完全的Markdown语法自行百度。</p>
+<p>&#160; &#160; &#160;&#160;了解以上这些，写出一篇文章应该可以了，更加完全的Markdown语法自行百度。</p>
+<h2 id="域名绑定"><a href="#域名绑定" class="headerlink" title="域名绑定"></a><strong>域名绑定</strong></h2><p><strong>1. 购买域名</strong><br>&#160; &#160; &#160;&#160;既然已经初步搭建好了自己的博客，但是是通过<em><code>username</code></em><code>.github.io</code>进行访问的。我们需要有一个自己独立的域名它看起来逼格高一些（并不会）。域名服务商有很多，国内国外的，我选择了腾讯云。<br>[注]接下来以在腾讯云购买域名为例，其他服务商应该也是大同小异。</p>
+<p><strong>2. 绑定域名</strong></p>
+<ul>
+<li>登陆腾讯云后台，进入我的域名——&gt;域名解析</li>
+<li>添加DNS记录</li>
+</ul>
+<p><img src="https://ws1.sinaimg.cn/large/a31d1330gy1fmt04w9vfij219h0ac0tn.jpg" alt="域名解析"></p>
+<ul>
+<li>在博客根目录里的public目录中新建CNAME文本，没有后缀名，可以新建一个txt把后缀删掉，编辑他，输入你的域名，保存并退出。将CNAME文本复制到source目录中一份。</li>
+<li>执行代码<code>hexo clean</code> <code>hexo d -g</code></li>
+<li>由于DNS记录需要一定时间生效，稍等片刻，用你的域名访问看看。</li>
+</ul>
 
       
     </div>
@@ -509,10 +522,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">标签</span>
-                
+                </a>
               </div>
             
 
@@ -545,7 +558,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a><strong>&#x524D;&#x8A00;</strong></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础配置部分"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x57FA;&#x7840;&#x914D;&#x7F6E;&#x90E8;&#x5206;" class="headerlink" title="&#x57FA;&#x7840;&#x914D;&#x7F6E;&#x90E8;&#x5206;"></a><strong>&#x57FA;&#x7840;&#x914D;&#x7F6E;&#x90E8;&#x5206;</strong></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Hexo部分"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4F7F;&#x7528;Hexo&#x90E8;&#x5206;" class="headerlink" title="&#x4F7F;&#x7528;Hexo&#x90E8;&#x5206;"></a><strong>&#x4F7F;&#x7528;Hexo&#x90E8;&#x5206;</strong></span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a><strong>&#x524D;&#x8A00;</strong></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础配置部分"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x57FA;&#x7840;&#x914D;&#x7F6E;&#x90E8;&#x5206;" class="headerlink" title="&#x57FA;&#x7840;&#x914D;&#x7F6E;&#x90E8;&#x5206;"></a><strong>&#x57FA;&#x7840;&#x914D;&#x7F6E;&#x90E8;&#x5206;</strong></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Hexo部分"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4F7F;&#x7528;Hexo&#x90E8;&#x5206;" class="headerlink" title="&#x4F7F;&#x7528;Hexo&#x90E8;&#x5206;"></a><strong>&#x4F7F;&#x7528;Hexo&#x90E8;&#x5206;</strong></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名绑定"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x57DF;&#x540D;&#x7ED1;&#x5B9A;" class="headerlink" title="&#x57DF;&#x540D;&#x7ED1;&#x5B9A;"></a><strong>&#x57DF;&#x540D;&#x7ED1;&#x5B9A;</strong></span></a></li></ol></div>
             
 
           </div>
