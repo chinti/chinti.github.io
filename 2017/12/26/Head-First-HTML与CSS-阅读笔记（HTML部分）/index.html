@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;在之前17年6月实习时，负责了管理公司论坛的任务，在此之中初步接触到了HTML和CSS方面的知识，但是学习的不够深入，现在是17年年底，打算重新开始学习这方面的知识，做一些巩固，为之后学习JavaScript与Jquery等打下基础。&amp;#160; &amp;#160; &amp;#160;&amp;#160;《Head First HTML与CSS》是一本对新手友好">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-26T12:10:58.390Z">
+<meta property="og:updated_time" content="2017-12-26T15:00:57.852Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Head First HTML与CSS 阅读笔记（HTML部分）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;在之前17年6月实习时，负责了管理公司论坛的任务，在此之中初步接触到了HTML和CSS方面的知识，但是学习的不够深入，现在是17年年底，打算重新开始学习这方面的知识，做一些巩固，为之后学习JavaScript与Jquery等打下基础。&amp;#160; &amp;#160; &amp;#160;&amp;#160;《Head First HTML与CSS》是一本对新手友好">
@@ -355,7 +355,7 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&#160; &#160; &#160;&#160;在之前17年6月实习时，负责了管理公司论坛的任务，在此之中初步接触到了HTML和CSS方面的知识，但是学习的不够深入，现在是17年年底，打算重新开始学习这方面的知识，做一些巩固，为之后学习JavaScript与Jquery等打下基础。<br>&#160; &#160; &#160;&#160;《Head First HTML与CSS》是一本对新手友好的前端入门书，虽然废话很多，插画也多的像连环画，但是作为第一本前端书籍是十分合适的，毕竟我认为保持高涨的兴趣才是进步的动力。<br>&#160; &#160; &#160;&#160;本书第一章到第六章介绍了HTML部分，第十二章讲述了HTML5的新特性，而十三到十五章则将HTML与CSS同时进行介绍。本篇博客主要整理HTML部分的知识点。<br><a id="more"></a></p>
 <p><strong>[注]书中所有代码可在<a href="http://wickedlysmart.com/hfhtmlcss/" target="_blank" rel="noopener">这里</a>找到。</strong></p>
 <hr>
-<h2 id="概念："><a href="#概念：" class="headerlink" title="概念："></a><strong>概念：</strong></h2><p><strong>简称</strong></p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>简称</strong></p>
 <ul>
 <li>HTML是<code>HyperText Markup Language</code>的缩写，译为超文本标记语言，用来建立网页的结构。</li>
 <li>CSS是<code>Cascading Style Sheets</code>的缩写，译为层叠样式表，用来控制HTML的表现。<br><br></li>
@@ -371,6 +371,9 @@
 <ul>
 <li><code>&lt;a href=&quot;链接地址&quot;&gt;链接文本&lt;/a&gt;</code></li>
 <li><code>href</code>是<code>hypertextreference</code>的缩写，意思为超文本引用。</li>
+<li><code>&lt;img&gt;</code>元素也可以放在<code>&lt;a&gt;</code>标记之间</li>
+<li><code>../</code>dotdot代表向上到父级文件夹</li>
+<li>内部网页采用相对路径，外部网页采用绝对路径</li>
 </ul>
 <p><strong>工具</strong><br>[注]学习环境是Windows10</p>
 <ul>
@@ -387,7 +390,7 @@
 <li>Safari<br>etc.</li>
 </ul>
 <hr>
-<h2 id="HTML首部"><a href="#HTML首部" class="headerlink" title="HTML首部"></a><strong>HTML首部</strong></h2><p>[注]元素=开始标记+内容+结束标记   </p>
+<h2 id="HTML首部"><a href="#HTML首部" class="headerlink" title="HTML首部"></a>HTML首部</h2><p>[注]元素=开始标记+内容+结束标记   </p>
 <ul>
 <li><p><code>&lt;html&gt;</code>标签<br><code>html</code> 告诉浏览器文件内容是HTML，使用：<code>&lt;html&gt;...&lt;/html&gt;</code>包围你的的HTML</p>
 </li>
@@ -401,7 +404,7 @@
 </ul>
 <p>[注]编写HTML时要把首部和页面主体分开。</p>
 <hr>
-<h2 id="HTML页面主体"><a href="#HTML页面主体" class="headerlink" title="HTML页面主体"></a><strong>HTML页面主体</strong></h2><ul>
+<h2 id="HTML页面主体"><a href="#HTML页面主体" class="headerlink" title="HTML页面主体"></a>HTML页面主体</h2><ul>
 <li><p>主体<br><code>body</code> web页面的主体元素</p>
 </li>
 <li><p>标题<br><code>h1 h2 h3 h4 h5 h6</code> 共六级标题，使用：<code>&lt;h1&gt;标题&lt;/h1&gt;</code></p>
@@ -410,7 +413,7 @@
 </li>
 </ul>
 <hr>
-<h2 id="图像"><a href="#图像" class="headerlink" title="图像"></a><strong>图像</strong></h2><ul>
+<h2 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h2><ul>
 <li><code>img</code>图片</li>
 <li><code>src</code>属性，指定img的源文件地址。可以指定相对地址，该属性必须填写。</li>
 </ul>
@@ -586,7 +589,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念："><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6982;&#x5FF5;&#xFF1A;" class="headerlink" title="&#x6982;&#x5FF5;&#xFF1A;"></a><strong>&#x6982;&#x5FF5;&#xFF1A;</strong></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML首部"><span class="nav-number">3.</span> <span class="nav-text"><a href="#HTML&#x9996;&#x90E8;" class="headerlink" title="HTML&#x9996;&#x90E8;"></a><strong>HTML&#x9996;&#x90E8;</strong></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML页面主体"><span class="nav-number">4.</span> <span class="nav-text"><a href="#HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;" class="headerlink" title="HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;"></a><strong>HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;</strong></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x56FE;&#x50CF;" class="headerlink" title="&#x56FE;&#x50CF;"></a><strong>&#x56FE;&#x50CF;</strong></span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6982;&#x5FF5;" class="headerlink" title="&#x6982;&#x5FF5;"></a>&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML首部"><span class="nav-number">3.</span> <span class="nav-text"><a href="#HTML&#x9996;&#x90E8;" class="headerlink" title="HTML&#x9996;&#x90E8;"></a>HTML&#x9996;&#x90E8;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML页面主体"><span class="nav-number">4.</span> <span class="nav-text"><a href="#HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;" class="headerlink" title="HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;"></a>HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x56FE;&#x50CF;" class="headerlink" title="&#x56FE;&#x50CF;"></a>&#x56FE;&#x50CF;</span></a></li></ol></div>
             
 
           </div>
