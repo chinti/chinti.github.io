@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;在之前17年6月实习时，负责了管理公司论坛的任务，在此之中初步接触到了HTML和CSS方面的知识，但是学习的不够深入，现在是17年年底，打算重新开始学习这方面的知识，做一些巩固，为之后学习JavaScript与Jquery等打下基础。&amp;#160; &amp;#160; &amp;#160;&amp;#160;《Head First HTML与CSS》是一本对新手友好">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-26T15:00:57.852Z">
+<meta property="og:updated_time" content="2017-12-27T15:10:05.932Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Head First HTML与CSS 阅读笔记（HTML部分）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;在之前17年6月实习时，负责了管理公司论坛的任务，在此之中初步接触到了HTML和CSS方面的知识，但是学习的不够深入，现在是17年年底，打算重新开始学习这方面的知识，做一些巩固，为之后学习JavaScript与Jquery等打下基础。&amp;#160; &amp;#160; &amp;#160;&amp;#160;《Head First HTML与CSS》是一本对新手友好">
@@ -352,8 +352,8 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&#160; &#160; &#160;&#160;在之前17年6月实习时，负责了管理公司论坛的任务，在此之中初步接触到了HTML和CSS方面的知识，但是学习的不够深入，现在是17年年底，打算重新开始学习这方面的知识，做一些巩固，为之后学习JavaScript与Jquery等打下基础。<br>&#160; &#160; &#160;&#160;《Head First HTML与CSS》是一本对新手友好的前端入门书，虽然废话很多，插画也多的像连环画，但是作为第一本前端书籍是十分合适的，毕竟我认为保持高涨的兴趣才是进步的动力。<br>&#160; &#160; &#160;&#160;本书第一章到第六章介绍了HTML部分，第十二章讲述了HTML5的新特性，而十三到十五章则将HTML与CSS同时进行介绍。本篇博客主要整理HTML部分的知识点。<br><a id="more"></a></p>
-<p><strong>[注]书中所有代码可在<a href="http://wickedlysmart.com/hfhtmlcss/" target="_blank" rel="noopener">这里</a>找到。</strong></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&#160; &#160; &#160;&#160;在之前17年6月实习时，负责了管理公司论坛的任务，在此之中初步接触到了HTML和CSS方面的知识，但是学习的不够深入，现在是17年年底，打算重新开始学习这方面的知识，做一些巩固，为之后学习JavaScript与Jquery等打下基础。<br>&#160; &#160; &#160;&#160;《Head First HTML与CSS》是一本对新手友好的前端入门书，虽然废话很多，插画也多的像连环画，但是作为第一本前端书籍是十分合适的，毕竟我认为保持高涨的兴趣才是进步的动力。<br>&#160; &#160; &#160;&#160;本书第一章到第六章介绍了HTML部分（第五章有部分发布的知识，暂且略过），第十二章讲述了HTML5的新特性，而十三到十五章则将HTML与CSS同时进行介绍。本篇博客主要整理HTML部分的知识点。<br><a id="more"></a></p>
+<p><strong>[注]书中所有代码可在<a href="http://wickedlysmart.com/hfhtmlcss/" target="_blank" rel="noopener">代码地址</a>找到。</strong></p>
 <hr>
 <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>简称</strong></p>
 <ul>
@@ -365,15 +365,28 @@
 <li>由于浏览器会忽略制表符、回车和大部分空格，但是为了提高HTML文档的可读性，利用这些会很有帮助。</li>
 <li>按照一定标准编写html，可以减少不同浏览器之间的差异度甚至不兼容。</li>
 <li>属性的写法都是一样的：首先是属性名，后面一个等号，然后是双引号括起来的属性值，不严谨的写法可能会出现问题。</li>
+<li>文件夹层数没有限制，但是过多的情况下，可能说明网站组织太复杂。</li>
+<li>尽可能使用元素告诉浏览器你的内容的含义</li>
+<li>web服务器默认文件名为”index.html”或”default.htm”，根据不同服务器。没有斜线的情况下，如果该目录存在，浏览器会自动添加末尾的斜线</li>
+<li>端口默认为80</li>
 </ul>
 <p><strong>嵌套</strong></p>
-<p><strong>超链接</strong></p>
 <ul>
-<li><code>&lt;a href=&quot;链接地址&quot;&gt;链接文本&lt;/a&gt;</code></li>
-<li><code>href</code>是<code>hypertextreference</code>的缩写，意思为超文本引用。</li>
-<li><code>&lt;img&gt;</code>元素也可以放在<code>&lt;a&gt;</code>标记之间</li>
-<li><code>../</code>dotdot代表向上到父级文件夹</li>
-<li>内部网页采用相对路径，外部网页采用绝对路径</li>
+<li>根元素，子元素</li>
+<li>了解如何嵌套，可以避免标记不匹配，不要越界</li>
+</ul>
+<p><strong>元素</strong></p>
+<ul>
+<li>块（block）元素：特立独行,<code>&lt;h1&gt;、&lt;h2&gt;、...、&lt;h6&gt;、&lt;p&gt;和&lt;blockquote&gt;</code></li>
+<li>内联（inline）元素：随波逐流,<code>&lt;q&gt;、&lt;a&gt;和&lt;em&gt;</code></li>
+<li>void元素：没有实际内容，可以使用简写，提高效率</li>
+</ul>
+<p><strong>特殊字符</strong></p>
+<ul>
+<li><code>&lt;</code> 可以使用<code>&amp;lt</code>代替</li>
+<li><code>&gt;</code> 可以使用<code>&amp;gt</code>代替</li>
+<li><code>&amp;</code> 可以使用<code>&amp;amp</code>代替</li>
+<li>更多常见特殊字符可以在<a href="http://www.w3school.com.cn/tags/html_ref_entities.html" target="_blank" rel="noopener">常见字符地址</a>（书上的404了）找到，如果需要更为详尽的字符实体清单可以在<a href="http://www.unicode.org/charts/" target="_blank" rel="noopener">详尽字符地址</a>找到。</li>
 </ul>
 <p><strong>工具</strong><br>[注]学习环境是Windows10</p>
 <ul>
@@ -392,7 +405,7 @@
 <hr>
 <h2 id="HTML首部"><a href="#HTML首部" class="headerlink" title="HTML首部"></a>HTML首部</h2><p>[注]元素=开始标记+内容+结束标记   </p>
 <ul>
-<li><p><code>&lt;html&gt;</code>标签<br><code>html</code> 告诉浏览器文件内容是HTML，使用：<code>&lt;html&gt;...&lt;/html&gt;</code>包围你的的HTML</p>
+<li><p><code>&lt;html&gt;</code>标签，它总会是一个根元素<br><code>html</code> 告诉浏览器文件内容是HTML，使用：<code>&lt;html&gt;...&lt;/html&gt;</code>包围你的的HTML</p>
 </li>
 <li><p>头部<br><code>head</code> 包含Web页面的有关信息，只能放置<code>&lt;title&gt;&lt;meta&gt;&lt;style&gt;</code>元素。</p>
 <ul>
@@ -411,11 +424,47 @@
 </li>
 <li><p>段落<br><code>p</code> 块元素，使用：<code>&lt;p&gt;...&lt;/p&gt;</code></p>
 </li>
+<li><p>超链接</p>
+<ul>
+<li><code>&lt;a href=&quot;链接地址&quot;&gt;链接文本&lt;/a&gt;</code></li>
+<li><code>href</code>是<code>hypertextreference</code>的缩写，意思为超文本引用。</li>
+<li><code>&lt;img&gt;</code>元素也可以放在<code>&lt;a&gt;</code>标记之间</li>
+<li><code>../</code>dotdot代表向上到父级文件夹</li>
+<li><code>title</code> 提供链接信息</li>
+<li>内部网页采用相对路径，外部网页采用绝对路径</li>
+<li>默认的，这个标签具有下划线且可以点击</li>
+<li>保证链接标签简洁且有意义（不要使用这里或者这一页的标签），在title属性中提供额外信息，且不要将链接放在一起</li>
+</ul>
+</li>
+<li><p>强调<br><code>em</code>内联元素，使用：<code>&lt;em&gt;...&lt;/em&gt;</code></p>
+</li>
+<li><p>换行<br><code>br</code>用于换行，使用<code>&lt;br&gt;</code>，它是一个void元素，处理XHTML时可以用<code>&lt;/br&gt;</code></p>
+</li>
+<li><p>代码<br><code>code</code>，块元素，用来显示计算机程序代码</p>
+</li>
+<li><p>加粗<br><code>strong</code>，内联，用来标记特别强调的文本</p>
+</li>
+<li><p>原样显示<br><code>pre</code>，希望浏览器按你输入的方式原样显示文本，使用这个元素指定文本格式</p>
+</li>
+<li><p>时间<br><code>time</code>，这个元素告诉浏览器这个内容是个日期或时间</p>
+</li>
 </ul>
 <hr>
 <h2 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h2><ul>
 <li><code>img</code>图片</li>
-<li><code>src</code>属性，指定img的源文件地址。可以指定相对地址，该属性必须填写。</li>
+<li><code>src</code>属性，指定img的源文件地址。可以指定相对地址，该属性必须填写，与href属性类似。</li>
+</ul>
+<hr>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
+<li><code>&lt;q&gt;</code> 短引用，不是所有浏览器都会在<code>&lt;q&gt;</code>的内容两边加上引号。去掉双引号用<code>&lt;q&gt;</code>可以让页面更加结构化，更有意义。是一个内联元素。</li>
+<li><code>&lt;blockquote&gt;</code>长引用，需要被单独显示。是一个块元素。</li>
+</ul>
+<hr>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><ul>
+<li><code>li</code>列表项 </li>
+<li><code>ol</code>有序列表，ordered list的简写，由浏览器编号</li>
+<li><code>ul</code>无序列表，unordered list的简写</li>
+<li>第一步，每个列表项都要放在单独的<code>&lt;li&gt;</code>元素中，第二步，用<code>&lt;ol&gt;</code>或<code>&lt;ul&gt;</code>包围所有列表项</li>
 </ul>
 
       
@@ -532,7 +581,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -589,7 +638,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6982;&#x5FF5;" class="headerlink" title="&#x6982;&#x5FF5;"></a>&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML首部"><span class="nav-number">3.</span> <span class="nav-text"><a href="#HTML&#x9996;&#x90E8;" class="headerlink" title="HTML&#x9996;&#x90E8;"></a>HTML&#x9996;&#x90E8;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML页面主体"><span class="nav-number">4.</span> <span class="nav-text"><a href="#HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;" class="headerlink" title="HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;"></a>HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x56FE;&#x50CF;" class="headerlink" title="&#x56FE;&#x50CF;"></a>&#x56FE;&#x50CF;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6982;&#x5FF5;" class="headerlink" title="&#x6982;&#x5FF5;"></a>&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML首部"><span class="nav-number">3.</span> <span class="nav-text"><a href="#HTML&#x9996;&#x90E8;" class="headerlink" title="HTML&#x9996;&#x90E8;"></a>HTML&#x9996;&#x90E8;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML页面主体"><span class="nav-number">4.</span> <span class="nav-text"><a href="#HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;" class="headerlink" title="HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;"></a>HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x56FE;&#x50CF;" class="headerlink" title="&#x56FE;&#x50CF;"></a>&#x56FE;&#x50CF;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x5F15;&#x7528;" class="headerlink" title="&#x5F15;&#x7528;"></a>&#x5F15;&#x7528;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">7.</span> <span class="nav-text"><a href="#&#x5217;&#x8868;" class="headerlink" title="&#x5217;&#x8868;"></a>&#x5217;&#x8868;</span></a></li></ol></div>
             
 
           </div>
