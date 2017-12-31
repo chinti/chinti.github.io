@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-31T14:51:05.886Z">
+<meta property="og:updated_time" content="2017-12-31T15:59:12.380Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Head First HTML与CSS 阅读笔记（CSS部分）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
@@ -356,6 +356,7 @@
 <hr>
 <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>常识</strong></p>
 <ul>
+<li><a href="http://jigsaw.w3.org/css-validator/" target="_blank" rel="noopener">CSS验证工具</a></li>
 <li>css中的每一个语句包括一个场所（如卧室），以及这个场所的一个属性（如窗帘或地毯），还要应用到这个属性的一个样式（如蓝色，或者1英寸的瓷砖），使用：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p&#123; //需要增加样式的元素 </span><br><span class="line">background-color: red; //指定样式属性</span><br><span class="line">border: 1px solid gray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -375,13 +376,11 @@
 <hr>
 <h2 id="选择器与类"><a href="#选择器与类" class="headerlink" title="选择器与类"></a>选择器与类</h2><ul>
 <li>只能为<code>body</code>添加样式</li>
-<li>类选择器，先选择类中的元素，再用”.”指定一个类<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;p class = &quot;greentea&quot;&gt;</span><br><span class="line">...</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<li><p>类选择器，先选择类中的元素，再用”.”指定一个类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;p class = &quot;greentea&quot;&gt;</span><br><span class="line">...</span><br><span class="line">&lt;/p&gt;    //HTML</span><br><span class="line"></span><br><span class="line">p.greentea&#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;       //CSS</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p.greentea&#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
 <li><p>合并类规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">blockquote.greentea,p.greentea&#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;   /*CSS</span><br><span class="line">&lt;blockquote class = &quot;greentea&quot;&gt; /*HTML</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">blockquote.greentea,p.greentea&#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;   //CSS</span><br><span class="line"></span><br><span class="line">&lt;blockquote class = &quot;greentea&quot;&gt; //HTML</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>省略所有元素名，只有一个点，即可运用到全部成员</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.greentea&#123;</span><br><span class="line">    color: green；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -405,11 +404,28 @@
 </ul>
 <hr>
 <h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p><strong><code>color</code> 颜色</strong></p>
+<ul>
+<li><code>color</code> 设置文本元素的字体颜色</li>
+<li><code>background-color</code> 控制元素的背景颜色</li>
+</ul>
 <p><strong><code>font</code> 字体</strong></p>
 <ul>
 <li><code>font-family</code>字体样式<br><code>sans-serif</code>没有衬线 <code>serif</code>有衬线</li>
+<li><code>font-style</code> 用来设置斜体文本</li>
+<li><code>font-size</code> 用来控制文本大小</li>
+<li><code>font-weight</code> 用来设置粗体</li>
 </ul>
 <p><strong><code>border</code>边框</strong></p>
+<ul>
+<li><code>top</code> 控制元素顶部位置</li>
+<li><code>left</code> 指定元素左边位置</li>
+<li><code>padding</code> 内边距</li>
+<li><code>line-height</code> 行间距</li>
+<li><code>background-image</code> 元素后面放置一个图像</li>
+<li><code>letter-spacing</code> 字母之间间距</li>
+<li><code>list-style</code> 列表外观</li>
+<li><code>text-align</code> 右对齐</li>
+</ul>
 
       
     </div>
