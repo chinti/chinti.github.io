@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT, Chinti" />
+  <meta name="keywords" content="CSS," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="ChinTi&#39;s Blog">
-<meta property="og:url" content="http://chinti.xyz/index.html">
+<meta name="description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Head First HTML与CSS 阅读笔记（CSS部分）">
+<meta property="og:url" content="http://chinti.xyz/2017/12/31/Head-First-HTML与CSS-阅读笔记（CSS部分）/index.html">
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
+<meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-31T14:51:05.886Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ChinTi&#39;s Blog">
+<meta name="twitter:title" content="Head First HTML与CSS 阅读笔记（CSS部分）">
+<meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://chinti.xyz/"/>
+  <link rel="canonical" href="http://chinti.xyz/2017/12/31/Head-First-HTML与CSS-阅读笔记（CSS部分）/"/>
 
 
 
 
 
-  <title>ChinTi's Blog</title>
+  <title>Head First HTML与CSS 阅读笔记（CSS部分） | ChinTi's Blog</title>
   
 
 
@@ -140,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -244,9 +248,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -276,9 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/31/Head-First-HTML与CSS-阅读笔记（CSS部分）/" itemprop="url">Head First HTML与CSS 阅读笔记（CSS部分）</a></h1>
+          <h1 class="post-title" itemprop="name headline">Head First HTML与CSS 阅读笔记（CSS部分）</h1>
         
 
         <div class="post-meta">
@@ -350,16 +352,65 @@
       
 
       
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&#160; &#160; &#160;&#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为<a href="http://chinti.github.io/2017/12/26/Head-First-HTML%E4%B8%8ECSS-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%EF%BC%88HTML%E9%83%A8%E5%88%86%EF%BC%89/" target="_blank" rel="noopener">Head First HTML与CSS 阅读笔记（HTML部分）</a>。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/31/Head-First-HTML与CSS-阅读笔记（CSS部分）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&#160; &#160; &#160;&#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为<a href="http://chinti.github.io/2017/12/26/Head-First-HTML%E4%B8%8ECSS-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%EF%BC%88HTML%E9%83%A8%E5%88%86%EF%BC%89/" target="_blank" rel="noopener">Head First HTML与CSS 阅读笔记（HTML部分）</a>。<br><a id="more"></a></p>
+<hr>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>常识</strong></p>
+<ul>
+<li>css中的每一个语句包括一个场所（如卧室），以及这个场所的一个属性（如窗帘或地毯），还要应用到这个属性的一个样式（如蓝色，或者1英寸的瓷砖），使用：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p&#123; //需要增加样式的元素 </span><br><span class="line">background-color: red; //指定样式属性</span><br><span class="line">border: 1px solid gray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>使用方式</strong></p>
+<ul>
+<li><p>在html文件中指定样式，需要在<code>&lt;head&gt;</code>元素中增加<code>&lt;style&gt;</code>，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">p&#123;    //选择器  p选择器会选择HTML中所有的段落</span><br><span class="line">    color: maroo;  //color 代表文本颜色 maroon 茶红色</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>外部链接，将规则放在XXX.css中，css文件通常被称为”样式表”<code>stylesheet</code>,然后不再需要<code>style</code>元素，将其删除，然后添加外部链接，例如<code>&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;lounge.css&quot;&gt;</code></p>
+</li>
+<li><p><code>link</code>用于链入外部信息，<code>rel</code>属性制定了链接的文件关系，这里是样式表所以是<code>stylesheet</code></p>
+</li>
+<li><p>规则合并，共通样式合并起来写，特定样式写在另一个规则里</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">h1，h2&#123;</span><br><span class="line">    font-family: sans-serif;</span><br><span class="line">    color: gray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="选择器与类"><a href="#选择器与类" class="headerlink" title="选择器与类"></a>选择器与类</h2><ul>
+<li>只能为<code>body</code>添加样式</li>
+<li>类选择器，先选择类中的元素，再用”.”指定一个类<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;p class = &quot;greentea&quot;&gt;</span><br><span class="line">...</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p.greentea&#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>合并类规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">blockquote.greentea,p.greentea&#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;   /*CSS</span><br><span class="line">&lt;blockquote class = &quot;greentea&quot;&gt; /*HTML</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>省略所有元素名，只有一个点，即可运用到全部成员</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.greentea&#123;</span><br><span class="line">    color: green；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>一个元素可以拥有多个类，<code>&lt;p class = &quot;greentea raspberry blueberry&quot;&gt;</code></p>
+</li>
+</ul>
+<hr>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><ul>
+<li>元素能从他们的父元素继承一部分样式</li>
+<li>例如，<code>font-family</code></li>
+<li>继承的样式可以被覆盖</li>
+<li>如果样式会影响文本的外观，那么所有的这样子的样式都会被继承，比如：<code>color、font-family、font-size、font-weight、font-style</code>等等</li>
+<li>其他的一般都不能被继承，如果不确定可以尝试一下</li>
+<li><code>/*  */</code>注释</li>
+</ul>
+<hr>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><ul>
+<li>可以用于定义一类元素</li>
+<li>首先，为HTML中的元素添加一个class属性，其次，在CSS中选择这个类</li>
+</ul>
+<hr>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p><strong><code>color</code> 颜色</strong></p>
+<p><strong><code>font</code> 字体</strong></p>
+<ul>
+<li><code>font-family</code>字体样式<br><code>sans-serif</code>没有衬线 <code>serif</code>有衬线</li>
+</ul>
+<p><strong><code>border</code>边框</strong></p>
+
       
     </div>
     
@@ -374,284 +425,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chinti.xyz/2017/12/26/Head-First-HTML与CSS-阅读笔记（HTML部分）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chinti">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChinTi's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/26/Head-First-HTML与CSS-阅读笔记（HTML部分）/" itemprop="url">Head First HTML与CSS 阅读笔记（HTML部分）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-26T12:56:11+08:00">
-                2017-12-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/CSS/" rel="tag"># CSS</a>
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&#160; &#160; &#160;&#160;在之前17年6月实习时，负责了管理公司论坛的任务，在此之中初步接触到了HTML和CSS方面的知识，但是学习的不够深入，现在是17年年底，打算重新开始学习这方面的知识，做一些巩固，为之后学习JavaScript与Jquery等打下基础。<br>&#160; &#160; &#160;&#160;《Head First HTML与CSS》是一本对新手友好的前端入门书，虽然废话很多，插画也多的像连环画，但是作为第一本前端书籍是十分合适的，毕竟我认为保持高涨的兴趣才是进步的动力。<br>&#160; &#160; &#160;&#160;本书第一章到第六章介绍了HTML部分（第五章有部分发布的知识，暂且略过），第十二章讲述了HTML5的新特性，而十三到十五章则将HTML与CSS同时进行介绍。本篇博客主要整理HTML部分的知识点。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/26/Head-First-HTML与CSS-阅读笔记（HTML部分）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/26/Head-First-HTML与CSS-阅读笔记（HTML部分）/" rel="next" title="Head First HTML与CSS 阅读笔记（HTML部分）">
+                <i class="fa fa-chevron-left"></i> Head First HTML与CSS 阅读笔记（HTML部分）
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chinti.xyz/2017/12/24/Hexo-GithubPage博客搭建/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chinti">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChinTi's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/24/Hexo-GithubPage博客搭建/" itemprop="url">Hexo+GithubPage博客搭建</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-24T21:19:26+08:00">
-                2017-12-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h2><p>&#160; &#160; &#160;&#160;在了解到博客后一直想用它进行一些学习上的记录，但是由于各种各样的原因计划一直搁浅了。不过在接下来的时间，继大半年前接触到一些浅显的前端技术后将进行比较系统的学习，所以借着机会将博客搭建完成。其实网上关于搭建个人博客的教程很多，但是呢作为Markdown程序员的开篇之作还是很适宜的。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/24/Hexo-GithubPage博客搭建/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -661,10 +464,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -672,6 +476,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -692,8 +500,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -755,6 +572,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6982;&#x5FF5;" class="headerlink" title="&#x6982;&#x5FF5;"></a>&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择器与类"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x9009;&#x62E9;&#x5668;&#x4E0E;&#x7C7B;" class="headerlink" title="&#x9009;&#x62E9;&#x5668;&#x4E0E;&#x7C7B;"></a>&#x9009;&#x62E9;&#x5668;&#x4E0E;&#x7C7B;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7EE7;&#x627F;" class="headerlink" title="&#x7EE7;&#x627F;"></a>&#x7EE7;&#x627F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x7C7B;" class="headerlink" title="&#x7C7B;"></a>&#x7C7B;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x5C5E;&#x6027;" class="headerlink" title="&#x5C5E;&#x6027;"></a>&#x5C5E;&#x6027;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -895,6 +728,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
