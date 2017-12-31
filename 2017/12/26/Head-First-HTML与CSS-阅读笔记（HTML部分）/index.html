@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;在之前17年6月实习时，负责了管理公司论坛的任务，在此之中初步接触到了HTML和CSS方面的知识，但是学习的不够深入，现在是17年年底，打算重新开始学习这方面的知识，做一些巩固，为之后学习JavaScript与Jquery等打下基础。&amp;#160; &amp;#160; &amp;#160;&amp;#160;《Head First HTML与CSS》是一本对新手友好">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-27T15:10:05.932Z">
+<meta property="og:updated_time" content="2017-12-31T08:47:24.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Head First HTML与CSS 阅读笔记（HTML部分）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;在之前17年6月实习时，负责了管理公司论坛的任务，在此之中初步接触到了HTML和CSS方面的知识，但是学习的不够深入，现在是17年年底，打算重新开始学习这方面的知识，做一些巩固，为之后学习JavaScript与Jquery等打下基础。&amp;#160; &amp;#160; &amp;#160;&amp;#160;《Head First HTML与CSS》是一本对新手友好">
@@ -360,7 +360,7 @@
 <li>HTML是<code>HyperText Markup Language</code>的缩写，译为超文本标记语言，用来建立网页的结构。</li>
 <li>CSS是<code>Cascading Style Sheets</code>的缩写，译为层叠样式表，用来控制HTML的表现。<br><br></li>
 </ul>
-<p><strong>规范</strong></p>
+<p><strong>常识</strong></p>
 <ul>
 <li>由于浏览器会忽略制表符、回车和大部分空格，但是为了提高HTML文档的可读性，利用这些会很有帮助。</li>
 <li>按照一定标准编写html，可以减少不同浏览器之间的差异度甚至不兼容。</li>
@@ -431,6 +431,8 @@
 <li><code>&lt;img&gt;</code>元素也可以放在<code>&lt;a&gt;</code>标记之间</li>
 <li><code>../</code>dotdot代表向上到父级文件夹</li>
 <li><code>title</code> 提供链接信息</li>
+<li><code>id</code> 用来为目标创建标识符，必须是唯一的，例：<code>&lt;h2 id=&quot;chai&quot;&gt;Chai Tea&lt;/h2&gt;</code>,然后使用方法如下：<code>&lt;a href=&quot;index.html&quot;#chai&gt;See Chai Tea&lt;/a&gt;</code></li>
+<li><code>target</code>属性，使用：<code>target=&quot;_blank&quot;</code>代表在新窗口打开</li>
 <li>内部网页采用相对路径，外部网页采用绝对路径</li>
 <li>默认的，这个标签具有下划线且可以点击</li>
 <li>保证链接标签简洁且有意义（不要使用这里或者这一页的标签），在title属性中提供额外信息，且不要将链接放在一起</li>
@@ -450,9 +452,24 @@
 </li>
 </ul>
 <hr>
-<h2 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h2><ul>
-<li><code>img</code>图片</li>
+<h2 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h2><p><strong><code>img</code>图片</strong></p>
+<ul>
 <li><code>src</code>属性，指定img的源文件地址。可以指定相对地址，该属性必须填写，与href属性类似。</li>
+<li><code>alt</code>属性，指定描述这个图像的一些文字，在图像无法显示时替代显示文本，可用于帮助视力障碍的用户</li>
+<li><code>width</code>属性，指定宽度</li>
+<li><code>height</code>属性，指定高度，高度与宽度都是由像素数指定</li>
+</ul>
+<p><strong>图片格式</strong></p>
+<ul>
+<li>常见格式为：JPEG、PNG和GIF</li>
+<li>照片和复杂图像使用JPEG，单色图像、logo和几何图形使用PNG或GIF</li>
+</ul>
+<p><strong>规范</strong></p>
+<ul>
+<li>指定长宽，可以使页面在显示图像之前就建立布局</li>
+<li>指定长宽可以用于缩放图像，但它会先获取完整图像</li>
+<li>浏览器宽度通常被设为800到1280像素之间，所以图像宽度要小于800</li>
+<li>可以用photoshop等图像编辑软件调整图片大小</li>
 </ul>
 <hr>
 <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
@@ -465,6 +482,22 @@
 <li><code>ol</code>有序列表，ordered list的简写，由浏览器编号</li>
 <li><code>ul</code>无序列表，unordered list的简写</li>
 <li>第一步，每个列表项都要放在单独的<code>&lt;li&gt;</code>元素中，第二步，用<code>&lt;ol&gt;</code>或<code>&lt;ul&gt;</code>包围所有列表项</li>
+</ul>
+<hr>
+<h2 id="HTML5及工业标准"><a href="#HTML5及工业标准" class="headerlink" title="HTML5及工业标准"></a>HTML5及工业标准</h2><p><strong>HTML5 doctype</strong></p>
+<p>-文档类型定义</p>
+<ul>
+<li><code>&lt;!doctype html&gt;</code> 从html5开始不再有版本号，是一个动态的标准，且具有向后兼容性。HTML5主要是添加了些新东西，不要为了使用新特性而使用新特性，应当物尽其用，最合适的东西干最适合的活。</li>
+</ul>
+<p><strong>字符编码</strong></p>
+<ul>
+<li><code>meta</code>，使用:<code>&lt;meta charset=&quot;utf-8&quot;&gt;</code></li>
+<li>指定<code>doctype</code>以及使用<code>&lt;meta&gt;</code>指定字符编码是义务必须履行</li>
+<li><code>meta</code>放在<code>head</code>中</li>
+</ul>
+<p><strong>W3C验证工具</strong></p>
+<ul>
+<li><a href="http://validator.w3.org" target="_blank" rel="noopener">W3C验证工具</a></li>
 </ul>
 
       
@@ -638,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6982;&#x5FF5;" class="headerlink" title="&#x6982;&#x5FF5;"></a>&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML首部"><span class="nav-number">3.</span> <span class="nav-text"><a href="#HTML&#x9996;&#x90E8;" class="headerlink" title="HTML&#x9996;&#x90E8;"></a>HTML&#x9996;&#x90E8;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML页面主体"><span class="nav-number">4.</span> <span class="nav-text"><a href="#HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;" class="headerlink" title="HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;"></a>HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x56FE;&#x50CF;" class="headerlink" title="&#x56FE;&#x50CF;"></a>&#x56FE;&#x50CF;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x5F15;&#x7528;" class="headerlink" title="&#x5F15;&#x7528;"></a>&#x5F15;&#x7528;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">7.</span> <span class="nav-text"><a href="#&#x5217;&#x8868;" class="headerlink" title="&#x5217;&#x8868;"></a>&#x5217;&#x8868;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6982;&#x5FF5;" class="headerlink" title="&#x6982;&#x5FF5;"></a>&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML首部"><span class="nav-number">3.</span> <span class="nav-text"><a href="#HTML&#x9996;&#x90E8;" class="headerlink" title="HTML&#x9996;&#x90E8;"></a>HTML&#x9996;&#x90E8;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML页面主体"><span class="nav-number">4.</span> <span class="nav-text"><a href="#HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;" class="headerlink" title="HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;"></a>HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x56FE;&#x50CF;" class="headerlink" title="&#x56FE;&#x50CF;"></a>&#x56FE;&#x50CF;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x5F15;&#x7528;" class="headerlink" title="&#x5F15;&#x7528;"></a>&#x5F15;&#x7528;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">7.</span> <span class="nav-text"><a href="#&#x5217;&#x8868;" class="headerlink" title="&#x5217;&#x8868;"></a>&#x5217;&#x8868;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5及工业标准"><span class="nav-number">8.</span> <span class="nav-text"><a href="#HTML5&#x53CA;&#x5DE5;&#x4E1A;&#x6807;&#x51C6;" class="headerlink" title="HTML5&#x53CA;&#x5DE5;&#x4E1A;&#x6807;&#x51C6;"></a>HTML5&#x53CA;&#x5DE5;&#x4E1A;&#x6807;&#x51C6;</span></a></li></ol></div>
             
 
           </div>
