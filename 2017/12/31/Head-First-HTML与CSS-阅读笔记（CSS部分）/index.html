@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-31T15:59:12.380Z">
+<meta property="og:updated_time" content="2018-01-03T13:08:06.870Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Head First HTML与CSS 阅读笔记（CSS部分）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
@@ -405,15 +405,53 @@
 <hr>
 <h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p><strong><code>color</code> 颜色</strong></p>
 <ul>
-<li><code>color</code> 设置文本元素的字体颜色</li>
+<li><code>color</code> 设置文本元素的前景色</li>
 <li><code>background-color</code> 控制元素的背景颜色</li>
+<li>常用颜色<code>Aqua Black Blue Fuchsia Gray Green Lime Maroon Navy Olive Purple Red Sliver Teal White Yellow</code>CSS只定义了16个基本颜色和大约150个颜色名</li>
+<li><p>按红绿蓝指定颜色，例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">body&#123;</span><br><span class="line">    background-color: rgb(80%, 40%, 0%);</span><br><span class="line">&#125;//数字也可以指定为0到255之间的一个数值</span><br><span class="line">body&#123;</span><br><span class="line">    background-color: rgb(204, 102, 0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>十六进制码，前两位表示红色，中间两位表示绿色，最后两位表示蓝色,且如果每两位数字都相同，那可以缩写成类似#cb0的写法</p>
+</li>
+<li>可以利用诸如PS等应用找到Web颜色，或者使用<a href="http://en.wikipedia.org/wiki/web_colors" target="_blank" rel="noopener">在线颜色表</a></li>
 </ul>
 <p><strong><code>font</code> 字体</strong></p>
 <ul>
-<li><code>font-family</code>字体样式<br><code>sans-serif</code>没有衬线 <code>serif</code>有衬线</li>
-<li><code>font-style</code> 用来设置斜体文本</li>
-<li><code>font-size</code> 用来控制文本大小</li>
-<li><code>font-weight</code> 用来设置粗体</li>
+<li><p><code>font-family</code>字体样式</p>
+<ul>
+<li>5个字体系列：<code>sans-serif、serif、monospace、cursive、fantasy</code></li>
+<li><code>Serif</code>字体系列，<code>Times、Times New Roman 、Georgia</code>，具有衬线，常见到报纸上的排版</li>
+<li><code>Sans-serif</code>字体系列，<code>Verdana、Arial Black、Trebuchet MS、Arial、Geneva</code>，没有衬线，在计算机屏幕上更容易读</li>
+<li><code>Monospace</code>字体系列，<code>Courier、Courier New、Andale Mono</code>字体包含固定宽度的字符，主要用于软件代码显示</li>
+<li><code>Cursive</code>字体系列，<code>Comic Sans、Apple Chancery</code>，一些看似手写的字体，常在标题里看到</li>
+<li><code>Fantasy</code>字体系列，<code>Last Ninja、Impact</code>，某种风格的装饰性字体</li>
+<li>使用CSS指定字体系列，<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">body&#123;</span><br><span class="line">    font-family: Verdana, Geneva, Arial, sans-serif;</span><br><span class="line">&#125;//浏览器从第一个开始找，没有的话就往后，还没有就使用浏览器默认的sans-serif字体</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>font-style</code> 用来设置斜体文本，<code>italic oblique</code>斜体和倾斜</p>
+</li>
+<li><code>font-weight</code> 用来设置粗体，<code>lighter normal bold bolder</code></li>
+<li><code>text-decoration</code>用来增加装饰，<code>none underline overline line-through</code></li>
+</ul>
+<p><strong><code>@font-face</code>Web字体</strong></p>
+<ul>
+<li>允许你定义一种字体的名字和位置，然后在页面中使用</li>
+<li>常用字体格式：TrueType字体：.ttf,OpenType字体：.otf,Embedded Opentype字体：.eot,SVG字体：.svg,Web开放字体格式：.woff</li>
+<li>现代浏览器上支持的最为广泛的格式是Web开放字体格式</li>
+<li>将字体文件放到web上</li>
+<li>使用：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@font-face &#123;</span><br><span class="line">    font-family: &quot;Emblema One&quot;;</span><br><span class="line">    src: url(&quot;http://wickedlysmart.com/hfhtmlcss/chapter8/journal/EmblemaOne-Regular.woff&quot;),</span><br><span class="line">         url(&quot;http://wickedlysmart.com/hfhtmlcss/chapter8/journal/EmblemaOne-Regular.ttf&quot;)</span><br><span class="line">&#125;//我这边浏览器没啥效果。。不知道是什么问题</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>字体大小</strong></p>
+<ul>
+<li><code>font-size: 14px;</code>字的高度为14像素高</li>
+<li><code>font-size: 150%;</code>字相对于另一个字体的大小，若从父元素继承了，就是相对于父元素的大小</li>
+<li><code>font-size: 1.2em;</code> 比例系数</li>
+<li>除此之外，还可以将文字大小指定为，<code>xx-small, x-small, small, medium, large, x-large或xx-large</code>，浏览器会将这些关键字转为像素值，其中<code>small</code>为12像素，然后每个大小大约比前一个大20%</li>
+<li>通常，可以选一个关键字（推荐small或medium），然后利用em或者百分数相对body指定其他元素字体大小。</li>
+<li>默认情况下，h1是200%，h2是150%，h3是120%，h4是100%，h5是90%，h6是60%</li>
+<li>浏览器默认16像素</li>
 </ul>
 <p><strong><code>border</code>边框</strong></p>
 <ul>
@@ -618,7 +656,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
