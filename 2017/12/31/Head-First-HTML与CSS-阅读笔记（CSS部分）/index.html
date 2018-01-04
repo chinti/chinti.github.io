@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-04T08:58:17.129Z">
+<meta property="og:updated_time" content="2018-01-04T11:15:41.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Head First HTML与CSS 阅读笔记（CSS部分）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
@@ -423,6 +423,29 @@
 <li>其他的一般都不能被继承，如果不确定可以尝试一下</li>
 <li><code>/*  */</code>注释</li>
 </ul>
+<p><strong>层叠</strong></p>
+<ul>
+<li>浏览器用多个样式表组织样式，最优点的是作者的样式，然后是读者的样式，最后才是浏览器的默认样式</li>
+<li>读者如果在某个属性声明的最后加上”!important”，那么他就能覆盖作者的样式</li>
+<li>浏览器想知道某个元素的属性，会通过5个步骤</li>
+</ul>
+<ol>
+<li>收集所有样式表</li>
+<li>找到所匹配的声明</li>
+<li>现在对所有匹配的规则排序</li>
+<li>现在按特性对所有声明排序</li>
+<li>最后，对于冲突的规则，按照它们在各自的样式表中出现的顺序进行排序</li>
+</ol>
+<ul>
+<li>求特定性，特定性由一组3个数开始，000<ol>
+<li>这个选择器包含id吗？每个id加1分</li>
+<li>这个选择器包含类或伪类么？每个类或伪类加1分</li>
+<li>这个选择器包含元素名吗？一个元素名加1分</li>
+</ol>
+</li>
+<li>然后将他们读作真正的数，其中100&gt;010&gt;001</li>
+<li>注意，我们只在作者、读者和浏览器类别范围内排序，并不对整个列表重新排序</li>
+</ul>
 <hr>
 <h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p><strong><code>color</code> 颜色</strong></p>
 <ul>
@@ -503,7 +526,10 @@
 <li>使用方式：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a:link &#123;</span><br><span class="line">    color:  green;</span><br><span class="line">&#125;//未访问</span><br><span class="line">a:visited &#123;</span><br><span class="line">    color:  red;</span><br><span class="line">&#125;//已访问</span><br><span class="line">a:hover &#123;</span><br><span class="line">    color:  yellow;</span><br><span class="line">&#125;//悬停</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><strong>伪类</strong></p>
+<p><strong>伪类（Pseudo-class）</strong></p>
+<ul>
+<li>表现的像个类，但并不是真正的类，例如之前的<code>a:visited a:link a:hover</code>还有<code>first-child</code> </li>
+</ul>
 
       
     </div>
