@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-04T04:56:59.532Z">
+<meta property="og:updated_time" content="2018-01-04T08:58:17.129Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Head First HTML与CSS 阅读笔记（CSS部分）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
@@ -372,12 +372,33 @@
 <li><p>规则合并，共通样式合并起来写，特定样式写在另一个规则里</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">h1，h2&#123;</span><br><span class="line">    font-family: sans-serif;</span><br><span class="line">    color: gray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>可以使用多个样式表，按照顺序通过<code>link</code>元素将样式表链入HTML文件，最下面的样式表最优先</p>
+</li>
+<li><p>在<code>link</code>元素中添加<code>media</code>属性，可以适用于指定设备的样式文件，使用方式如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    &lt;link href=&quot;lounge-mobile.css&quot; rel=&quot;stylesheet&quot; media=&quot;screen and (max-device-width: 480px)&quot;&gt;  //创建了一个查询，指定了一个有屏幕的设备，且屏幕宽度不超过480像素</span><br><span class="line"></span><br><span class="line">&lt;link href=&quot;lounge-print.css&quot; rel=&quot;stylesheet&quot; media=&quot;print&quot;&gt; //匹配了打印机</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询中还有很多属性可用，例如min-device-width、max-device-width，以及显示方向[orientation,这可以是横向（landscape）或纵向（portrait）]，此外还有许多其他属性，根据需要添加多个<code>link</code>，涵盖所要支持的全部设备</p>
+</li>
+<li><p>直接在CSS中增加媒体查询(IE8及以前版本不支持媒体查询)，例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@media screen and (min-device-width: 481px) &#123;</span><br><span class="line">    #guarantee &#123;</span><br><span class="line">        margin-right: 250px;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@media screen and (max-device-width:480px) &#123;</span><br><span class="line">    #guarantee &#123;</span><br><span class="line">        margin-right: 30px;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@media print &#123;</span><br><span class="line">    body &#123;</span><br><span class="line">        font-family: Times, &quot;Times New Roman&quot;, serif;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">p.special &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <hr>
 <h2 id="选择器与类"><a href="#选择器与类" class="headerlink" title="选择器与类"></a>选择器与类</h2><ul>
 <li>只能为<code>body</code>添加样式</li>
+<li>可以用于定义一类元素</li>
+<li>首先，为HTML中的元素添加一个class属性，其次，在CSS中选择这个类</li>
 <li><p>类选择器，先选择类中的元素，再用”.”指定一个类</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;p class = &quot;greentea&quot;&gt;</span><br><span class="line">...</span><br><span class="line">&lt;/p&gt;    //HTML</span><br><span class="line"></span><br><span class="line">p.greentea&#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;       //CSS</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>id选择器，方法如类选择器，除了不用”.”改用用”#”指定id</p>
+</li>
+<li><p>子孙选择器，父元素和子孙元素名之间放一个空格，使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#exlixirs h2 &#123;</span><br><span class="line">    color: black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>直接孩子，使用<code>#elixir&gt;h2</code></p>
+</li>
+<li><p>复杂选择，方式一样，例如<code>#elixir blockquote h2</code></p>
 </li>
 <li><p>合并类规则</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">blockquote.greentea,p.greentea&#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;   //CSS</span><br><span class="line"></span><br><span class="line">&lt;blockquote class = &quot;greentea&quot;&gt; //HTML</span><br></pre></td></tr></table></figure>
@@ -387,20 +408,20 @@
 </li>
 <li><p>一个元素可以拥有多个类，<code>&lt;p class = &quot;greentea raspberry blueberry&quot;&gt;</code></p>
 </li>
+<li><p>id属性，与类类似，但是id具有唯一性，一个元素不能有多个id，另外页面上不允许多个元素都有相似的id</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;p id=&quot;footer&quot;&gt;...&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">#footer &#123;  </span><br><span class="line">...</span><br><span class="line">&#125;//p#footer</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>类名要以一个字母开头，id可以以一个数字或者字母开头，它们都可以包含字母、数字以及_字符，但不能有空格</p>
+</li>
 </ul>
-<hr>
-<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><ul>
+<p><strong>继承</strong></p>
+<ul>
 <li>元素能从他们的父元素继承一部分样式</li>
 <li>例如，<code>font-family</code></li>
 <li>继承的样式可以被覆盖</li>
 <li>如果样式会影响文本的外观，那么所有的这样子的样式都会被继承，比如：<code>color、font-family、font-size、font-weight、font-style</code>等等</li>
 <li>其他的一般都不能被继承，如果不确定可以尝试一下</li>
 <li><code>/*  */</code>注释</li>
-</ul>
-<hr>
-<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><ul>
-<li>可以用于定义一类元素</li>
-<li>首先，为HTML中的元素添加一个class属性，其次，在CSS中选择这个类</li>
 </ul>
 <hr>
 <h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p><strong><code>color</code> 颜色</strong></p>
@@ -452,6 +473,7 @@
 <li>通常，可以选一个关键字（推荐small或medium），然后利用em或者百分数相对body指定其他元素字体大小。</li>
 <li>默认情况下，h1是200%，h2是150%，h3是120%，h4是100%，h5是90%，h6是60%</li>
 <li>浏览器默认16像素</li>
+<li>字体可以简写，所需的所有属性为<code>font-family,font-style,font-weight,font-size,font-variant,line-height</code>,按照这个顺序<code>font-style font-variant font-weight font-size/line-height font-family</code>，前三个顺序不重要，非必需，但一定要在font-size前，font-size必须指定</li>
 </ul>
 <p><strong>盒模型</strong></p>
 <ul>
@@ -462,15 +484,26 @@
 <li>指定某一边的边框，可以使用这样的形式：<code>border-top-color</code></li>
 <li><code>border-bottom：thin dotted #888888;</code>灰色细虚线</li>
 <li><code>border-radius： 15px</code>创建圆角，可以利用px或者em指定半径大小</li>
-<li><code>padding</code> 内边距</li>
-<li><code>line-height</code> 行间距</li>
+<li><code>padding</code> 内边距，可以采用缩写，按照top right bottom left的顺序，若四个值相同，那只需写一个就行了</li>
+<li><code>line-height</code> 行间距,比较特殊，可以直接用数字,代表自己字体大小的倍数</li>
 <li><code>letter-spacing</code> 字母之间间距</li>
 <li><code>list-style</code> 列表外观</li>
-<li><code>text-align</code> 右对齐</li>
+<li><code>text-align</code> 内联元素对齐，可以设置ceter</li>
+<li><code>width</code> 可以设置元素宽度，不设置默认auto</li>
 <li><code>background-image</code> 元素后面放置一个图像，使用：<code>background: url(images/background.gif);</code></li>
 <li><code>background-position</code>,用于设置图像位置，可以按像素指定，也可以指定为一个百分数，或者采用关键字（top、left、right、bottom、center）</li>
 <li><code>background-repeat</code>，用于控制平铺行为（no-repeat,repeat-x,repeat-y,inherit，repeat）</li>
+<li>border，background都可以简写</li>
 </ul>
+<p><strong>a元素和它的多重人格</strong></p>
+<ul>
+<li>页面上的链接可以有多种状态：可能未访问、已访问或者处于悬停状态（还有其他状态），可能会用到伪类</li>
+<li>此外还有：focus和active状态，浏览器将焦点放在连接上就是焦点状态（用TAB键，键盘输入时），用户第一次单击一个链接时就处于活动状态</li>
+<li>适当的顺序为，link，visited，hover，focus，然后是active</li>
+<li>使用方式：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a:link &#123;</span><br><span class="line">    color:  green;</span><br><span class="line">&#125;//未访问</span><br><span class="line">a:visited &#123;</span><br><span class="line">    color:  red;</span><br><span class="line">&#125;//已访问</span><br><span class="line">a:hover &#123;</span><br><span class="line">    color:  yellow;</span><br><span class="line">&#125;//悬停</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>伪类</strong></p>
 
       
     </div>
@@ -647,7 +680,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6982;&#x5FF5;" class="headerlink" title="&#x6982;&#x5FF5;"></a>&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择器与类"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x9009;&#x62E9;&#x5668;&#x4E0E;&#x7C7B;" class="headerlink" title="&#x9009;&#x62E9;&#x5668;&#x4E0E;&#x7C7B;"></a>&#x9009;&#x62E9;&#x5668;&#x4E0E;&#x7C7B;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7EE7;&#x627F;" class="headerlink" title="&#x7EE7;&#x627F;"></a>&#x7EE7;&#x627F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x7C7B;" class="headerlink" title="&#x7C7B;"></a>&#x7C7B;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x5C5E;&#x6027;" class="headerlink" title="&#x5C5E;&#x6027;"></a>&#x5C5E;&#x6027;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6982;&#x5FF5;" class="headerlink" title="&#x6982;&#x5FF5;"></a>&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择器与类"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x9009;&#x62E9;&#x5668;&#x4E0E;&#x7C7B;" class="headerlink" title="&#x9009;&#x62E9;&#x5668;&#x4E0E;&#x7C7B;"></a>&#x9009;&#x62E9;&#x5668;&#x4E0E;&#x7C7B;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x5C5E;&#x6027;" class="headerlink" title="&#x5C5E;&#x6027;"></a>&#x5C5E;&#x6027;</span></a></li></ol></div>
             
 
           </div>
