@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-04T11:15:41.661Z">
+<meta property="og:updated_time" content="2018-01-04T16:08:04.801Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Head First HTML与CSS 阅读笔记（CSS部分）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
@@ -529,6 +529,71 @@
 <p><strong>伪类（Pseudo-class）</strong></p>
 <ul>
 <li>表现的像个类，但并不是真正的类，例如之前的<code>a:visited a:link a:hover</code>还有<code>first-child</code> </li>
+<li>伪类不知能处理链接，也能够对其他类型的元素提供处理</li>
+</ul>
+<hr>
+<h2 id="布局与定位"><a href="#布局与定位" class="headerlink" title="布局与定位"></a>布局与定位</h2><p><strong>流</strong></p>
+<ul>
+<li>流实际上就是浏览器在页面上摆放HTML元素所用的方法</li>
+<li>浏览器从HTML文件最上面开始，从上到下沿着元素流逐个显示所遇到的各个元素</li>
+<li>块元素自上而下流，每个块元素之间加一个换行</li>
+<li>内联元素在水平上挨着，总体上从左上方流向右下方</li>
+<li>外边距，并排放置，外边距叠加，上下放置，取决于最大外边距</li>
+</ul>
+<p><code>float</code></p>
+<ul>
+<li>首先它会尽可能远的向左或向右浮动一个元素，然后它下面的所有内容会绕流这个元素</li>
+<li>对于所有的浮动元素都有一个要求：它必须有一个宽度</li>
+<li>浮动元素外边距不会被折叠，注意这点可以避免一些错误</li>
+<li>内联元素同样可以浮动，常见为浮动一个图像</li>
+<li>float属性可以设置为<code>left</code>或者<code>right</code></li>
+<li>此时没浏览器会如下处理float<ol>
+<li>首先，浏览器正常将元素流入页面，从文件最上面开始，逐步移向末尾元素</li>
+<li>浏览器遇到浮动元素，会将其尽可能放在最右边，然后从流中删除这个段落</li>
+<li>然后其他块元素会填在这里，就像根本没这个段落</li>
+<li>不过，在内联元素定位时，它们会考虑浮动元素的边界，所以会围绕着浮动元素</li>
+</ol>
+</li>
+</ul>
+<p><strong>实现两栏效果</strong></p>
+<ul>
+<li>将sidebar放在页眉下面，然后用float将sidebar栏向右浮动，然后将主内容的右外边距至少设置得和sidebar的宽度相同，这样主内容区和边栏就会分开，但是宽度太宽时，页脚会上移造成重叠</li>
+<li>可以利用clear属性解决这个问题，在footer中设置<code>clear: right</code>,代表这个元素右边不允许有浮动元素，此时还有另一个问题，在小的移动设备会看到边栏在最上面，因为我们把sidebar放在了主要内容前</li>
+<li>可以采用右紧左松，也就是将主内容向左浮动，设置仿照如上，这样内容的顺序会是对的，但是边栏看起来非常松散</li>
+</ul>
+<p><strong>流体与冻结设计</strong></p>
+<ul>
+<li>流体布局（liquid layouts），不论浏览器调整到多大的宽度，布局都会扩展，填满整个浏览器，而有时候布局锁定更为重要，这样当用户调整屏幕大小时，你依然可以保持原样，这被称为冻结布局（frozen layouts）</li>
+<li>首先，你需要将body内的所有内容放置于一个id为”allcontent”的<code>&lt;div&gt;</code>元素内<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#allcontent&#123;</span><br><span class="line">    width:			800px;</span><br><span class="line"> padding-top:		5px;</span><br><span class="line"> padding-bottom:		5px;</span><br><span class="line"> background-color:	#675c47;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这样页面宽度将被限制为800px，在页面很宽时，右边很多空白空间</p>
+<p><strong>凝胶布局</strong></p>
+<ul>
+<li>这是Web上常见的一种设计，介于冻结与流体之间，称为凝胶（Jello），它会锁定页面中内容区的宽度，不过会将它在浏览器中居中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#allcontent&#123;</span><br><span class="line">    width:			800px;</span><br><span class="line"> padding-top:		5px;</span><br><span class="line"> padding-bottom:		5px;</span><br><span class="line"> background-color:	#675c47;</span><br><span class="line"> margin-left:        auto;</span><br><span class="line"> margin-right:       auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>绝对定位</strong></p>
+<ul>
+<li>可以在页面上精确的定位元素，同时采用绝对定位可以实现一些漂亮的效果</li>
+<li><p>一个元素绝对定位时，浏览器首先将它从流中完全删除，然后浏览器将这个元素放置在位置属性所制定的位置上，例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#sidebar &#123;</span><br><span class="line">    positon:    absolute;</span><br><span class="line">    top:        100px;</span><br><span class="line">    right:      200px;</span><br><span class="line">    width:      280px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同时，在绝对定位时，一个元素可有放在另一个绝对定位的元素之上，那么谁在上面？每个定位元素都有一个名为z-index的属性，将会指定它在一个虚拟z轴上的位置，越上面的，z-index越大</p>
+</li>
+<li><code>position</code>拥有4个值：<code>static， absolute， fixed 和 absolute</code>，其中固定（Fixed）定位是将元素放在相对于浏览器窗口的一个位置上（而不是相对与页面），所以固定元素永远不会移动，而相对（Relative）定位会让元素正常流入页面，不过在页面上显示要进行偏移，相对定位常用于更高级的定位和特殊效果</li>
+<li>绝对定位元素不必须指定宽度，但是，会占据浏览器整个宽度，这可能并不是你想要的</li>
+<li>指定位置还可以使用百分数，但是位置可能会改变，百分数还常用与制定宽度，可以使主内容区和边栏的大小更为灵活</li>
+</ul>
+<p><strong>CSS表格</strong></p>
+<ul>
+<li>类似电子表格只包含行和列</li>
+<li><p>为整个表格创建一个块，然后为每行创建块，例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id = &quot;tableContainer&quot;&gt;</span><br><span class="line">    &lt;div id = &quot;tableRow&quot;&gt;</span><br><span class="line">        &lt;div id = &quot;main&quot;&gt;</span><br><span class="line">        ...</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div id = &quot;siderbar&quot;&gt;</span><br><span class="line">        ...</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CSS实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">    div#tableContainer &#123;</span><br><span class="line">        display:            table;</span><br><span class="line">        border-spacing:     10px;  //单元格间距</span><br><span class="line">    &#125;</span><br><span class="line">    div#tableRow &#123;</span><br><span class="line">        display:    table-row;</span><br><span class="line">    &#125;</span><br><span class="line">    #main &#123;</span><br><span class="line">	    display:		table-cell;</span><br><span class="line"> 	    background:       	#efe5d0 url(images/background.gif) top left;</span><br><span class="line">  	    font-size:        	105%;</span><br><span class="line">  	    padding:          	15px;</span><br><span class="line">  	    vertical-align：    top;    //单元格上对齐</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    #sidebar &#123;</span><br><span class="line">	    display:		table-cell;</span><br><span class="line">  	    background:       	#efe5d0                 url(images/background.gif) bottom right;</span><br><span class="line">  	    font-size:        	105%;</span><br><span class="line">  	    padding:          	15px;</span><br><span class="line">        vertical-align：    top;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 
       
@@ -706,7 +771,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6982;&#x5FF5;" class="headerlink" title="&#x6982;&#x5FF5;"></a>&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择器与类"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x9009;&#x62E9;&#x5668;&#x4E0E;&#x7C7B;" class="headerlink" title="&#x9009;&#x62E9;&#x5668;&#x4E0E;&#x7C7B;"></a>&#x9009;&#x62E9;&#x5668;&#x4E0E;&#x7C7B;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x5C5E;&#x6027;" class="headerlink" title="&#x5C5E;&#x6027;"></a>&#x5C5E;&#x6027;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6982;&#x5FF5;" class="headerlink" title="&#x6982;&#x5FF5;"></a>&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择器与类"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x9009;&#x62E9;&#x5668;&#x4E0E;&#x7C7B;" class="headerlink" title="&#x9009;&#x62E9;&#x5668;&#x4E0E;&#x7C7B;"></a>&#x9009;&#x62E9;&#x5668;&#x4E0E;&#x7C7B;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x5C5E;&#x6027;" class="headerlink" title="&#x5C5E;&#x6027;"></a>&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#布局与定位"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x5E03;&#x5C40;&#x4E0E;&#x5B9A;&#x4F4D;" class="headerlink" title="&#x5E03;&#x5C40;&#x4E0E;&#x5B9A;&#x4F4D;"></a>&#x5E03;&#x5C40;&#x4E0E;&#x5B9A;&#x4F4D;</span></a></li></ol></div>
             
 
           </div>
