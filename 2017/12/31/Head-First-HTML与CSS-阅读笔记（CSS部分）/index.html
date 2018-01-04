@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-03T13:08:06.870Z">
+<meta property="og:updated_time" content="2018-01-04T04:56:59.532Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Head First HTML与CSS 阅读笔记（CSS部分）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
@@ -453,16 +453,23 @@
 <li>默认情况下，h1是200%，h2是150%，h3是120%，h4是100%，h5是90%，h6是60%</li>
 <li>浏览器默认16像素</li>
 </ul>
-<p><strong><code>border</code>边框</strong></p>
+<p><strong>盒模型</strong></p>
 <ul>
-<li><code>top</code> 控制元素顶部位置</li>
-<li><code>left</code> 指定元素左边位置</li>
+<li>CSS将每个元素视为盒模型（box model），每个盒模型由一个内容区以及可选的内边距，边框和外边框组成，其中，内容区（content area）包含内容（例如文本和图像），内容区被可选的透明内边距（padding）包围，内边距周围可能放置一个可选的边框（border），最后有一个可选的透明外边距（margin）包围所有部分</li>
+<li><code>border-style</code>可以控制边框的视觉样式，共8种（solid实线，double双线，groove槽线，outset外凸，dotted虚线，dashed破折线，inset内凹，ridge脊线）</li>
+<li><code>border-width</code>控制边框宽度，可以采用关键字或者像素指定（thin medium thick）</li>
+<li><code>border-color</code>控制边框颜色，与设置颜色类似</li>
+<li>指定某一边的边框，可以使用这样的形式：<code>border-top-color</code></li>
+<li><code>border-bottom：thin dotted #888888;</code>灰色细虚线</li>
+<li><code>border-radius： 15px</code>创建圆角，可以利用px或者em指定半径大小</li>
 <li><code>padding</code> 内边距</li>
 <li><code>line-height</code> 行间距</li>
-<li><code>background-image</code> 元素后面放置一个图像</li>
 <li><code>letter-spacing</code> 字母之间间距</li>
 <li><code>list-style</code> 列表外观</li>
 <li><code>text-align</code> 右对齐</li>
+<li><code>background-image</code> 元素后面放置一个图像，使用：<code>background: url(images/background.gif);</code></li>
+<li><code>background-position</code>,用于设置图像位置，可以按像素指定，也可以指定为一个百分数，或者采用关键字（top、left、right、bottom、center）</li>
+<li><code>background-repeat</code>，用于控制平铺行为（no-repeat,repeat-x,repeat-y,inherit，repeat）</li>
 </ul>
 
       
@@ -503,6 +510,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/04/2018素描/" rel="prev" title="2018素描">
+                2018素描 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -579,7 +590,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -590,7 +601,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -601,7 +612,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
