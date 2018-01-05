@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-05T03:01:56.349Z">
+<meta property="og:updated_time" content="2018-01-05T04:01:32.208Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Head First HTML与CSS 阅读笔记（CSS部分）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;本文是《Head First HTML与CSS》的CSS部分，另一部分为Head First HTML与CSS 阅读笔记（HTML部分）。">
@@ -576,12 +576,12 @@
 <p><strong>绝对定位</strong></p>
 <ul>
 <li>可以在页面上精确的定位元素，同时采用绝对定位可以实现一些漂亮的效果</li>
-<li><p>一个元素绝对定位时，浏览器首先将它从流中完全删除，然后浏览器将这个元素放置在位置属性所制定的位置上，例：</p>
+<li><p>一个元素绝对定位时，浏览器首先将它从流中完全删除，然后浏览器将这个元素放置在位置属性所制定的位置上，绝对定位是<strong>相对于最近的已定位的祖先元素</strong>，例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#sidebar &#123;</span><br><span class="line">    positon:    absolute;</span><br><span class="line">    top:        100px;</span><br><span class="line">    right:      200px;</span><br><span class="line">    width:      280px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>同时，在绝对定位时，一个元素可有放在另一个绝对定位的元素之上，那么谁在上面？每个定位元素都有一个名为z-index的属性，将会指定它在一个虚拟z轴上的位置，越上面的，z-index越大</p>
+<li><p>同时，在绝对定位时，一个元素可有放在另一个绝对定位的元素之上，那么谁在上面？每个定位元素（绝对、相对、固定定位的元素）都有一个名为z-index的属性，将会指定它在一个虚拟z轴上的位置，越上面的，z-index越大，使用：<code>z-index:   1;</code>就可以确保在其他的元素上方，但是有多个需要定位的元素，那需要好好考虑下数值。</p>
 </li>
-<li><code>position</code>拥有4个值：<code>static， absolute， fixed 和 absolute</code>，其中固定（Fixed）定位是将元素放在相对于浏览器窗口的一个位置上（而不是相对与页面），所以固定元素永远不会移动，而相对（Relative）定位会让元素正常流入页面，不过在页面上显示要进行偏移，相对定位常用于更高级的定位和特殊效果</li>
+<li><code>position</code>拥有4个值：<code>static， absolute， fixed 和 relative</code>，其中固定（Fixed）定位是将元素放在相对于浏览器窗口的一个位置上（而不是相对与页面），所以固定元素永远不会移动，而相对（Relative）定位会让元素正常流入页面，不过在页面上显示“相对于”自己的起点要进行偏移，相对定位常用于更高级的定位和特殊效果</li>
 <li>绝对定位元素不必须指定宽度，但是，会占据浏览器整个宽度，这可能并不是你想要的</li>
 <li>指定位置还可以使用百分数，但是位置可能会改变，百分数还常用与制定宽度，可以使主内容区和边栏的大小更为灵活</li>
 </ul>
