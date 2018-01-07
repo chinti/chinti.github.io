@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;在之前17年6月实习时，负责了管理公司论坛的任务，在此之中初步接触到了HTML和CSS方面的知识，但是学习的不够深入，现在是17年年底，打算重新开始学习这方面的知识，做一些巩固，为之后学习JavaScript与Jquery等打下基础。&amp;#160; &amp;#160; &amp;#160;&amp;#160;《Head First HTML与CSS》是一本对新手友好">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-04T11:17:44.263Z">
+<meta property="og:updated_time" content="2018-01-07T07:18:17.448Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Head First HTML与CSS 阅读笔记（HTML部分）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;在之前17年6月实习时，负责了管理公司论坛的任务，在此之中初步接触到了HTML和CSS方面的知识，但是学习的不够深入，现在是17年年底，打算重新开始学习这方面的知识，做一些巩固，为之后学习JavaScript与Jquery等打下基础。&amp;#160; &amp;#160; &amp;#160;&amp;#160;《Head First HTML与CSS》是一本对新手友好">
@@ -381,6 +381,11 @@
 <li>内联（inline）元素：随波逐流,<code>&lt;q&gt;、&lt;a&gt;和&lt;em&gt;</code></li>
 <li>void元素：没有实际内容，可以使用简写，提高效率</li>
 </ul>
+<p><strong>交互性</strong></p>
+<ul>
+<li>html不只是一个被动的文档，它可以拥有可执行的内容，可以使用<code>JavaScript</code>脚本语言来编写程序或脚本</li>
+<li>通过JavaScript调用HTML5提供的一些API可以创建许多Web应用</li>
+</ul>
 <p><strong>特殊字符</strong></p>
 <ul>
 <li><code>&lt;</code> 可以使用<code>&amp;lt</code>代替</li>
@@ -486,6 +491,9 @@
 <li><code>ol</code>有序列表，ordered list的简写，由浏览器编号</li>
 <li><code>ul</code>无序列表，unordered list的简写</li>
 <li>第一步，每个列表项都要放在单独的<code>&lt;li&gt;</code>元素中，第二步，用<code>&lt;ol&gt;</code>或<code>&lt;ul&gt;</code>包围所有列表项</li>
+<li>可以为列表添加一些样式，列表的主要属性是<code>lis-style-type</code>,<code>disc</code>是默认的列表标记类型，<code>circle</code>，提供一个简单的圆形标记，<code>square</code>方块标记，<code>none</code>删除标记</li>
+<li>定制标记，<code>list-style-image: url(images/backpack.gif);</code></li>
+<li>文本回绕，<code>list-style-position</code>,<code>inside</code>标记下回绕，<code>outside</code>文本下回绕</li>
 </ul>
 <hr>
 <h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><p>逻辑区就是页面上一组彼此相关的元素，通过<code>div</code>或者<code>span</code>容器来标记一组元素<br><strong><code>div</code>块元素容器</strong></p>
@@ -498,6 +506,91 @@
 <p><strong><code>span</code>内联元素容器</strong></p>
 <ul>
 <li>类似div，只是创建的是内联元素</li>
+</ul>
+<hr>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><ul>
+<li><p>用<code>table</code>标记一个表格的开始，每行<code>tr</code>开始，<code>th</code>代表每列的表头，其余由<code>td</code>标记</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">  			&lt;tr&gt;</span><br><span class="line">    			&lt;th&gt;City&lt;/th&gt;</span><br><span class="line">    			&lt;th&gt;Date&lt;/th&gt;</span><br><span class="line">    			&lt;th&gt;Temperature&lt;/th&gt;</span><br><span class="line">    			&lt;th&gt;Altitude&lt;/th&gt;</span><br><span class="line">    			&lt;th&gt;Population&lt;/th&gt;</span><br><span class="line">    			&lt;th&gt;Diner Rating&lt;/th&gt;</span><br><span class="line">  			&lt;/tr&gt;</span><br><span class="line">  			&lt;tr&gt;</span><br><span class="line">    			&lt;td&gt;Walla Walla, WA&lt;/td&gt;</span><br><span class="line">    			&lt;td&gt;June 15th&lt;/td&gt;</span><br><span class="line">    			&lt;td&gt;75&lt;/td&gt;</span><br><span class="line">    			&lt;td&gt;1,204 ft&lt;/td&gt;</span><br><span class="line">    			&lt;td&gt;29,686&lt;/td&gt;</span><br><span class="line">    			&lt;td&gt;4/5&lt;/td&gt;</span><br><span class="line">  			&lt;/tr&gt;</span><br><span class="line">  			&lt;tr&gt;</span><br><span class="line">    			&lt;td&gt;Magic City, ID&lt;/td&gt;</span><br><span class="line">    			&lt;td&gt;June 25th&lt;/td&gt;</span><br><span class="line">    			&lt;td&gt;74&lt;/td&gt;</span><br><span class="line">    			&lt;td&gt;5,312 ft&lt;/td&gt;</span><br><span class="line">    			&lt;td&gt;50&lt;/td&gt;</span><br><span class="line">    			&lt;td&gt;3/5&lt;/td&gt;</span><br><span class="line">  			&lt;/tr&gt;</span><br><span class="line">		&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>caption</code> 标题,放在<code>table</code>下，<code>tr</code>上,可以在CSS指定它的位置，大多数浏览器默认显示在表格上方</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;caption&gt;</span><br><span class="line">    The cities I visited on my</span><br><span class="line">    Segway&apos;n USA travels</span><br><span class="line">&lt;caption&gt;</span><br><span class="line"></span><br><span class="line">//CSS部分</span><br><span class="line">table &#123;</span><br><span class="line"> margin-left:		20px;</span><br><span class="line"> margin-right:		20px;</span><br><span class="line"> border:			thin dotted gray;</span><br><span class="line"> caption-side:		bottom;  //指定位置</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">td, th &#123;</span><br><span class="line"> border:			thin dotted gray;</span><br><span class="line"> padding:		5px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">caption &#123;</span><br><span class="line"> font-style:		italic;</span><br><span class="line"> padding-top:		8px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>border-spacing</code> 边框间距，每个表格单元的外边距不能被设置，只能设置共同间距，而且可以在垂直方向和水平方向设置不同间距，例如<code>border-spacing: 10px 30px;</code>代表设置了10像素水平边框间距，30像素的垂直边框间距</p>
+</li>
+<li><code>border-collapse</code> 边框折叠，使用：<code>border-collapse:   collapse;</code></li>
+<li><p>颜色交替，<br>一种通过定义类<br>还有一种通过伪类<code>nth-child</code>这是一种更高级的指定方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">p:nth-child(even) &#123;</span><br><span class="line">    background-color:   red;</span><br><span class="line">&#125;</span><br><span class="line">p:nth-child(odd) &#123;</span><br><span class="line">    background-color:   green;</span><br><span class="line">&#125;</span><br><span class="line">//或者可以用表达式</span><br><span class="line">    p:nth-child(2n) &#123;</span><br><span class="line">    background-color:   red;</span><br><span class="line">&#125;</span><br><span class="line">p:nth-child(2n+1) &#123;</span><br><span class="line">    background-color:   green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>合并单元格，当存在一个单元格跨多行时，可以使用<code>rowspan</code>属性，指定一个表格数据单元格占的行数，然后将这个单元格所跨越的其他行删除相应的表格数据元素,同理，<code>colspan</code>属性可以用来跨多列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;tr&gt;</span><br><span class="line">	&lt;td rowspan = &quot;2&quot;&gt;Truth or Consequences, NM&lt;/td&gt;</span><br><span class="line">	&lt;td class = &quot;center&quot;&gt;August 9th&lt;/td&gt;</span><br><span class="line">	&lt;td class = &quot;center&quot;&gt;93&lt;/td&gt;</span><br><span class="line">	&lt;td rowspan = &quot;2&quot; class = &quot;right&quot;&gt;4,242 ft&lt;/td&gt;</span><br><span class="line">	&lt;td rowspan = &quot;2&quot; class = &quot;right&quot;&gt;7,289&lt;/td&gt;</span><br><span class="line">	&lt;td class = &quot;center&quot;&gt;5/5&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;</span><br><span class="line">&lt;tr&gt;</span><br><span class="line"></span><br><span class="line">	&lt;td class = &quot;center&quot;&gt;August 27th&lt;/td&gt;</span><br><span class="line">	&lt;td class = &quot;center&quot;&gt;98&lt;/td&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	&lt;td class = &quot;center&quot;&gt;4/5&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>表格嵌套，在表格里再放个<code>table</code></p>
+</li>
+</ul>
+<hr>
+<h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><ul>
+<li><p><code>form</code>表单元素，几乎所有块级元素都可以放在里面,<code>action</code>属性包含Web服务器脚本的URL，<code>method</code>属性确定表单数据如何发送到服务器，常用方法<code>POST</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=&quot;http://wickedlysmart.com/hfhtmlcss/contest.php&quot; method=&quot;POST&quot;&gt;</span><br><span class="line">    &lt;p&gt;Just type in your name (and click Submit) to enter the contest:&lt;br&gt;</span><br><span class="line">    First name: &lt;input type=&quot;text&quot; name=&quot;firstname&quot; value=&quot;&quot;&gt;&lt;br&gt;</span><br><span class="line">    Last name:  &lt;input type=&quot;text&quot; name=&quot;lastname&quot; value=&quot;&quot;&gt;&lt;br&gt;</span><br><span class="line">    &lt;input type=&quot;submit&quot;&gt;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>input</code>元素用于输入一行文本，它还有一些可选的属性，允许你为这个控件设置最大字符个数和宽度，void内联元素，其中提交按钮需要指定”submit”作为<code>input</code>元素的type属性值，”radio”可以单选按钮，若有<code>checked</code>布尔属性则默认选中，”checkbox”复选框，相关选框必须共有一个名字，每个框有一个不同的值，可以用<code>maxlength = &quot;100&quot;</code>设置最多输入100字符</p>
+</li>
+<li><p><code>textarea</code>元素可以创建一个多行的文本区，输入的文本在文本区中放不下，右边会出现滚动条,row行，cols列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;textarea name = &quot;comments&quot; rows = &quot;10&quot; cols = &quot;48&quot;&gt;&lt;/textarea&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>select</code>元素可以创建一个下拉选择的菜单，<code>option</code>元素创建菜单项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select name = &quot;characters&quot;&gt;</span><br><span class="line">    &lt;option value = &quot;Buckaroo&quot;&gt;Buckaroo Banzai&lt;/option&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>以下是HTML5新增的表单元素</strong></p>
+<ul>
+<li><p>数字输入，<code>number</code>用于限制只输入数字，有些浏览器会在右边给一个显示箭头，用于增减</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type = &quot;number&quot; min = &quot;0&quot; max = &quot;20&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>范围输入，<code>range</code>，显示一个滑动条而非输入框</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type = &quot;range&quot; min = &quot;0&quot; max = &quot;20&quot; step = &quot;5&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>颜色输入，<code>color</code>，用于指定元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type = &quot;color&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>日期输入，<code>date</code>，用于选择时间，方法同上</p>
+</li>
+<li>email输入，<code>email</code>，同上</li>
+<li>tel输入，<code>tel</code>，同上</li>
+<li>url输入，<code>url</code>，同上</li>
+</ul>
+<p><strong><code>POST</code>与<code>GET</code></strong></p>
+<ul>
+<li>都是将表单数据发送到服务器，POST会打包表单变量，然后后台发送，GET也会打包，但会把这些数据追加到URL最后，向服务器发送一个请求，用户会可见</li>
+</ul>
+<p><strong>关于可访问性</strong></p>
+<ul>
+<li>实际上应该用<code>label</code>元素标记那些标签，可以提供页面结构更多的信息，这样可以更容易用css添加样式，另外对于有视力障碍的人也有助于他们使用的屏幕阅读器更准确的标识表单元元素，id可以与name相同，每个id必须唯一，使用：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type = &quot;radio&quot; name = &quot;hotornot&quot; value = &quot;hot&quot; id = &quot;hot&quot;&gt;</span><br><span class="line">&lt;label for = &quot;hot&quot;&gt;hot&lt;/label&gt;</span><br><span class="line">&lt;input type = &quot;radio&quot; name = &quot;hotornot&quot; value = &quot;not&quot; id = &quot;not&quot;&gt;</span><br><span class="line">&lt;label for = &quot;not&quot;&gt;not&lt;/label&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong><code>fieldset</code>和<code>legend</code></strong></p>
+<ul>
+<li>表单分组，用<code>fieldset</code>将公共元素组织在一起，用<code>legend</code>为这个分组提供一个标签<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;fieldset&gt;</span><br><span class="line">    &lt;legend&gt;Condiments&lt;/legend&gt;</span><br><span class="line">    &lt;input ...&gt;...&lt;br&gt;</span><br><span class="line">    &lt;input ...&gt;...&lt;br&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;/fieldset&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong><code>passwords</code></strong></p>
+<ul>
+<li>会为你输入的文本增加掩码，工作与<code>text</code>类似，不过并不会采用一种安全的方式从浏览器到服务器脚本，想要提高安全性，清联系托管公司</li>
+</ul>
+<p><strong><code>file</code></strong></p>
+<ul>
+<li>创建一个文件输入元素，只需将<code>input</code>元素的<code>type</code>属性设置为<code>file</code>，此外运用这个元素必须使用POST方式</li>
+</ul>
+<p><strong><code>多选菜单</code></strong></p>
+<ul>
+<li>为<code>select</code>元素增加布尔属性<code>multiple</code>即可，这样菜单就不再显示下拉，而是得到一个多选菜单</li>
+</ul>
+<p><strong><code>Placeholder</code></strong></p>
+<ul>
+<li>在<code>input</code>元素中增加<code>placeholder</code>属性，可以设置一个提示，告诉别人你希望他填写什么</li>
+</ul>
+<p><strong><code>Required</code></strong></p>
+<ul>
+<li>可用与任何表单元素，是一个布尔属性，加入它，说明这是一个必须填写的表单，必须输入才能提交</li>
 </ul>
 <hr>
 <h2 id="HTML5及工业标准"><a href="#HTML5及工业标准" class="headerlink" title="HTML5及工业标准"></a>HTML5及工业标准</h2><p><strong>HTML5 doctype</strong></p>
@@ -516,6 +609,57 @@
 <p><strong>W3C验证工具</strong></p>
 <ul>
 <li><a href="http://validator.w3.org" target="_blank" rel="noopener">W3C验证工具</a></li>
+</ul>
+<p><strong>重新考虑HTML结构</strong><br>&#160; &#160; &#160;&#160;将<code>div</code>元素替换成一些更加特定的元素，能够更明确地指示其中包含什么类型的内容</p>
+<p><strong>新增元素</strong></p>
+<ul>
+<li>可以查看<a href="http://caniuse.com/#search=new%20elements" target="_blank" rel="noopener">http://caniuse.com/#search=new%20elements</a>,了解浏览器是否支持新元素</li>
+<li><code>article</code> 表示页面中一个独立的组成部分，如一个博客帖子、用户论坛帖子或者新闻报道</li>
+<li><code>nav</code> 所包含的内容将作为页面的导航链接</li>
+<li><code>header</code> 放在页面顶部的内容，或者放在页面某个区块的顶部</li>
+<li><code>footer</code> 放在页面底部的内容，或者放在页面某个区块的底部</li>
+<li><p><code>time</code> 可能包含一个日期或时间，也可能同时包含日期和时间，简要指南如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;time datetime=&quot;2012-02-18&quot;&gt;2/18/2012&lt;/time&gt;</span><br><span class="line">//内容中，可以写任何内容，如&quot;February 18,2012&quot;甚至可以是&quot;yesterday&quot;或&quot;now&quot;</span><br><span class="line">//若元素内容没有采用日期/时间的格式来写，就必须要datetime属性</span><br><span class="line">//（2012-02   2012  2012-02-18 9：00   05：00   2012-02-18 05：00z（utc时间））</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>aside</code> 包含的内容是对页面内容的补充，如插图或边栏</p>
+</li>
+<li><code>section</code> 一个主题内容分组，通常包含一个首部（header），可能还有一个底部（footer）</li>
+<li><code>video</code> 用来为页面增加视频媒体</li>
+<li><code>mark</code> 用于突出显示某些文本</li>
+<li><code>meter</code> 显示某个范围的度量</li>
+<li><code>progress</code> 显示任务的完成进度</li>
+<li><code>canvas</code> 显示用javaScript绘制的图像和动画</li>
+<li><code>figure</code> 定义类似照片、图标甚至代码清单等独立的内容</li>
+</ul>
+<p><strong>视频<code>video</code></strong></p>
+<ul>
+<li><p>可以将视频看作<code>img</code>元素，可以提供一个src属性引用视频</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;video controls autoplay width = &quot;512&quot; height = &quot;288&quot; src = &quot;video/tweetsip.mp4&quot;&gt; </span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>autoplay</code> 自动播放</p>
+</li>
+<li><code>control</code> 提供一组控件来控制播放、暂停、调节音量等</li>
+<li>视频格式问题，Safari更接受H.264，Chorme更接受WebM</li>
+<li><code>autoplay</code>与<code>controls</code>没有值，是一个bool属性，通常用户希望觉得加载页面时是否播放视频，所以是否加这个属性请三思</li>
+<li><code>src</code> 与<code>img</code>的<code>src</code>很相似</li>
+<li><code>preload</code> 用于细粒度（没懂，是指精细么）地控制视频如何加载，来实现优化，可以<code>preload:    none</code>代表用户播放前不加载，<code>metadata</code>代表下载元数据，不下载内容，也可以是设置为<code>auto</code>，交给浏览器决定</li>
+<li><code>poster</code> 在视频未播放时，将视频的某一帧显示为“海报”图像，浏览器通常会指定第一帧,这往往是个黑屏</li>
+<li><code>loop</code> 自动循环，bool属性</li>
+<li><code>width height</code>设置视频显示区，有多余就显示黑边</li>
+</ul>
+<p><strong>视频格式</strong></p>
+<p>&#160; &#160; &#160;&#160;现在主流格式有3种，MP4容器，包含H.264视频和AAC音频，WebM容器，包含VP8视频和Vorbis音频，Ogg容器，包含Theora视频和Vorbis音频，在使用多个格式时可采用<code>source</code>元素，方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    &lt;video controls autoplay width = &quot;512&quot; height = &quot;288&quot;&gt;</span><br><span class="line">        &lt;source src = &quot;video/tweetsip.mp4&quot;&gt;</span><br><span class="line">        &lt;source src = &quot;video/tweetsip.webm&quot;&gt;</span><br><span class="line">        &lt;source src = &quot;video/tweetsip.ogv&quot;&gt;</span><br><span class="line">        &lt;p&gt;Sorry, your browser doesn&apos;t support the video element.&lt;/p&gt;</span><br><span class="line">    &lt;/video&gt;</span><br><span class="line">``` </span><br><span class="line">- 如何更加具体的指定格式</span><br></pre></td></tr></table></figure></p>
+<pre><code>&lt;source src = &quot;video/tweetsip.ogv&quot; type = &apos;video/ogg; codecs = &quot;theora, vorbis&quot;&apos;&gt; //type可选帮助浏览器确定能否播放文件，单引号
+&lt;source src = &quot;video/tweetsip.mp4&quot; type = &apos;video/mp4; codecs = &quot;avc1.42E01E, mp4a.40.2&quot;&apos;&gt;
+&lt;source src = &quot;video/tweetsip.webm&quot; type = &apos;video/webm; codecs = &quot;vp8, vorbis&quot;&apos;&gt;
+</code></pre><p>```</p>
+<ul>
+<li>参考<a href="http://wiki.whatwg.org/wiki/Video_type_parameters" target="_blank" rel="noopener">http://wiki.whatwg.org/wiki/Video_type_parameters</a>得到有关type参数的更多信息</li>
+<li>在<code>video</code>元素中插入<code>object</code>元素，放在<code>source</code>下面，如果浏览器不认识<code>video</code>那么就会用<code>object</code>，最终看到一个<code>flash</code>视频</li>
+</ul>
+<p><strong>音频</strong></p>
+<ul>
+<li><code>audio</code>使用方法与<code>video</code>类似</li>
 </ul>
 
       
@@ -693,7 +837,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6982;&#x5FF5;" class="headerlink" title="&#x6982;&#x5FF5;"></a>&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML首部"><span class="nav-number">3.</span> <span class="nav-text"><a href="#HTML&#x9996;&#x90E8;" class="headerlink" title="HTML&#x9996;&#x90E8;"></a>HTML&#x9996;&#x90E8;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML页面主体"><span class="nav-number">4.</span> <span class="nav-text"><a href="#HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;" class="headerlink" title="HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;"></a>HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x56FE;&#x50CF;" class="headerlink" title="&#x56FE;&#x50CF;"></a>&#x56FE;&#x50CF;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x5F15;&#x7528;" class="headerlink" title="&#x5F15;&#x7528;"></a>&#x5F15;&#x7528;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">7.</span> <span class="nav-text"><a href="#&#x5217;&#x8868;" class="headerlink" title="&#x5217;&#x8868;"></a>&#x5217;&#x8868;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器"><span class="nav-number">8.</span> <span class="nav-text"><a href="#&#x5BB9;&#x5668;" class="headerlink" title="&#x5BB9;&#x5668;"></a>&#x5BB9;&#x5668;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5及工业标准"><span class="nav-number">9.</span> <span class="nav-text"><a href="#HTML5&#x53CA;&#x5DE5;&#x4E1A;&#x6807;&#x51C6;" class="headerlink" title="HTML5&#x53CA;&#x5DE5;&#x4E1A;&#x6807;&#x51C6;"></a>HTML5&#x53CA;&#x5DE5;&#x4E1A;&#x6807;&#x51C6;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x6982;&#x5FF5;" class="headerlink" title="&#x6982;&#x5FF5;"></a>&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML首部"><span class="nav-number">3.</span> <span class="nav-text"><a href="#HTML&#x9996;&#x90E8;" class="headerlink" title="HTML&#x9996;&#x90E8;"></a>HTML&#x9996;&#x90E8;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML页面主体"><span class="nav-number">4.</span> <span class="nav-text"><a href="#HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;" class="headerlink" title="HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;"></a>HTML&#x9875;&#x9762;&#x4E3B;&#x4F53;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x56FE;&#x50CF;" class="headerlink" title="&#x56FE;&#x50CF;"></a>&#x56FE;&#x50CF;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x5F15;&#x7528;" class="headerlink" title="&#x5F15;&#x7528;"></a>&#x5F15;&#x7528;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">7.</span> <span class="nav-text"><a href="#&#x5217;&#x8868;" class="headerlink" title="&#x5217;&#x8868;"></a>&#x5217;&#x8868;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器"><span class="nav-number">8.</span> <span class="nav-text"><a href="#&#x5BB9;&#x5668;" class="headerlink" title="&#x5BB9;&#x5668;"></a>&#x5BB9;&#x5668;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表格"><span class="nav-number">9.</span> <span class="nav-text"><a href="#&#x8868;&#x683C;" class="headerlink" title="&#x8868;&#x683C;"></a>&#x8868;&#x683C;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表单"><span class="nav-number">10.</span> <span class="nav-text"><a href="#&#x8868;&#x5355;" class="headerlink" title="&#x8868;&#x5355;"></a>&#x8868;&#x5355;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5及工业标准"><span class="nav-number">11.</span> <span class="nav-text"><a href="#HTML5&#x53CA;&#x5DE5;&#x4E1A;&#x6807;&#x51C6;" class="headerlink" title="HTML5&#x53CA;&#x5DE5;&#x4E1A;&#x6807;&#x51C6;"></a>HTML5&#x53CA;&#x5DE5;&#x4E1A;&#x6807;&#x51C6;</span></a></li></ol></div>
             
 
           </div>
