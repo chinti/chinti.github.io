@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT, Chinti" />
+  <meta name="keywords" content="JavaScript," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
+<meta name="description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;开始正式起步JavaScript的学习了，根据知乎的建议买了两本书《JavaScript DOM编程艺术》以及《JavaScript高级程序设计》，我打算先从编程艺术入手，全书将会围绕着一个具体的网页效果展开，使读者对JavaScript有个整体的了解。">
+<meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript DOM 编程艺术 读书笔记">
+<meta property="og:title" content="JavaScript DOM 编程艺术 阅读笔记">
 <meta property="og:url" content="http://chinti.xyz/2018/01/07/JavaScript-DOM-编程艺术-阅读笔记/index.html">
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
+<meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;开始正式起步JavaScript的学习了，根据知乎的建议买了两本书《JavaScript DOM编程艺术》以及《JavaScript高级程序设计》，我打算先从编程艺术入手，全书将会围绕着一个具体的网页效果展开，使读者对JavaScript有个整体的了解。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-07T08:03:38.525Z">
+<meta property="og:updated_time" content="2018-01-08T12:20:05.219Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript DOM 编程艺术 读书笔记">
+<meta name="twitter:title" content="JavaScript DOM 编程艺术 阅读笔记">
+<meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;开始正式起步JavaScript的学习了，根据知乎的建议买了两本书《JavaScript DOM编程艺术》以及《JavaScript高级程序设计》，我打算先从编程艺术入手，全书将会围绕着一个具体的网页效果展开，使读者对JavaScript有个整体的了解。">
 
 
 
@@ -122,7 +126,7 @@
 
 
 
-  <title>JavaScript DOM 编程艺术 读书笔记 | ChinTi's Blog</title>
+  <title>JavaScript DOM 编程艺术 阅读笔记 | ChinTi's Blog</title>
   
 
 
@@ -276,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaScript DOM 编程艺术 读书笔记</h1>
+          <h1 class="post-title" itemprop="name headline">JavaScript DOM 编程艺术 阅读笔记</h1>
         
 
         <div class="post-meta">
@@ -298,6 +302,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -326,7 +352,86 @@
       
 
       
-        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&#160; &#160; &#160;&#160;开始正式起步JavaScript的学习了，根据知乎的建议买了两本书《JavaScript DOM编程艺术》以及《JavaScript高级程序设计》，我打算先从编程艺术入手，全书将会围绕着一个具体的网页效果展开，使读者对JavaScript有个整体的了解。<br><a id="more"></a></p>
+<h2 id="第一章：JavaScript简史"><a href="#第一章：JavaScript简史" class="headerlink" title="第一章：JavaScript简史"></a>第一章：JavaScript简史</h2><p>&#160; &#160; &#160;&#160;正如其名，本章主要介绍了JavaScript的起源，还有浏览器战争和DOM演变史。</p>
+<ul>
+<li>JavaScript的起源，它是由Netscape公司与Sun公司合作开发的。在它出现之后，网页的可交互性得到了显著改善。JavaScript是一种脚本语言。</li>
+<li>DOM是一套对文档的内容进行抽象和概念化的方法。</li>
+<li>浏览器战争<ul>
+<li>DHTML，是Dynamic HTML(动态HTML)的缩写，它不是一个新技术，而是描述HTML、CSS和JavaScript技术组合的术语，其含义为</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>利用HTML把网页标记为各种元素</li>
+<li>利用CSS设置元素样式和它们的显示位置</li>
+<li><p>利用JavaScript实时的操控页面和改变样式</p>
+<ul>
+<li>浏览器之间的冲突，Netscape公司的DOM和微软公司的DOM采用了不一样的方式，导致脚本不得不编写两次，并且为了确保正确向浏览器提供脚本，程序员必须写一些代码去探查在客户端运行的浏览器是哪一种</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>制定标准，W3C结合大家的优点推出了一个标准化的DOM<ul>
+<li>浏览器以外的考虑，DOM是一种API（应用编程接口），它可以使人们更方便的交流与合作</li>
+<li>浏览器战争的结局，微软战胜了Netscape只是因为IE随系统附带而已</li>
+<li>崭新的起点，现今几乎所有的浏览器都内置了对DOM的支持，只要遵循最新的DOM标准，就可以大胆去做</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="第二章：JavaScript语法"><a href="#第二章：JavaScript语法" class="headerlink" title="第二章：JavaScript语法"></a>第二章：JavaScript语法</h2><p>&#160; &#160; &#160;&#160;本章主要是介绍JS语法，其实大多数与其他语言差不多，稍微记一些差别就行</p>
+<ul>
+<li><p>准备工作，只需要文本编辑器（嗯 继续用记事本）和一个浏览器，可以通过两种方式执行JS代码</p>
+<ul>
+<li>第一种方式是将JS代码放入<code>head</code>标签中的<code>script</code>标签之间</li>
+<li>第二种方式是将代码存在一个扩展名为.js的独立文件，典型方式为在<code>head</code>放一个<code>script</code>并将它的<code>src</code>指向该文件，例如：<code>&lt;script src = &quot;file.js&quot;&gt;&lt;/script&gt;</code>,但是更好的方式是将<code>script</code>放在HTML文档末尾，<code>&lt;/body&gt;</code>之前，可以使浏览器更快的加载页面</li>
+<li>本章给了一个<code>text.html</code>其中<code>&lt;html lang = &quot;en&quot;&gt;</code>用于向搜索引擎表示该页面为html语言，且语言为英语，lang代表language，若想改成中文，可使用<code>zh-CN</code></li>
+</ul>
+</li>
+<li><p>语法，语句，注释（<code>//,/*...*/,&lt;!--</code>）推荐使用前两个</p>
+</li>
+<li><p>变量（variable）与赋值（assignment），JS允许程序员直接对变量赋值无需事先声明，但是提前声明是一种良好的编程习惯,在JS中是区分大小写的，变量名中不允许包含空格或标点符号（美元符号<code>$</code>除外），同时第一位不允许是数字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var mood = &quot;happy&quot;,age = 33;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为了使变量易于阅读，可以在变量名中的适当位置插入下划线，例如<code>var my_mood = &quot;happy&quot;;</code>另一种方式称为驼峰式（camel case）,删除下划线，后面的新单词改用大写字母开头，例如<code>var myMood = &quot;happy&quot;;</code>,其中happy被称为字面量（literal），我想用何种命名方式主要还是靠实际工作中的团队约定吧</p>
+</li>
+<li><p>数据类型，JS是一种弱类型（weakly typed）语言，所以不需要进行类型声明（typing），所以程序员可随时改变变量的数据类型</p>
+<ul>
+<li><p>字符串，需要用单引号或者双引号包裹住，但是若字符串中包含所用引号，则需要在此之前加一个”\”进行转义（escaping）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var height = &quot;about 5&apos;10\&quot; tall&quot;;</span><br><span class="line">alert(height);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数值，布尔值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var age = 33.5;</span><br><span class="line">var temperature = -20.33333;</span><br><span class="line"></span><br><span class="line">var sleeping = true;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>数组，之前三个都是标量（scalar），而存储一组值则需要数组（array）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var beatles = Array(4);</span><br><span class="line">var beatles = Array();//不知道元素个数时也能用</span><br><span class="line">array[index] = element; //填充（populating）</span><br><span class="line"></span><br><span class="line">var beatles = Array(&quot;John&quot;,&quot;Paul&quot;,&quot;George&quot;,&quot;Ringo&quot;);</span><br><span class="line">var beatles = [&quot;John&quot;,&quot;Paul&quot;,&quot;George&quot;,&quot;Ringo&quot;]//略随便</span><br></pre></td></tr></table></figure>
+<ul>
+<li>关联数组，可以使用明确下标，例如字符串,但这种方式不推荐<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var lennon = Array();</span><br><span class="line">lennon[&quot;name&quot;] = &quot;John&quot;;</span><br><span class="line">lennon[&quot;year&quot;] = 1940;</span><br><span class="line">lennon[&quot;living&quot;] = false;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>对象(Object)，与数组类似</p>
+<ul>
+<li>包含在对象中的数据可以通过两种形式访问，属性（property）和方法（method），为了使对象描述特定的人，需要通过new创建实例</li>
+<li>内建对象，比如Array，和它的length属性，还有类似Math对象和Date对象</li>
+<li>宿主对象，由浏览器提供的预定义对象被称为宿主对象（host object）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var lennon = Object();</span><br><span class="line">lennon.name = &quot;John&quot;;</span><br><span class="line">lennon.year = 1940;</span><br><span class="line">lennon.living = false;</span><br><span class="line"></span><br><span class="line">var lennon = &#123;name:&quot;John&quot;, year:1940; living:false &#125;; //花括号法</span><br><span class="line">Person.mood; Person.walk();</span><br><span class="line">var jeremy = new Person;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>操作（operation），进行计算和处理数据，和其他的语言差不多，除了要记住字符串与数值拼接在一起会自动转化为字符串，以及记住JS是弱类型语言</p>
+</li>
+<li>条件语句（if…else）,比较操作符（==, &gt;=, &lt;=, &gt;, &lt;, !=, ===, !==）,全等和严格不相等是在比较某些类似false 与””的情况下</li>
+<li>逻辑操作符（&amp;&amp;, ||, !）,为了避免歧义”!”后面最好跟（）</li>
+<li>循环语句（if, while, do…while, for）</li>
+<li>函数，若多次使用同一段代码可以将他们封装为一个函数，通过<code>function</code>定义一个函数的语法（参数argument），且JS拥有许多内建函数，例如<code>alert</code></li>
+<li>书中作者推荐利用下划线命名变量，驼峰法命名函数</li>
+<li>变量的作用域，即全局变量和局部变量，在函数内定义变量避免二义性</li>
+</ul>
+<hr>
+<h2 id="第三章：DOM"><a href="#第三章：DOM" class="headerlink" title="第三章：DOM"></a>第三章：DOM</h2>
       
     </div>
     
@@ -340,6 +445,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
       
 
       
@@ -410,8 +521,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -448,7 +568,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -473,6 +593,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章：JavaScript简史"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;" class="headerlink" title="&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;"></a>&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章：JavaScript语法"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;" class="headerlink" title="&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;"></a>&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章：DOM"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM" class="headerlink" title="&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM"></a>&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
