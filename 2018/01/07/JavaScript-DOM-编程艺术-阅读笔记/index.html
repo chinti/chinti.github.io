@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;开始正式起步JavaScript的学习了，根据知乎的建议买了两本书《JavaScript DOM编程艺术》以及《JavaScript高级程序设计》，我打算先从编程艺术入手，全书将会围绕着一个具体的网页效果展开，使读者对JavaScript有个整体的了解。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-09T12:08:17.228Z">
+<meta property="og:updated_time" content="2018-01-11T14:50:21.983Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript DOM 编程艺术 阅读笔记">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;开始正式起步JavaScript的学习了，根据知乎的建议买了两本书《JavaScript DOM编程艺术》以及《JavaScript高级程序设计》，我打算先从编程艺术入手，全书将会围绕着一个具体的网页效果展开，使读者对JavaScript有个整体的了解。">
@@ -469,8 +469,30 @@
 </li>
 </ul>
 <hr>
-<p>第四章：案例研究：JavaScript图片库</p>
-
+<h2 id="第四章：案例研究：JavaScript图片库"><a href="#第四章：案例研究：JavaScript图片库" class="headerlink" title="第四章：案例研究：JavaScript图片库"></a>第四章：案例研究：JavaScript图片库</h2><p>&#160; &#160; &#160;&#160;本章将会被带着使用JS和DOM去建立一个图片库，首先编写一个优秀的标记文件，其次编写一个JS函数用以显示用户想要查看的图片，然后利用标记触发函数调用</p>
+<ul>
+<li><p>标记</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang = &quot;en&quot;&gt;</span><br><span class="line"> &lt;head&gt;</span><br><span class="line">  &lt;meta charset = &quot;utf-8&quot;&gt;</span><br><span class="line">  &lt;title&gt;Image Gallery&lt;/title&gt;</span><br><span class="line"> &lt;/head&gt;</span><br><span class="line"> &lt;body&gt;</span><br><span class="line">  &lt;h1&gt;Snapshots&lt;/h1&gt;</span><br><span class="line">  &lt;ul&gt;</span><br><span class="line">   &lt;li&gt;</span><br><span class="line">    &lt;a href = &quot;images/fireworks.jpg&quot; title = &quot;A fireworks display&quot;&gt;Fireworks&lt;/a&gt;</span><br><span class="line">   &lt;/li&gt;</span><br><span class="line">   &lt;li&gt;</span><br><span class="line">    &lt;a href = &quot;images/coffee.jpg&quot; title = &quot;A cup of black coffee&quot;&gt;Coffee&lt;/a&gt;</span><br><span class="line">   &lt;/li&gt;</span><br><span class="line">   &lt;li&gt;</span><br><span class="line">    &lt;a href = &quot;images/rose.jpg&quot; title = &quot;A red,red rose&quot;&gt;Rose&lt;/a&gt;</span><br><span class="line">   &lt;/li&gt;</span><br><span class="line">   &lt;li&gt;</span><br><span class="line">    &lt;a href = &quot;images/bigben.jpg&quot; title = &quot;The famous clock&quot;&gt;Big Ben&lt;/a&gt;</span><br><span class="line">   &lt;/li&gt;</span><br><span class="line">  &lt;/ul&gt;</span><br><span class="line">  &lt;img id = &quot;placeholder&quot; src = &quot;images/placeholder.gif&quot; alt = &quot;my image gallery&quot;&gt;//占位</span><br><span class="line">  &lt;script type = &quot;text/javascript&quot; src = &quot;showPic.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"> &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JavaScript</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    //DOM方法如下</span><br><span class="line">    function showPic(whichpic)&#123;  </span><br><span class="line">	    var source = whichpic.getAttribute(&quot;href&quot;);</span><br><span class="line">	    var placeholder = whichpic.getElementById(&quot;placeholder&quot;);</span><br><span class="line">	    placeholder.setAttribute(&quot;src&quot;,source);</span><br><span class="line">&#125;</span><br><span class="line">    //非DOM方法如下,推荐使用DOM方法</span><br><span class="line">        placeholder.src = source;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>应用这个JavaScript函数，添加事件处理函数（event handler）,这里需要注意的是，当你JS打错了会不执行然后页面正常跳转，我傻乎乎的找了半天html哪里写错了。。。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href = &quot;images/fireworks.jpg&quot; title = &quot;A fireworks display&quot; onclick = &quot;showPic(this); return false;&quot;&gt;Fireworks&lt;/a&gt; //在每个链接中加入onclick</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对这个函数进行扩展</p>
+<ul>
+<li>childNodes属性，可以用来获取任何一个元素的所有子元素，使用：<code>element.childNodes</code>,按书中要求我获得了9，是因为空格和换行符也会被解释为节点</li>
+<li>nodeType属性，这个属性可以告诉我们节点是哪一种节点，它一共拥有12种值，但其中只有三个有实用价值，元素节点为1，属性节点为2，文本节点为3</li>
+<li>nodeValue属性，用于得到和设置一个节点的值：<code>node.nodeValue</code>,这里要注意p元素本身的属性是个空值，你要找它的子节点，例如<code>alert(description.childNodes[0].nodeValue);</code></li>
+<li>firstchild和lastchild属性</li>
+</ul>
+</li>
+<li><p>加上CSS样式</p>
+</li>
+</ul>
+<hr>
+<h2 id="第五章：最佳实践"><a href="#第五章：最佳实践" class="headerlink" title="第五章：最佳实践"></a>第五章：最佳实践</h2>
       
     </div>
     
@@ -642,7 +664,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章：JavaScript简史"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;" class="headerlink" title="&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;"></a>&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章：JavaScript语法"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;" class="headerlink" title="&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;"></a>&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章：DOM"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM" class="headerlink" title="&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM"></a>&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章：JavaScript简史"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;" class="headerlink" title="&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;"></a>&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章：JavaScript语法"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;" class="headerlink" title="&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;"></a>&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章：DOM"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM" class="headerlink" title="&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM"></a>&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章：案例研究：JavaScript图片库"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x7B2C;&#x56DB;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;JavaScript&#x56FE;&#x7247;&#x5E93;" class="headerlink" title="&#x7B2C;&#x56DB;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;JavaScript&#x56FE;&#x7247;&#x5E93;"></a>&#x7B2C;&#x56DB;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;JavaScript&#x56FE;&#x7247;&#x5E93;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五章：最佳实践"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E94;&#x7AE0;&#xFF1A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;" class="headerlink" title="&#x7B2C;&#x4E94;&#x7AE0;&#xFF1A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;"></a>&#x7B2C;&#x4E94;&#x7AE0;&#xFF1A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;</span></a></li></ol></div>
             
 
           </div>
