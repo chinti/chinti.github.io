@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;开始正式起步JavaScript的学习了，根据知乎的建议买了两本书《JavaScript DOM编程艺术》以及《JavaScript高级程序设计》，我打算先从编程艺术入手，全书将会围绕着一个具体的网页效果展开，使读者对JavaScript有个整体的了解。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-11T14:50:21.983Z">
+<meta property="og:updated_time" content="2018-01-13T04:23:07.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript DOM 编程艺术 阅读笔记">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;开始正式起步JavaScript的学习了，根据知乎的建议买了两本书《JavaScript DOM编程艺术》以及《JavaScript高级程序设计》，我打算先从编程艺术入手，全书将会围绕着一个具体的网页效果展开，使读者对JavaScript有个整体的了解。">
@@ -492,7 +492,93 @@
 </li>
 </ul>
 <hr>
-<h2 id="第五章：最佳实践"><a href="#第五章：最佳实践" class="headerlink" title="第五章：最佳实践"></a>第五章：最佳实践</h2>
+<h2 id="第五章：最佳实践"><a href="#第五章：最佳实践" class="headerlink" title="第五章：最佳实践"></a>第五章：最佳实践</h2><p>&#160; &#160; &#160;&#160;本章将介绍一些最佳实践，同时向读者介绍了四种思想：平稳退化，分离JavaScript，向后兼容性，性能考虑</p>
+<ul>
+<li>过去的错误，很多书中介绍的遗留问题在如今已经得到了解决<ul>
+<li>不要怪罪JavaScript</li>
+<li>Flash的遭遇</li>
+<li>质疑一切，利用JS改变网页行为，必须三思而后行，确认是否必要</li>
+</ul>
+</li>
+<li><p>平稳退化，若JS不被浏览器支持，虽然某些功能无法使用，但基本操作仍能顺利完成（现今基本不用担心支持问题）</p>
+<ul>
+<li><code>window.open(url,name,features)</code>，第三个参数是利用逗号分割的字符串，用于设定属性，例如尺寸显示位置等</li>
+<li>“javascript:”伪协议，用于通过一个链接调用JavaScript函数，例如：<code>&lt;a href = &quot;javascript:popUp(&#39;http://www.example.com/&#39;);&quot;&gt;Example&lt;/a&gt;</code>，在html文档中通过伪协议调用JS代码并不好</li>
+<li>内嵌的事件处理函数，类似onclick，<code>&lt;a href = &quot;#&quot; onclick = &quot;popUp(&#39;http://www.example.com&#39;); return false;&quot;&gt;Example&lt;/a&gt;</code>，若用户禁用JS这条链接将毫无作用</li>
+<li>谁关心这个，除了禁用JS的浏览器的用户以外，你可以想象用户是搜索机器人，只有极少数搜索机器人可以理解JS代码，若你的网页无法平稳退化，它在搜索引擎上的排名会受到损害<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href = &quot;http://www.example.com/&quot; onclick = &quot;popUp(&apos;http://www.example.com&apos;); return false;&quot;&gt;Example&lt;/a&gt;</span><br><span class="line">//精简下</span><br><span class="line">&lt;a href = &quot;http://www.example.com/&quot; onclick = &quot;popUp(this.getAttribute(&apos;href&apos;)); return false;&quot;&gt;Example&lt;/a&gt;</span><br><span class="line">//利用DOM提供的的this.href</span><br><span class="line">&lt;a href = &quot;http://www.example.com/&quot; onclick = &quot;popUp(this.href); return false;&quot;&gt;Example&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>向CSS学习</p>
+<ul>
+<li>结构与样式的分离</li>
+<li>渐进增强，“标记良好的内容就是一切”</li>
+</ul>
+</li>
+<li><p>分离JavaScript，利用id或class作为挂钩<code>&lt;a href = &quot;http://www.example.com/&quot; class = &quot;popup&quot;&gt;Example&lt;/a&gt;</code>，在外部JS文件中完成事件动作<code>element.event = action...</code>，具体步骤：</p>
+<ol>
+<li>把文档里的所有链接放入一个数组</li>
+<li>遍历数组</li>
+<li>若果某个链接的class属性等于popup，就表示这个链接被点击时应该调用popUp()函数</li>
+<li>于是，把这个连接的href传给popUp()函数，取消这个链接的默认行为<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">window.load = prepareLinks; //必须</span><br><span class="line">function prepareLinks() &#123;</span><br><span class="line">    var links = document.getElementsByTagName(&quot;a&quot;);</span><br><span class="line">    for(var i=0; i&lt;links.length; i++)&#123;</span><br><span class="line">        if(links[i].getAttribute(&quot;class&quot;) == &quot;popup&quot;)&#123;</span><br><span class="line">            popUp(this.getAttribute(&quot;href&quot;));</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function popUp(winURL) &#123;</span><br><span class="line">    window.open(winURL,&quot;popup&quot;,&quot;width=320,height=480&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>向后兼容</p>
+<ul>
+<li>对象检测，<code>if(method){statements}</code>，但是可读性较差，可以采用逻辑非的方式，<code>if(!method) return false;</code></li>
+<li>浏览器嗅探技术（browser sniffung），这个风险很大，因为浏览器有时会说谎，将自己报告成另外一种浏览器（我想到edge报告自己是chrome）</li>
+</ul>
+</li>
+<li><p>性能考虑</p>
+<ul>
+<li>尽量少访问DOM和尽量减少标记，只要查询某些元素就要遍历整个DOM树，最好的方法就是将第一次结果保存在一个变量中</li>
+<li>合并和放置脚本</li>
+<li>压缩脚本，代码压缩工具：<a href="http://www.crockford.com/javascript/jsmin.html" target="_blank" rel="noopener">Douglas Crockford的JSMin</a>、<a href="http://developer.yahoo.com/yui/compressor" target="_blank" rel="noopener">雅虎的YUI Compressor</a>、<a href="http://closure-compiler.appspot.com/home" target="_blank" rel="noopener">谷歌的Closure Compiler</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="第六章：案例研究：图片库改进版"><a href="#第六章：案例研究：图片库改进版" class="headerlink" title="第六章：案例研究：图片库改进版"></a>第六章：案例研究：图片库改进版</h2><p>&#160; &#160;&#160;&#160;本章是将上一章内容运用进之前所做的图片库</p>
+<ul>
+<li>快速回顾，确认它能否支持平稳退化</li>
+<li><p>JS是否分离</p>
+<ul>
+<li>结构化程序设计备忘，通常认为函数只有一个出口和入口，但是过分拘泥这点会使代码难以阅读</li>
+<li>添加事件处理函数</li>
+</ul>
+<ol>
+<li>检查点，检查浏览器是否支持函数</li>
+<li>变量名里有什么，用一些有意义的单词命名一长串代码，使代码更加易读和理解</li>
+<li>遍历</li>
+<li>改变行为</li>
+<li>完成JavaScript函数</li>
+</ol>
+<ul>
+<li>共享onload事件，将函数与onclick事件绑定，可以采用一个弹性的解决方案<code>addLoadEvent</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function addLoadEvent(func) &#123;</span><br><span class="line">    var oldonload = window.onload;</span><br><span class="line">    if(typeof window.onload != &apos;function&apos;) &#123;</span><br><span class="line">        window.onload = func;</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        window.onload = function() &#123;</span><br><span class="line">            oldonload();</span><br><span class="line">            func();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>不要做太多假设，在实际工作中，检查需要根据具体情况来做出</p>
+</li>
+<li>键盘访问，<code>onkeypress</code>，但是最好不要用它，且<code>onclick</code>的支持已经够完美</li>
+<li><p><code>prepareGallery</code>和<code>showPic</code>代码段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">function showPic(whichpic) &#123;  </span><br><span class="line"> if (!document.getElementById(&quot;placeholder&quot;)) return false;</span><br><span class="line"> var source = whichpic.getAttribute(&quot;href&quot;);</span><br><span class="line"> var placeholder = document.getElementById(&quot;placeholder&quot;);</span><br><span class="line"> if (placeholder.nodeName != &quot;IMG&quot;) return false;</span><br><span class="line"> placeholder.setAttribute(&quot;src&quot;,source);</span><br><span class="line"> if (document.getElementById(&quot;description&quot;)) &#123;</span><br><span class="line">  var text = whichpic.getAttribute(&quot;title&quot;) ? whichpic.getAttribute(&quot;title&quot;):&quot;&quot;;</span><br><span class="line">  var description = document.getElementById(&quot;description&quot;);</span><br><span class="line">  if (description.firstChild.nodeType == 3)&#123;</span><br><span class="line">   description.firstChild.nodeValue = text;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> return true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function prepareGallery() &#123;</span><br><span class="line"> if (!document.getElementsByTagName) return false;</span><br><span class="line"> if (!document.getElementById) return false;</span><br><span class="line"> if (!document.getElementById(&quot;imagegallery&quot;)) return false;</span><br><span class="line"> var gallery = document.getElementById(&quot;imagegallery&quot;);</span><br><span class="line"> var links = gallery.getElementsByTagName(&quot;a&quot;);</span><br><span class="line"> for(var i=0; i &lt; links.length; i++) &#123;</span><br><span class="line">  links[i].onclick = function() &#123;</span><br><span class="line">   return showPic(this)? false:true;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把JavaScript与CSS结合起来</p>
+</li>
+<li>DOM Core和HTML-DOM</li>
+</ul>
+<hr>
+<h2 id="第七章：动态创建标记"><a href="#第七章：动态创建标记" class="headerlink" title="第七章：动态创建标记"></a>第七章：动态创建标记</h2><p>&#160; &#160; &#160;&#160;本章主要是介绍一些传统方法和DOM方法</p>
+<ul>
+<li>一些传统方法<ul>
+<li>document.write，最大的缺点是它违背了“行为应该与表现分离”的原则</li>
+<li>innerHTML</li>
+</ul>
+</li>
+</ul>
+
       
     </div>
     
@@ -664,7 +750,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章：JavaScript简史"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;" class="headerlink" title="&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;"></a>&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章：JavaScript语法"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;" class="headerlink" title="&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;"></a>&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章：DOM"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM" class="headerlink" title="&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM"></a>&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章：案例研究：JavaScript图片库"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x7B2C;&#x56DB;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;JavaScript&#x56FE;&#x7247;&#x5E93;" class="headerlink" title="&#x7B2C;&#x56DB;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;JavaScript&#x56FE;&#x7247;&#x5E93;"></a>&#x7B2C;&#x56DB;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;JavaScript&#x56FE;&#x7247;&#x5E93;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五章：最佳实践"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E94;&#x7AE0;&#xFF1A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;" class="headerlink" title="&#x7B2C;&#x4E94;&#x7AE0;&#xFF1A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;"></a>&#x7B2C;&#x4E94;&#x7AE0;&#xFF1A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章：JavaScript简史"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;" class="headerlink" title="&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;"></a>&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章：JavaScript语法"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;" class="headerlink" title="&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;"></a>&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章：DOM"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM" class="headerlink" title="&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM"></a>&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章：案例研究：JavaScript图片库"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x7B2C;&#x56DB;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;JavaScript&#x56FE;&#x7247;&#x5E93;" class="headerlink" title="&#x7B2C;&#x56DB;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;JavaScript&#x56FE;&#x7247;&#x5E93;"></a>&#x7B2C;&#x56DB;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;JavaScript&#x56FE;&#x7247;&#x5E93;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五章：最佳实践"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E94;&#x7AE0;&#xFF1A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;" class="headerlink" title="&#x7B2C;&#x4E94;&#x7AE0;&#xFF1A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;"></a>&#x7B2C;&#x4E94;&#x7AE0;&#xFF1A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章：案例研究：图片库改进版"><span class="nav-number">7.</span> <span class="nav-text"><a href="#&#x7B2C;&#x516D;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;&#x56FE;&#x7247;&#x5E93;&#x6539;&#x8FDB;&#x7248;" class="headerlink" title="&#x7B2C;&#x516D;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;&#x56FE;&#x7247;&#x5E93;&#x6539;&#x8FDB;&#x7248;"></a>&#x7B2C;&#x516D;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;&#x56FE;&#x7247;&#x5E93;&#x6539;&#x8FDB;&#x7248;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第七章：动态创建标记"><span class="nav-number">8.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E03;&#x7AE0;&#xFF1A;&#x52A8;&#x6001;&#x521B;&#x5EFA;&#x6807;&#x8BB0;" class="headerlink" title="&#x7B2C;&#x4E03;&#x7AE0;&#xFF1A;&#x52A8;&#x6001;&#x521B;&#x5EFA;&#x6807;&#x8BB0;"></a>&#x7B2C;&#x4E03;&#x7AE0;&#xFF1A;&#x52A8;&#x6001;&#x521B;&#x5EFA;&#x6807;&#x8BB0;</span></a></li></ol></div>
             
 
           </div>
