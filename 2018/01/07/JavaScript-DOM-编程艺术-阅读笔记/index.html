@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;开始正式起步JavaScript的学习了，根据知乎的建议买了两本书《JavaScript DOM编程艺术》以及《JavaScript高级程序设计》，我打算先从编程艺术入手，全书将会围绕着一个具体的网页效果展开，使读者对JavaScript有个整体的了解。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-13T04:23:07.708Z">
+<meta property="og:updated_time" content="2018-01-13T09:41:25.816Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript DOM 编程艺术 阅读笔记">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;开始正式起步JavaScript的学习了，根据知乎的建议买了两本书《JavaScript DOM编程艺术》以及《JavaScript高级程序设计》，我打算先从编程艺术入手，全书将会围绕着一个具体的网页效果展开，使读者对JavaScript有个整体的了解。">
@@ -572,11 +572,41 @@
 <hr>
 <h2 id="第七章：动态创建标记"><a href="#第七章：动态创建标记" class="headerlink" title="第七章：动态创建标记"></a>第七章：动态创建标记</h2><p>&#160; &#160; &#160;&#160;本章主要是介绍一些传统方法和DOM方法</p>
 <ul>
-<li>一些传统方法<ul>
-<li>document.write，最大的缺点是它违背了“行为应该与表现分离”的原则</li>
-<li>innerHTML</li>
+<li><p>一些传统方法</p>
+<ul>
+<li><code>document.write</code>，最大的缺点是它违背了“行为应该与表现分离”的原则</li>
+<li><code>innerHTML</code>，用它读取内容毫无细节可言，会将标记和字符串一起读出，但是可以用来在js中把一段HTML内容完全替换进这个标签，无法做到插入，在XHTML中可能会忽略这个属性</li>
 </ul>
 </li>
+<li><p>DOM方法</p>
+<ul>
+<li><code>createElement</code>方法，使用：<code>document.createElement(nodeName)</code>，用于创建元素节点，创建后，它成为了一个文档碎片（document fragment），但它已经具有了一个nodeType和一个nodeName值</li>
+<li><code>appendChild</code>方法，使用：<code>parent.appendChild(child)</code>，用于插入某文档的节点树</li>
+<li><code>createTextNode</code>方法，使用：<code>document.createTextNode(text)</code>，用于创建一个文本节点</li>
+<li>一个更复杂的组合<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    window.onload = function() &#123;</span><br><span class="line">	    var para = document.createElement(&quot;p&quot;);</span><br><span class="line">        var txt1 = document.createTextNode(&quot;This is &quot;);</span><br><span class="line">	    para.appendChild(txt1);</span><br><span class="line">	    var emphasis = document.createElement(&quot;em&quot;);</span><br><span class="line">	    var txt2 = document.createTextNode(&quot;my&quot;);</span><br><span class="line">	    emphasis.appendChild(txt2);</span><br><span class="line">	    para.appendChild(emphasis);</span><br><span class="line">	    var txt3 = document.createTextNode(&quot; content. &quot;);</span><br><span class="line">	    para.appendChild(txt3);</span><br><span class="line">	    var testdiv = document.getElementById(&quot;testdiv&quot;);</span><br><span class="line">	    testdiv.appendChild(para);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>重回图片库</p>
+<ul>
+<li><code>insetBefore()</code>在已有元素前插入一个新元素，使用：<code>parentElement.insertBefore(newElement,targetElement)</code>，例如：<code>var gallery = document.getElementById(&quot;imagegallery&quot;);</code> <code>gallery.parentNode.insertBefore(placeholder,gallery)</code></li>
+<li>在已有元素后插入一个新元素，并没有现成的函数，但是可以自己写，具体原理：若此元素为父元素最后一个孩子，使用<code>appendChild</code>，若不是，则利用<code>insertBefore</code>插入这个元素的下一个兄弟元素之前<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function insertAfter(newElement,targetElement)     &#123;</span><br><span class="line">    var parent = targetElement.parentNode;</span><br><span class="line">    if (parent.lastChild == targetElement) &#123;</span><br><span class="line">        parent.appendChild(newElement);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        parent.insertBefore(newElement,targetElement.nextSibling);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Ajax，这个词用于概括异步加载页面内容的技术</p>
+<ul>
+<li>XMLHttpRequest对象，它是Ajax技术的核心，充当浏览器中的脚本与服务器之间的中间人的角色，以往请求都是由浏览器发出，而现在JS也可以通过这个对象自己发送请求和处理响应，书中给了一个ajax例子，这里需要注意，Chrome本地服务器上并不能处理异步，换成火狐浏览器即可解决这个问题</li>
+<li>渐进增强与Ajax</li>
+<li>Hijax</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="第八章：充实文档的内容"><a href="#第八章：充实文档的内容" class="headerlink" title="第八章：充实文档的内容"></a>第八章：充实文档的内容</h2><p>&#160; &#160; &#160;&#160;本章将继续实践上一章学到的内容</p>
+<ul>
+<li>不应该做什么，不要把重要内容通过DOM技术添加到网页上</li>
+<li>把“不可见”变成“可见”，可以利用DOM技术得到隐藏在属性里的信息，创建标记封装这些信息，把这些标记插入到文档</li>
 </ul>
 
       
@@ -750,7 +780,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章：JavaScript简史"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;" class="headerlink" title="&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;"></a>&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章：JavaScript语法"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;" class="headerlink" title="&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;"></a>&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章：DOM"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM" class="headerlink" title="&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM"></a>&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章：案例研究：JavaScript图片库"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x7B2C;&#x56DB;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;JavaScript&#x56FE;&#x7247;&#x5E93;" class="headerlink" title="&#x7B2C;&#x56DB;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;JavaScript&#x56FE;&#x7247;&#x5E93;"></a>&#x7B2C;&#x56DB;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;JavaScript&#x56FE;&#x7247;&#x5E93;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五章：最佳实践"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E94;&#x7AE0;&#xFF1A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;" class="headerlink" title="&#x7B2C;&#x4E94;&#x7AE0;&#xFF1A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;"></a>&#x7B2C;&#x4E94;&#x7AE0;&#xFF1A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章：案例研究：图片库改进版"><span class="nav-number">7.</span> <span class="nav-text"><a href="#&#x7B2C;&#x516D;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;&#x56FE;&#x7247;&#x5E93;&#x6539;&#x8FDB;&#x7248;" class="headerlink" title="&#x7B2C;&#x516D;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;&#x56FE;&#x7247;&#x5E93;&#x6539;&#x8FDB;&#x7248;"></a>&#x7B2C;&#x516D;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;&#x56FE;&#x7247;&#x5E93;&#x6539;&#x8FDB;&#x7248;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第七章：动态创建标记"><span class="nav-number">8.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E03;&#x7AE0;&#xFF1A;&#x52A8;&#x6001;&#x521B;&#x5EFA;&#x6807;&#x8BB0;" class="headerlink" title="&#x7B2C;&#x4E03;&#x7AE0;&#xFF1A;&#x52A8;&#x6001;&#x521B;&#x5EFA;&#x6807;&#x8BB0;"></a>&#x7B2C;&#x4E03;&#x7AE0;&#xFF1A;&#x52A8;&#x6001;&#x521B;&#x5EFA;&#x6807;&#x8BB0;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章：JavaScript简史"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;" class="headerlink" title="&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;"></a>&#x7B2C;&#x4E00;&#x7AE0;&#xFF1A;JavaScript&#x7B80;&#x53F2;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章：JavaScript语法"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;" class="headerlink" title="&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;"></a>&#x7B2C;&#x4E8C;&#x7AE0;&#xFF1A;JavaScript&#x8BED;&#x6CD5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章：DOM"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM" class="headerlink" title="&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM"></a>&#x7B2C;&#x4E09;&#x7AE0;&#xFF1A;DOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章：案例研究：JavaScript图片库"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x7B2C;&#x56DB;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;JavaScript&#x56FE;&#x7247;&#x5E93;" class="headerlink" title="&#x7B2C;&#x56DB;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;JavaScript&#x56FE;&#x7247;&#x5E93;"></a>&#x7B2C;&#x56DB;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;JavaScript&#x56FE;&#x7247;&#x5E93;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五章：最佳实践"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E94;&#x7AE0;&#xFF1A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;" class="headerlink" title="&#x7B2C;&#x4E94;&#x7AE0;&#xFF1A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;"></a>&#x7B2C;&#x4E94;&#x7AE0;&#xFF1A;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章：案例研究：图片库改进版"><span class="nav-number">7.</span> <span class="nav-text"><a href="#&#x7B2C;&#x516D;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;&#x56FE;&#x7247;&#x5E93;&#x6539;&#x8FDB;&#x7248;" class="headerlink" title="&#x7B2C;&#x516D;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;&#x56FE;&#x7247;&#x5E93;&#x6539;&#x8FDB;&#x7248;"></a>&#x7B2C;&#x516D;&#x7AE0;&#xFF1A;&#x6848;&#x4F8B;&#x7814;&#x7A76;&#xFF1A;&#x56FE;&#x7247;&#x5E93;&#x6539;&#x8FDB;&#x7248;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第七章：动态创建标记"><span class="nav-number">8.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E03;&#x7AE0;&#xFF1A;&#x52A8;&#x6001;&#x521B;&#x5EFA;&#x6807;&#x8BB0;" class="headerlink" title="&#x7B2C;&#x4E03;&#x7AE0;&#xFF1A;&#x52A8;&#x6001;&#x521B;&#x5EFA;&#x6807;&#x8BB0;"></a>&#x7B2C;&#x4E03;&#x7AE0;&#xFF1A;&#x52A8;&#x6001;&#x521B;&#x5EFA;&#x6807;&#x8BB0;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第八章：充实文档的内容"><span class="nav-number">9.</span> <span class="nav-text"><a href="#&#x7B2C;&#x516B;&#x7AE0;&#xFF1A;&#x5145;&#x5B9E;&#x6587;&#x6863;&#x7684;&#x5185;&#x5BB9;" class="headerlink" title="&#x7B2C;&#x516B;&#x7AE0;&#xFF1A;&#x5145;&#x5B9E;&#x6587;&#x6863;&#x7684;&#x5185;&#x5BB9;"></a>&#x7B2C;&#x516B;&#x7AE0;&#xFF1A;&#x5145;&#x5B9E;&#x6587;&#x6863;&#x7684;&#x5185;&#x5BB9;</span></a></li></ol></div>
             
 
           </div>
