@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;开始正式起步JavaScript的学习了，根据知乎的建议买了两本书《JavaScript DOM编程艺术》以及《JavaScript高级程序设计》，我打算先从编程艺术入手，全书将会围绕着一个具体的网页效果展开，使读者对JavaScript有个整体的了解。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-14T06:58:52.941Z">
+<meta property="og:updated_time" content="2018-01-15T06:49:36.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript DOM 编程艺术 阅读笔记">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;开始正式起步JavaScript的学习了，根据知乎的建议买了两本书《JavaScript DOM编程艺术》以及《JavaScript高级程序设计》，我打算先从编程艺术入手，全书将会围绕着一个具体的网页效果展开，使读者对JavaScript有个整体的了解。">
@@ -620,7 +620,27 @@
 </li>
 </ul>
 <hr>
-<h2 id="第九章：CSS-DOM"><a href="#第九章：CSS-DOM" class="headerlink" title="第九章：CSS-DOM"></a>第九章：CSS-DOM</h2>
+<h2 id="第九章：CSS-DOM"><a href="#第九章：CSS-DOM" class="headerlink" title="第九章：CSS-DOM"></a>第九章：CSS-DOM</h2><p>&#160; &#160; &#160;&#160;本章介绍如何利用DOM技术获取和设置CSS信息</p>
+<ul>
+<li>三位一体的网页，结构层、表示层、行为层</li>
+<li>style属性，<code>element.style.property</code>，它也是一个对象</li>
+<li>在调用诸如<code>font-family</code>这样的属性时，会将中间的连字符解释为减法操作符，需要将他变为驼峰命名法<code>fontFamily</code>，在火狐浏览器中，返回颜色值是以RGB（红，绿，蓝）</li>
+<li>style属性只能返回内嵌样式，所以几乎没有实用价值。。，但是可以用于设置样式</li>
+<li>何时需要设置样式<ul>
+<li>根据元素在节点树里的位置来设置样式，<code>nextSibling</code></li>
+<li>根据某种条件反复设置某种样式，书中给了一个让表格反复变色的例子，这不是一个很好的做法在现在尽量用CSS完成，例如：<code>tr:nth-child(odd) { background-color:   #ffc}</code></li>
+<li>响应事件，CSS提供了<code>:hover</code>等伪class属性，DOM也可以通过<code>onmouseover</code>等事件对HTML元素的状态变化作出响应,同样尽可能利用CSS完成</li>
+</ul>
+</li>
+<li><p><code>ClassName</code>属性，之前让DOM直接设置或修改样式，这种做法让“行为层”干了“表示层”的活，不如用JS代码更新这个元素的类名<code>element.className = value;</code>，<code>elem.setAttribute(&quot;class&quot;,&quot;intro&quot;);</code>的方式也可以，用下面这个函数可以添加类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function addClass(element,value) &#123;</span><br><span class="line">	if(!element.className) &#123;</span><br><span class="line">		element.className = value;</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		newClassName = element.className;</span><br><span class="line">		newClassName += &quot; &quot;;</span><br><span class="line">		newClassName += value;</span><br><span class="line">		element.className = newClassName;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同时，可以对复杂的函数更进一步的抽象，以便通用</p>
+</li>
+</ul>
+<hr>
+<p>第十章：用JavaScript实现动画效果</p>
+
       
     </div>
     
