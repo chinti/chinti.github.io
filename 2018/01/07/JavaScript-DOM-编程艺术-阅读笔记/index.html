@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;开始正式起步JavaScript的学习了，根据知乎的建议买了两本书《JavaScript DOM编程艺术》以及《JavaScript高级程序设计》，我打算先从编程艺术入手，全书将会围绕着一个具体的网页效果展开，使读者对JavaScript有个整体的了解。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-20T13:27:07.669Z">
+<meta property="og:updated_time" content="2018-01-23T14:28:19.521Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript DOM 编程艺术 阅读笔记">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;开始正式起步JavaScript的学习了，根据知乎的建议买了两本书《JavaScript DOM编程艺术》以及《JavaScript高级程序设计》，我打算先从编程艺术入手，全书将会围绕着一个具体的网页效果展开，使读者对JavaScript有个整体的了解。">
@@ -686,6 +686,27 @@
 <li>JavaScript，先建立一个global.js用于保存一些通用函数例如之前所用到的<code>addLoadEvent(func) insertAfter(newElement, targetElement) addClass(element, value)</code></li>
 <li>页面突出显示<code>highlightPage</code>，利用<code>getAttribute(&quot;href&quot;)</code>获取链接的URL，利用<code>window.location.href</code>获取当前页面的url，<code>indexOf</code>可以用来在字符串中寻找子字符串的位置<code>string.indexOf(substring)</code>，返回-1即为失败</li>
 <li><code>toLowerCase</code>该方法可以将文本转换成小写</li>
+<li><p>点击内部链接后，会在连接后包含一串字符串，以#为分隔符，<code>about.html#jay</code>，这里利用split方法可以便捷的将字符串分成多串，<code>array = string.split(character)</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">    function showSection(id) &#123;</span><br><span class="line">	var sections =document.getElementsByTagName(&quot;section&quot;);</span><br><span class="line">	for (var i=0; i&lt;sections.length; i++) &#123;</span><br><span class="line">		if (sections[i].getAttribute(&quot;id&quot;) != id) &#123;</span><br><span class="line">			sections[i].style.display = &quot;none&quot;;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			sections[i].style.display = &quot;block&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function prepareInternalnav() &#123;</span><br><span class="line">	if (!document.getElementsByTagName) return false;</span><br><span class="line">	if (!document.getElementById) return false;</span><br><span class="line">	var articles = document.getElementsByTagName(&quot;article&quot;);</span><br><span class="line">	if (articles.length == 0) return false;</span><br><span class="line">	var navs = articles[0].getElementsByTagName(&quot;nav&quot;);</span><br><span class="line">	if (navs.length == 0) return false;</span><br><span class="line">	var nav = navs[0];</span><br><span class="line">	var links = nav.getElementsByTagName(&quot;a&quot;);</span><br><span class="line">	for (var i=0; i&lt;links.length; i++) &#123;</span><br><span class="line">		var sectionId = links[i].getAttribute(&quot;href&quot;).split(&quot;#&quot;)[1];</span><br><span class="line">		if (!document.getElementById(sectionId)) continue;</span><br><span class="line">		document.getElementById(sectionId).style.display = &quot;none&quot;;</span><br><span class="line">		links[i].destination = sectionId;</span><br><span class="line">		links[i].onclick = function() &#123;</span><br><span class="line">		//一开始一下子没绕过弯，留个档</span><br><span class="line">			showSection(this.destination);</span><br><span class="line">			return false;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JavaScript图片库，将第六章第七章部分代码改一下</p>
+</li>
+<li>增强表格，将第九章代码进行改编</li>
+<li>增强表单<ul>
+<li>字段标签，<code>element.focus()</code>单击一个标签可以将焦点转移到关联的表单字段中</li>
+<li>占位符值，<code>onfocus</code>事件会在焦点移入表单字段触发，<code>onblur</code>事件则反之，现代浏览器应该不需要再检查占位符值了吧</li>
+<li><code>replace</code>替换，<code>field.value.replace(&#39; &#39;,&#39;&#39;)</code>将空格替换掉</li>
+<li>同时，书上代码中有一段<code>element.required == &#39;required&#39;</code>代码，可能不太能用，required现在是一个bool型，在html中只需些<code>&lt;input ... required&gt;</code>即可，在js中的判断应改为<code>element.required == true</code></li>
+</ul>
+</li>
+<li>提交表单，添加一点Ajax，首先创建一个加载图像，可以到<a href="http://ajaxload.info" target="_blank" rel="noopener">http://ajaxload.info</a>创建一个，并把此图像命名为loading.gif </li>
+<li>假设表单中包含消息“Why does 2+2=4?”，然后根据<code>name=value&amp;name2=value2&amp;name3=value3</code>规则形成一个URL编码的表单数据字符串，例如<code>message=Why does 2+2=4?&amp;name=me&amp;email=me@example.com</code>的形式，但是其中诸如+、=、？可能会造成歧义，JS提供了一个函数<code>encodeURIComponent</code>可以用于把有歧义的字符转换成对应的ASCII码：<code>message=Why%20does%202%2B2%3D4%3F%26&amp;name=Me%email=me%40example.com</code>，<code>join</code>函数可以用来将数组中的所有元素通过一个分隔符进行连接并放入一个字符串中，例如<code>dataParts.join(&#39;&amp;&#39;)</code><ul>
+<li>正则表达式，在JS中，正则表达式的每个模式都是以一个斜杠（/）开头和结尾，正则表达式部分待之后在看了书上也没具体写</li>
+<li>这本书Ajax部分看的有点糊涂，感觉只是初步的了解，我打算看高级程序设计这本书的时候再结合起来好好理解下</li>
+<li>压缩js代码，用以改进性能</li>
+<li>书后附录中还简短的介绍了jQuery，不过我打算在《锋利的jQuery》中具体学习</li>
+</ul>
+</li>
 </ul>
 
       
