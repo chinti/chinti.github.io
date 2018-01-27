@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;700页。。好厚啊。。慢慢读吧，完整把javaScript过一遍再去学jQuery还有vue什么的框架和库吧（等一个月后百度前端学院开班。。不知道今年开不开），本书源代码可以在www.wrox.com中下载">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-27T15:31:02.567Z">
+<meta property="og:updated_time" content="2018-01-27T15:42:35.613Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;700页。。好厚啊。。慢慢读吧，完整把javaScript过一遍再去学jQuery还有vue什么的框架和库吧（等一个月后百度前端学院开班。。不知道今年开不开），本书源代码可以在www.wrox.com中下载">
@@ -395,14 +395,86 @@
 <li>Number类型，八进制必须以0开头，十六进制必须以0x开头，存在+0与-0，可以采用科学记数法，即<code>3.125e7</code>，同时不要使用浮点数值做判断，因为精度不能保证（IEEE754）</li>
 <li>数值范围，<code>Number.MIN_VALUE == 5e-324</code>，<code>Number.MAX_VALUE == 1.7976931348623157e+308</code>，Infinity表示无穷值，isFinite()判断有穷性</li>
 <li>NaN，Not a Number，NaN与任何值不相等包括自己，任何对NaN的操作都会返回NaN，任何数值除以非数值就会返回NaN，isNaN()判断不是数值，无法被转换为数值就会返回true</li>
-<li>数值转换，Number()、parseInt()、parseFloat()<br>|  函数  |八进制|十六进制|字符串|空字符串|<br>|——- |——|——–|——|——–|<br>|Number()|忽略前导0，转换为十进制|转换为相同大小的十进制|包含其他格式的转换为NaN|0|<br>|parseInt()|转换为相同大小的十进制，指定基数为8|同前，基数指定为16|若第一个字符为数字，则会一直解析到非数值为止，若第一个字符为非数字，转化为NaN|NaN|<br>|parseFloat()|忽略0，理解为十进制|转化为0|同上|同上|</li>
+<li>数值转换，Number()、parseInt()、parseFloat()</li>
 </ul>
 </li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">八进制</th>
+<th style="text-align:center">十六进制</th>
+<th style="text-align:center">字符串</th>
+<th style="text-align:center">空字符串</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Number()</td>
+<td style="text-align:center">忽略前导0，转换为十进制</td>
+<td style="text-align:center">转换为相同大小的十进制</td>
+<td style="text-align:center">包含其他格式的转换为NaN</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">parseInt()</td>
+<td style="text-align:center">转换为相同大小的十进制，指定基数为8</td>
+<td style="text-align:center">同前，基数指定为16</td>
+<td style="text-align:center">若第一个字符为数字，则会一直解析到非数值为止，若第一个字符为非数字，转化为NaN</td>
+<td style="text-align:center">NaN</td>
+</tr>
+<tr>
+<td style="text-align:center">parseFloat()</td>
+<td style="text-align:center">忽略0，理解为十进制</td>
+<td style="text-align:center">转化为0</td>
+<td style="text-align:center">同上</td>
+<td style="text-align:center">同上</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>string类型，”\”转义字符，例如<code>\n \t \b \r \f \\ \&#39; \&quot; \xnn \unnnn</code>，字符串一旦创建，值就是不可改变的，需要重新创建，toString()方法，该方法可以指定基数，将数值转化为对应进制的字符串值，null和undefined没有这个方法</li>
-<li>Object类型，对象，其实就是一组数据和功能的集合，<code>var o = new Object();</code>省略括号有效，但不推荐，每个Object实例都拥有下列属性和方法<br>|属性和方法名|说明|<br>|————|—-|<br>|constructor|保存着用于创建当前对象的函数|<br>|hasOwnProperty(propertyName)|用于检查给定属性在当前对象实例中是否存在|<br>|isPrototypeOf(object)|用于检查传入的对象是否是当前对象的原型|<br>|propertyIsEnumerable(propertyName)|用于检查给定的属性是否能够使用for-in语句来枚举|<br>|toLocalString()|返回对象的字符串表示，该字符串与执行环境的地区对应|<br>|toString()|返回对象的字符串表示|<br>|valueOf()|返回对象的字符串、数值或布尔值表示|</li>
+<li>Object类型，对象，其实就是一组数据和功能的集合，<code>var o = new Object();</code>省略括号有效，但不推荐，每个Object实例都拥有下列属性和方法</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性和方法名</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">constructor</td>
+<td style="text-align:center">保存着用于创建当前对象的函数</td>
+</tr>
+<tr>
+<td style="text-align:center">hasOwnProperty(propertyName)</td>
+<td style="text-align:center">用于检查给定属性在当前对象实例中是否存在</td>
+</tr>
+<tr>
+<td style="text-align:center">isPrototypeOf(object)</td>
+<td style="text-align:center">用于检查传入的对象是否是当前对象的原型</td>
+</tr>
+<tr>
+<td style="text-align:center">propertyIsEnumerable(propertyName)</td>
+<td style="text-align:center">用于检查给定的属性是否能够使用for-in语句来枚举</td>
+</tr>
+<tr>
+<td style="text-align:center">toLocalString()</td>
+<td style="text-align:center">返回对象的字符串表示，该字符串与执行环境的地区对应</td>
+</tr>
+<tr>
+<td style="text-align:center">toString()</td>
+<td style="text-align:center">返回对象的字符串表示</td>
+</tr>
+<tr>
+<td style="text-align:center">valueOf()</td>
+<td style="text-align:center">返回对象的字符串、数值或布尔值表示</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>操作符<ul>
 <li>一元操作符，递增递减操作符<code>++age; --age;</code>和C差不多，一元加和一元减，用在数值前表示正负，用于其他的值会强制执行一次Number()</li>
