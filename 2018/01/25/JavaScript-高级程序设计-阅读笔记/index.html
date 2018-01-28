@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;700页。。好厚啊。。慢慢读吧，完整把javaScript过一遍再去学jQuery还有vue什么的框架和库吧（等一个月后百度前端学院开班。。不知道今年开不开），本书源代码可以在www.wrox.com中下载">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-27T15:42:35.613Z">
+<meta property="og:updated_time" content="2018-01-28T13:26:54.531Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;700页。。好厚啊。。慢慢读吧，完整把javaScript过一遍再去学jQuery还有vue什么的框架和库吧（等一个月后百度前端学院开班。。不知道今年开不开），本书源代码可以在www.wrox.com中下载">
@@ -499,7 +499,35 @@
 <li>函数，function，可以向函数传递任意数量的参数，在函数体内可以通过arguments对象来访问这个参数数组，不存在重载</li>
 </ul>
 <hr>
-<h2 id="第四章-变量、作用域和内存问题"><a href="#第四章-变量、作用域和内存问题" class="headerlink" title="第四章 变量、作用域和内存问题"></a>第四章 变量、作用域和内存问题</h2>
+<h2 id="第四章-变量、作用域和内存问题"><a href="#第四章-变量、作用域和内存问题" class="headerlink" title="第四章 变量、作用域和内存问题"></a>第四章 变量、作用域和内存问题</h2><p>&#160; &#160; &#160;&#160;本章主要介绍基本类型和引用类型的值，以及理解执行环境和垃圾收集</p>
+<ul>
+<li>基本类型和引用类型的值，基本类型指的是简单数据段，引用类型指的是由多个值构成的对象<ul>
+<li>动态的属性，只能给引用类型值动态的添加属性，以便将来使用</li>
+<li>复制变量值，引用类型相当于创建了一个副本到原副本的指针</li>
+<li>传递参数，访问变量有按值和按引用两种方式，而参数只能按值传递</li>
+<li>检测类型，typeof操作符可以确定一个变量是字符串、数值、布尔值还是undefined的最佳工具，若变量的值是null或对象，都会返回object</li>
+<li>instanceof用于确定一个值使用哪种引用类型，<code>alert(person instanceof Object);</code>，基本类型则返回false</li>
+</ul>
+</li>
+<li>执行环境及作用域<ul>
+<li>全局执行环境被认为是window对象</li>
+<li>每个函数都有自己的执行环境，作用域链用于保证对执行环境有权访问的所有变量和函数的有序访问</li>
+<li>延长作用域链，try-catch语句的catch块和with语句会在作用域的前端临时增加一个变量对象</li>
+<li>没有块级作用域，所以在if和for语句中所声明的变量在执行完毕后不会被销毁</li>
+<li>函数中声明的变量，若没有使用var声明，该变量会自动被添加到全局环境</li>
+<li>查询标识符</li>
+</ul>
+</li>
+<li>垃圾收集，JS具有自动垃圾收集机制，原理很简单，具体到浏览器中，则通常有两种策略<ul>
+<li>标记清除（mark-and-sweap），当变量进入环境时，将这个变量标记为“进入环境”，该方法较为常见</li>
+<li>引用计数（reference counting），会造成很多麻烦，例如循环引用</li>
+<li>性能问题，可以直接调用<code>window.CollectGarbage()</code>触发垃圾收集过程，但是最好不要这么做</li>
+<li>管理内存，使用具备垃圾收集机制的语言，一般开发人员不需要操心内存管理，优化内存的最佳方式，就是为执行中的代码只保存必要的数据，一旦数据不再用，最好将其设为null来释放引用。不过，解除一个值的引用并不意味着自动回收该值所占用的内存，接触引用的真正作用是让值脱离执行环境，便于垃圾收集器下次运行时回收</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="第五章-引用类型"><a href="#第五章-引用类型" class="headerlink" title="第五章 引用类型"></a>第五章 引用类型</h2>
       
     </div>
     
@@ -697,7 +725,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章-JavaScript-简介"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E00;&#x7AE0;-JavaScript-&#x7B80;&#x4ECB;" class="headerlink" title="&#x7B2C;&#x4E00;&#x7AE0; JavaScript &#x7B80;&#x4ECB;"></a>&#x7B2C;&#x4E00;&#x7AE0; JavaScript &#x7B80;&#x4ECB;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章-在HTML中使用JavaScript"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E8C;&#x7AE0;-&#x5728;HTML&#x4E2D;&#x4F7F;&#x7528;JavaScript" class="headerlink" title="&#x7B2C;&#x4E8C;&#x7AE0; &#x5728;HTML&#x4E2D;&#x4F7F;&#x7528;JavaScript"></a>&#x7B2C;&#x4E8C;&#x7AE0; &#x5728;HTML&#x4E2D;&#x4F7F;&#x7528;JavaScript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章-基本概念"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E09;&#x7AE0;-&#x57FA;&#x672C;&#x6982;&#x5FF5;" class="headerlink" title="&#x7B2C;&#x4E09;&#x7AE0; &#x57FA;&#x672C;&#x6982;&#x5FF5;"></a>&#x7B2C;&#x4E09;&#x7AE0; &#x57FA;&#x672C;&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章-变量、作用域和内存问题"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x7B2C;&#x56DB;&#x7AE0;-&#x53D8;&#x91CF;&#x3001;&#x4F5C;&#x7528;&#x57DF;&#x548C;&#x5185;&#x5B58;&#x95EE;&#x9898;" class="headerlink" title="&#x7B2C;&#x56DB;&#x7AE0; &#x53D8;&#x91CF;&#x3001;&#x4F5C;&#x7528;&#x57DF;&#x548C;&#x5185;&#x5B58;&#x95EE;&#x9898;"></a>&#x7B2C;&#x56DB;&#x7AE0; &#x53D8;&#x91CF;&#x3001;&#x4F5C;&#x7528;&#x57DF;&#x548C;&#x5185;&#x5B58;&#x95EE;&#x9898;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章-JavaScript-简介"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E00;&#x7AE0;-JavaScript-&#x7B80;&#x4ECB;" class="headerlink" title="&#x7B2C;&#x4E00;&#x7AE0; JavaScript &#x7B80;&#x4ECB;"></a>&#x7B2C;&#x4E00;&#x7AE0; JavaScript &#x7B80;&#x4ECB;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章-在HTML中使用JavaScript"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E8C;&#x7AE0;-&#x5728;HTML&#x4E2D;&#x4F7F;&#x7528;JavaScript" class="headerlink" title="&#x7B2C;&#x4E8C;&#x7AE0; &#x5728;HTML&#x4E2D;&#x4F7F;&#x7528;JavaScript"></a>&#x7B2C;&#x4E8C;&#x7AE0; &#x5728;HTML&#x4E2D;&#x4F7F;&#x7528;JavaScript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章-基本概念"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E09;&#x7AE0;-&#x57FA;&#x672C;&#x6982;&#x5FF5;" class="headerlink" title="&#x7B2C;&#x4E09;&#x7AE0; &#x57FA;&#x672C;&#x6982;&#x5FF5;"></a>&#x7B2C;&#x4E09;&#x7AE0; &#x57FA;&#x672C;&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章-变量、作用域和内存问题"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x7B2C;&#x56DB;&#x7AE0;-&#x53D8;&#x91CF;&#x3001;&#x4F5C;&#x7528;&#x57DF;&#x548C;&#x5185;&#x5B58;&#x95EE;&#x9898;" class="headerlink" title="&#x7B2C;&#x56DB;&#x7AE0; &#x53D8;&#x91CF;&#x3001;&#x4F5C;&#x7528;&#x57DF;&#x548C;&#x5185;&#x5B58;&#x95EE;&#x9898;"></a>&#x7B2C;&#x56DB;&#x7AE0; &#x53D8;&#x91CF;&#x3001;&#x4F5C;&#x7528;&#x57DF;&#x548C;&#x5185;&#x5B58;&#x95EE;&#x9898;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五章-引用类型"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E94;&#x7AE0;-&#x5F15;&#x7528;&#x7C7B;&#x578B;" class="headerlink" title="&#x7B2C;&#x4E94;&#x7AE0; &#x5F15;&#x7528;&#x7C7B;&#x578B;"></a>&#x7B2C;&#x4E94;&#x7AE0; &#x5F15;&#x7528;&#x7C7B;&#x578B;</span></a></li></ol></div>
             
 
           </div>
