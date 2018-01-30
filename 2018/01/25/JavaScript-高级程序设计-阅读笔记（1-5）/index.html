@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;700页。。好厚啊。。慢慢读吧，完整把javaScript过一遍再去学jQuery还有vue什么的框架和库吧（等一个月后百度前端学院开班。。不知道今年开不开），本书源代码可以在www.wrox.com中下载，第一到第五章是语言基础知识">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-30T15:36:05.275Z">
+<meta property="og:updated_time" content="2018-01-30T15:45:41.453Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记（1-5）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;700页。。好厚啊。。慢慢读吧，完整把javaScript过一遍再去学jQuery还有vue什么的框架和库吧（等一个月后百度前端学院开班。。不知道今年开不开），本书源代码可以在www.wrox.com中下载，第一到第五章是语言基础知识">
@@ -556,40 +556,151 @@
 <li>ES5添加了Date.now()方法，返回表示调用这个方法时的日期和时间的毫秒数</li>
 <li>继承的方法，在不同浏览器中返回的日期和时间会略有不同</li>
 <li>日期/时间组件方法P102，有一大把，按需查阅</li>
-<li>日期格式化方法<br>|方法|作用|<br>|:—|:—:|<br>|toDateString()|以特定实现的格式显示星期几、月、日和年|<br>|toTimeString()|以特定于实现的格式显示时、分、秒和时区|<br>|toLocaleDateString()|以特定于地区的格式显示星期几、月、日和年|<br>|toLocaleTimeString()|以特定于实现的格式显示时、分、秒|<br>|toUTCString()|以特定于实现的格式完整的UTC日期|</li>
+<li>日期格式化方法</li>
 </ul>
 </li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">toDateString()</td>
+<td style="text-align:center">以特定实现的格式显示星期几、月、日和年</td>
+</tr>
+<tr>
+<td style="text-align:left">toTimeString()</td>
+<td style="text-align:center">以特定于实现的格式显示时、分、秒和时区</td>
+</tr>
+<tr>
+<td style="text-align:left">toLocaleDateString()</td>
+<td style="text-align:center">以特定于地区的格式显示星期几、月、日和年</td>
+</tr>
+<tr>
+<td style="text-align:left">toLocaleTimeString()</td>
+<td style="text-align:center">以特定于实现的格式显示时、分、秒</td>
+</tr>
+<tr>
+<td style="text-align:left">toUTCString()</td>
+<td style="text-align:center">以特定于实现的格式完整的UTC日期</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>RegExp类型<ul>
 <li><code>var expression = / pattern / flags ;</code></li>
 <li>其中，模式（pattern）部分可以是任何简单或者复杂的正则表达式</li>
 <li>正则表达式的匹配模式支持3个标志（flags）</li>
 </ul>
-<ol>
-<li>g，表示全局模式，即模式将被应用于所有字符串，而非在发现第一个匹配项时立即停止</li>
-<li>i，表示不区分大小写模式，即在确定匹配项时忽略模式与字符串的大小写</li>
-<li>m，表示多行模式，即在到达一行文本末尾时还会继续查找下一行中是否存在与模式匹配的项</li>
-</ol>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">标志</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">g</td>
+<td style="text-align:center">表示全局模式，即模式将被应用于所有字符串，而非在发现第一个匹配项时立即停止</td>
+</tr>
+<tr>
+<td style="text-align:center">i</td>
+<td style="text-align:center">表示不区分大小写模式，即在确定匹配项时忽略模式与字符串的大小写</td>
+</tr>
+<tr>
+<td style="text-align:center">m</td>
+<td style="text-align:center">表示多行模式，即在到达一行文本末尾时还会继续查找下一行中是否存在与模式匹配的项</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>ES3中，正则表达式字面量始终会共享一个RegExp实例，ES5明确规定，始终正则表达式字面量必须像直接调用RegExp构造函数一样，每次都创建新的RegExp实例</li>
 <li>RegExp实例属性</li>
 </ul>
-<ol>
-<li>global，布尔值，表示是否设置了g标志</li>
-<li>ignoreCase，布尔值，表示是否设置了i标志</li>
-<li>lastIndex，整数，表示开始搜索下一个匹配项的字符位置，从0算起</li>
-<li>multiline，布尔值，表示是否设置了m标志</li>
-<li>source，正则表达式的字符串表示，按照字面量形式而非传入构造函数中的字符串模式返回</li>
-</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">global</td>
+<td style="text-align:center">布尔值，表示是否设置了g标志</td>
+</tr>
+<tr>
+<td style="text-align:left">ignoreCase</td>
+<td style="text-align:center">布尔值，表示是否设置了i标志</td>
+</tr>
+<tr>
+<td style="text-align:left">lastIndex</td>
+<td style="text-align:center">整数，表示开始搜索下一个匹配项的字符位置，从0算起</td>
+</tr>
+<tr>
+<td style="text-align:left">multiline</td>
+<td style="text-align:center">布尔值，表示是否设置了m标志</td>
+</tr>
+<tr>
+<td style="text-align:left">source</td>
+<td style="text-align:center">正则表达式的字符串表示，按照字面量形式而非传入构造函数中的字符串模式返回</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>RegExp实例方法，该对象的主要方法是<strong>exec()</strong>，该方法是专门为捕获组而设计的，该方法接受一个参数，即要应用模式的字符串，然后返回包含第一个匹配项信息的数组，或者返回null，返回的数组包含两个额外的属性：index和input，前者表示匹配项在字符串中的位置，后者表示应用正则表达式的字符串，该方法即使使用g也只会返回一个匹配项，但是再次调用会继续往下匹配</li>
 <li>test()方法，接受一个字符串参数，匹配的话返回true，否则是false </li>
 <li>模式的局限性，高级正则表达式特性部分不支持</li>
-<li>RegExp构造函数属性，具有一个长属性名和一个短属性名，opera不支持短属性名，貌似现在高版本都支持了吧，一般短属性不是有效的ES标识符，所以需要用方括号法调用<br>|长属性名|短属性名|说明|<br>|:—|:—|:—:|<br>|input|&#36;&#95;|最近一次要匹配的字符串|<br>|lastMatch|&#36;&#38;|最近一次的匹配项|<br>|lastParen|&#36;&#43;|最近一次匹配的捕获组|<br>|leftContext|&#36;&#96;|input字符串中lastMatch之前的文本|<br>|multiline|&#36;&#42;|布尔值，表示是否所有表达式都是用多行模式|<br>|rightContext|&#36;&#39;|Input字符串中lastMatch之后的文本|</li>
+<li>RegExp构造函数属性，具有一个长属性名和一个短属性名，opera不支持短属性名，貌似现在高版本都支持了吧，一般短属性不是有效的ES标识符，所以需要用方括号法调用</li>
 </ul>
-</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">长属性名</th>
+<th style="text-align:left">短属性名</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">input</td>
+<td style="text-align:left">&#36;&#95;</td>
+<td style="text-align:center">最近一次要匹配的字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">lastMatch</td>
+<td style="text-align:left">&#36;&#38;</td>
+<td style="text-align:center">最近一次的匹配项</td>
+</tr>
+<tr>
+<td style="text-align:left">lastParen</td>
+<td style="text-align:left">&#36;&#43;</td>
+<td style="text-align:center">最近一次匹配的捕获组</td>
+</tr>
+<tr>
+<td style="text-align:left">leftContext</td>
+<td style="text-align:left">&#36;&#96;</td>
+<td style="text-align:center">input字符串中lastMatch之前的文本</td>
+</tr>
+<tr>
+<td style="text-align:left">multiline</td>
+<td style="text-align:left">&#36;&#42;</td>
+<td style="text-align:center">布尔值，表示是否所有表达式都是用多行模式</td>
+</tr>
+<tr>
+<td style="text-align:left">rightContext</td>
+<td style="text-align:left">&#36;&#39;</td>
+<td style="text-align:center">Input字符串中lastMatch之后的文本</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>Function类型<ul>
 <li>函数实际上是对象，每个函数都是Function类型的实例，所以函数名实际上也是一个指向函数对象的指针</li>
