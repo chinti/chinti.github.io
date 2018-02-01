@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;700页。。好厚啊。。慢慢读吧，完整把javaScript过一遍再去学jQuery还有vue什么的框架和库吧（等一个月后百度前端学院开班。。不知道今年开不开），本书源代码可以在www.wrox.com中下载，第一到第五章是语言基础知识">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-30T15:45:41.453Z">
+<meta property="og:updated_time" content="2018-02-01T15:18:39.347Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记（1-5）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;700页。。好厚啊。。慢慢读吧，完整把javaScript过一遍再去学jQuery还有vue什么的框架和库吧（等一个月后百度前端学院开班。。不知道今年开不开），本书源代码可以在www.wrox.com中下载，第一到第五章是语言基础知识">
@@ -702,13 +702,152 @@
 </tbody>
 </table>
 <ul>
-<li>Function类型<ul>
+<li><p>Function类型</p>
+<ul>
 <li>函数实际上是对象，每个函数都是Function类型的实例，所以函数名实际上也是一个指向函数对象的指针</li>
 <li><strong>没有重载（深入理解）</strong>，因为函数名只是指针罢了</li>
 <li>函数声明与函数表达式，函数声明会被提升到代码树顶部，并添加入执行环境中，但是等价的函数表达式不会，所以在执行语句放在函数表达式前的话会报错，除此之外没有区别</li>
 <li>作为值的函数</li>
+<li>函数内部属性，有两个特殊属性，arguments和this，前者主要用途是保存函数参数，是一个类数组对象，它还拥有一个属性，叫做callee，是一个指针，指向拥有该arguments对象的函数，可以消除类似递归函数中与函数名紧密耦合的现象，<code>arguments.callee(num-1)</code></li>
+<li><strong>this引用的是函数执行的环境对象</strong></li>
+<li><p>ES5规范了另一个函数对象的属性caller，该属性保存着调用当前函数的函数的引用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function outer()&#123;</span><br><span class="line">    inner();    </span><br><span class="line">&#125;</span><br><span class="line">function inner()&#123;</span><br><span class="line">    alert(arguments.callee.caller)</span><br><span class="line">&#125;</span><br><span class="line">outer(); //弹出outer()的源代码</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在严格模式下arguments.callee以及arguments.caller都会报错，而非严格模式下后者始终为undefined</p>
+</li>
+<li>函数属性和方法，每个函数都包含两个属性，length和prototype，其中前者表示函数希望接受的命名参数的个数，<strong>prototype属性是保存引用类型所有实例方法的真正所在，它是不可枚举的</strong></li>
+<li>每个函数都包含两个非继承而来的方法：apply()和call()，<strong>这两个方法的用途都是在特定的作用域中调用函数，实际上等于设置函数体内this对象的值</strong>，前者接受两个参数：一个是在其中运行函数的作用域，另一个是参数数组（可以是Array的实例，也可以是arguments对象），后者的第一个参数是this没有变化，变化的是其余参数都直接传递给函数，也就是传递的参数必须逐个列举出来</li>
+<li>事实上，传参并不是apply()和call()真正的用武之地，他们可以扩充函数赖以运行的作用域，<code>sayColor.call(o);  //blue</code></li>
+<li>ES5还定义了一个方法，bind()，该方法会创建一个函数的实例，其this值会被绑定到传给bind()函数的值</li>
 </ul>
 </li>
+<li><p>基本包装类型</p>
+<ul>
+<li>为了便于操作基本类型，ES提供了3个特殊的引用类型，Boolean、Number和String，引用类型与基本包装类型的主要区别在于对象的生存期，自动创建的基本类型对象只存在于一行代码的执行瞬间，然后即被销毁，要注意通过new调用基本包装类型的构造函数，与直接调用同名的转型函数是不一样的（建议永远不要使用Boolean对象）</li>
+<li>toFixed()方法会按照指定的小数位返回数值的字符串表示，<code>alert(num.toFixed(2));   //&quot;10.00&quot;</code></li>
+<li>toExponential()，该方法返回以指数表示法表示的数值的字符串形式</li>
+<li>toPrecision()方法会返回最合适的的格式</li>
+<li>字符方法，字符串操作方法，字符串位置方法，字符串大小写转换方法，字符串的模式匹配方法，</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">charAt()</td>
+<td style="text-align:center">以单字符字符串的形式返回给定位置的那个字符（位置从0开始）</td>
+</tr>
+<tr>
+<td style="text-align:left">charCodeAt()</td>
+<td style="text-align:center">同上，但返回的是字符编码</td>
+</tr>
+<tr>
+<td style="text-align:left">concat()</td>
+<td style="text-align:center">用于将一或多个字符串拼接起来，返回拼接得到的新字符串（还是加号操作符常用）</td>
+</tr>
+<tr>
+<td style="text-align:left">slice()</td>
+<td style="text-align:center">接受一或二个参数，返回一个字符串，第一个参数指定开始位置，第二个参数指定结束位置，输入的负值会与长度相加</td>
+</tr>
+<tr>
+<td style="text-align:left">substring()</td>
+<td style="text-align:center">接受一或二个参数，返回一个字符串，第一个参数指定开始位置，第二个参数指定结束位置，将负值转为0</td>
+</tr>
+<tr>
+<td style="text-align:left">substr()</td>
+<td style="text-align:center">接受一或二个参数，返回一个字符串，第一个参数指定开始位置，第二个参数指定返回字符个数，第一个负值与长度相加，第二个负值转为0</td>
+</tr>
+<tr>
+<td style="text-align:left">indexOf()</td>
+<td style="text-align:center">从字符串开头向后搜索子字符串的位置，没找到返回-1，接受可选的第二个参数表示从哪个位置开始</td>
+</tr>
+<tr>
+<td style="text-align:left">lastIndexOf()</td>
+<td style="text-align:center">从字符串末尾向后搜索子字符串的位置，没找到返回-1，接受可选的第二个参数表示从哪个位置开始</td>
+</tr>
+<tr>
+<td style="text-align:left">trim()</td>
+<td style="text-align:center">该方法会创建一个字符串的副本，删除前置及后缀的所有空格，然后返回结果</td>
+</tr>
+<tr>
+<td style="text-align:left">toLowerCase() toLocaleLowerCase()</td>
+<td style="text-align:center">转换为小写</td>
+</tr>
+<tr>
+<td style="text-align:left">toUpperCase() toLocaleUpperCase()</td>
+<td style="text-align:center">转换为大写</td>
+</tr>
+<tr>
+<td style="text-align:left">match()</td>
+<td style="text-align:center">在字符串上调用这个方法，本质上与调用RegExp的exec()方法相同，只接受一个参数，正则表达式或者RegExp对象</td>
+</tr>
+<tr>
+<td style="text-align:left">search()</td>
+<td style="text-align:center">返回字符串中第一个匹配项的索引</td>
+</tr>
+<tr>
+<td style="text-align:left">replace()</td>
+<td style="text-align:center">替换子字符串，该方法接受两个参数，第一个参数可以是个RegExp对象或者一个字符串（不会被转化为正则表达式），第二个参数可以是一个字符串或者函数（在下面又列了一个表，表示字符串可用的一些特殊字符序列）</td>
+</tr>
+<tr>
+<td style="text-align:left">split()</td>
+<td style="text-align:center">接受两个参数，第一个参数可以是字符串也可以是RegExp对象，是指定的分隔符，第二个可选的参数，用于指定数组的大小，返回一个数组</td>
+</tr>
+<tr>
+<td style="text-align:left">localeCompare()</td>
+<td style="text-align:center">一个字符串，字符串参数在字母表排前面返回1，相等返回0，之后返回-1</td>
+</tr>
+<tr>
+<td style="text-align:left">fromCharCode()</td>
+<td style="text-align:center">一个或多个字符编码，然后转化成对应的字符或字符串</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>特殊字符序列</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字符序列</th>
+<th style="text-align:center">替换文本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">&#36;&#36;</td>
+<td style="text-align:center">&#36;</td>
+</tr>
+<tr>
+<td style="text-align:left">&#36;&#38;</td>
+<td style="text-align:center">匹配整个模式的子字符串。与RegExp.lastMatch的值相同</td>
+</tr>
+<tr>
+<td style="text-align:left">&#36;&#39;</td>
+<td style="text-align:center">匹配的子字符串之前的子字符串。与RegExp.leftContext的值相同</td>
+</tr>
+<tr>
+<td style="text-align:left">&#36;&#96;</td>
+<td style="text-align:center">匹配的子字符串之后的子字符串。与RegExp.rightContext的值相同</td>
+</tr>
+<tr>
+<td style="text-align:left">&#36;n</td>
+<td style="text-align:center">匹配第n个捕获组的子字符串，其中n等于0~9</td>
+</tr>
+<tr>
+<td style="text-align:left">&#36;nn</td>
+<td style="text-align:center">同上，nn等于01~99</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>单体内置对象</li>
 </ul>
 
       
