@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;700页。。好厚啊。。慢慢读吧，完整把javaScript过一遍再去学jQuery还有vue什么的框架和库吧（等一个月后百度前端学院开班。。不知道今年开不开），本书源代码可以在www.wrox.com中下载，第一到第五章是语言基础知识">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-01T15:18:39.347Z">
+<meta property="og:updated_time" content="2018-02-02T15:37:59.483Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记（1-5）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160; &amp;#160;&amp;#160;700页。。好厚啊。。慢慢读吧，完整把javaScript过一遍再去学jQuery还有vue什么的框架和库吧（等一个月后百度前端学院开班。。不知道今年开不开），本书源代码可以在www.wrox.com中下载，第一到第五章是语言基础知识">
@@ -847,8 +847,126 @@
 </tbody>
 </table>
 <ul>
-<li>单体内置对象</li>
+<li><p>单体内置对象</p>
+<ul>
+<li>内置对象，开发人员不必显示地实例化内置对象，因为它们已经实例化了，例如Object、Array、String</li>
+<li>单体内置对象，Global和Math</li>
+<li>Global对象，兜底对象，不属于任何其他对象的属性和方法，最终都是它的属性和方法，事实上，没有全局变量或全局函数，所有在全局作用域中定义的属性和函数，都是Global对象的属性<blockquote>
+<ol>
+<li>URL编码方法<br>encodeURI()和encodeURIComponent()方法可以对URI进行编码，以便于发送给浏览器，有效的URI中不能包含某些字符，例如空格。这两个方法用特殊的UTF-8编码替换所有无效的字符，从而让浏览器能够接受和理解；前者作用与整个URI，后者作用于URI中的一段进行编码；对应解码方式为decodeURI()和decodeURIComponent()</li>
+<li>eval()方法<br>eval()就像一个完整的ECMASCript解析器，它只接受一个参数，即要执行的ECMAScript字符串，eval()中创建的任何变量或函数都不会被提升，严格模式下报错，而且可能会被代码注入，请谨慎使用</li>
+<li>Global对象的属性<br>undefined、NaN、Infinity、Object、Array、Function、Boolean、String、Number、Date、RegExp、Error、EvalError、RangeError、ReferenceError、SyntaxError、TypeError、URIError</li>
+<li>window对象<br>ECMASript没有指出如何访问Global()对象，但Web浏览器都是将这个全局对象作为window对象的一部分加以实现的。因此在全局作用域中声明的所有变量和函数，就都成了window对象的属性</li>
+</ol>
+</blockquote>
+</li>
 </ul>
+</li>
+<li><p>单体内置对象</p>
+<ul>
+<li>Math()对象<blockquote>
+<ol>
+<li>Math对象的属性<br>Math对象包含的属性大都是数学计算中可能会用到的一些特殊值，属性表</li>
+<li>min()和max()方法<br>var max = Math.max(3,54,32,16)   //54<br>var values = [1,2,3,4,5,6,7,8];<br>var max = Math.max.apply(Math, values) //Math作为apply()的第一个参数，从而正确的设置this值，然后将任何数组作为第二个参数</li>
+<li>舍入方法<br>Math.ceil()上舍，Math.floor()下舍，Math.round()四舍五入</li>
+<li>random()方法<br>返回一个大于0小于1的随机数<br>例如：值 = Math.floor(Math.random()*可能值的总数+第一个可能的值)</li>
+<li>其他方法，方法表</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Math.E</td>
+<td style="text-align:center">自然对数的底数，即常量e的值</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.LN10</td>
+<td style="text-align:center">10的自然对数</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.LN2</td>
+<td style="text-align:center">2的自然对数</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.LOG2E</td>
+<td style="text-align:center">以2为底e的对数</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.LOG10E</td>
+<td style="text-align:center">以10为底e的对数</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.PI</td>
+<td style="text-align:center">&pi;的值</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.SQRT1_2</td>
+<td style="text-align:center">1/2的平方根（即2的平方根的倒数）</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.SQRT2</td>
+<td style="text-align:center">2的平方根</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Math.abs(num)</td>
+<td style="text-align:left">返回num的绝对值</td>
+<td style="text-align:left">Math.asin(x)</td>
+<td style="text-align:left">返回x的反正弦值</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.exp(num)</td>
+<td style="text-align:left">返回Math.E的num次幂</td>
+<td style="text-align:left">Math.atan(x)</td>
+<td style="text-align:left">返回x的反正切值</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.log(num)</td>
+<td style="text-align:left">返回num的自然对数</td>
+<td style="text-align:left">Math.atan2(y,x)</td>
+<td style="text-align:left">返回y/x的反正切值</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.pow(num,power)</td>
+<td style="text-align:left">返回num的power次幂</td>
+<td style="text-align:left">Math.cos(x)</td>
+<td style="text-align:left">返回x的余弦值</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.sqrt(num)</td>
+<td style="text-align:left">返回num的平方根</td>
+<td style="text-align:left">Math.sin(x)</td>
+<td style="text-align:left">返回x的正弦值</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.acos(x)</td>
+<td style="text-align:left">返回x的反余弦值</td>
+<td style="text-align:left">Math.tan(x)</td>
+<td style="text-align:left">返回x的正弦值</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
