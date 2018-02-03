@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;4，6，7章主要讲解作用域链、JavaScript面向对象、原型-构造函数机制、闭包等概念，这些都是JavaScript的重中之重  第六章 面向对象的程序设计&amp;#160; &amp;#160;&amp;#160; &amp;#160;面向对象语言有一个标志，那就是它们都有类的概念，">
+<meta name="description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;4，6，7章主要讲解作用域链、JavaScript面向对象、原型-构造函数机制、闭包等概念，这些都是JavaScript的重中之重">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 高级程序设计 阅读笔记（6-7）">
 <meta property="og:url" content="http://chinti.xyz/2018/02/02/JavaScript-高级程序设计-阅读笔记（6-7）/index.html">
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
-<meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;4，6，7章主要讲解作用域链、JavaScript面向对象、原型-构造函数机制、闭包等概念，这些都是JavaScript的重中之重  第六章 面向对象的程序设计&amp;#160; &amp;#160;&amp;#160; &amp;#160;面向对象语言有一个标志，那就是它们都有类的概念，">
+<meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;4，6，7章主要讲解作用域链、JavaScript面向对象、原型-构造函数机制、闭包等概念，这些都是JavaScript的重中之重">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-02T16:21:16.263Z">
+<meta property="og:updated_time" content="2018-02-03T08:40:06.329Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记（6-7）">
-<meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;4，6，7章主要讲解作用域链、JavaScript面向对象、原型-构造函数机制、闭包等概念，这些都是JavaScript的重中之重  第六章 面向对象的程序设计&amp;#160; &amp;#160;&amp;#160; &amp;#160;面向对象语言有一个标志，那就是它们都有类的概念，">
+<meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;4，6，7章主要讲解作用域链、JavaScript面向对象、原型-构造函数机制、闭包等概念，这些都是JavaScript的重中之重">
 
 
 
@@ -364,8 +364,13 @@
 
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&#160; &#160;&#160; &#160;4，6，7章主要讲解作用域链、JavaScript面向对象、原型-构造函数机制、闭包等概念，这些都是JavaScript的重中之重</p>
+<a id="more"></a>
 <hr>
-<h2 id="第六章-面向对象的程序设计"><a href="#第六章-面向对象的程序设计" class="headerlink" title="第六章 面向对象的程序设计"></a>第六章 面向对象的程序设计</h2><p>&#160; &#160;&#160; &#160;面向对象语言有一个标志，那就是它们都有类的概念，</p>
+<h2 id="第六章-面向对象的程序设计"><a href="#第六章-面向对象的程序设计" class="headerlink" title="第六章 面向对象的程序设计"></a>第六章 面向对象的程序设计</h2><p>&#160; &#160;&#160; &#160;面向对象语言有一个标志，那就是它们都有类的概念，而通过类可以创建任意多个具有相同属性和方法的对象，但是ES没有类，所以它的对象也与其他语言中的对象有所不同，每个对象都是基于一个引用类型创建的，可以是原生类型，也可以是自己定义的</p>
+<h3 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a><strong>理解对象</strong></h3><p> 理解对象，可以创建一个Object对象，但现在对象字面量称为创建对象的首选模式</p>
+<ul>
+<li>属性类型</li>
+</ul>
 
       
     </div>
@@ -564,7 +569,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章-面向对象的程序设计"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x516D;&#x7AE0;-&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;" class="headerlink" title="&#x7B2C;&#x516D;&#x7AE0; &#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;"></a>&#x7B2C;&#x516D;&#x7AE0; &#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章-面向对象的程序设计"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x516D;&#x7AE0;-&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;" class="headerlink" title="&#x7B2C;&#x516D;&#x7AE0; &#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;"></a>&#x7B2C;&#x516D;&#x7AE0; &#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#理解对象"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x7406;&#x89E3;&#x5BF9;&#x8C61;" class="headerlink" title="&#x7406;&#x89E3;&#x5BF9;&#x8C61;"></a><strong>&#x7406;&#x89E3;&#x5BF9;&#x8C61;</strong></span></a></li></ol></li></ol></div>
             
 
           </div>
