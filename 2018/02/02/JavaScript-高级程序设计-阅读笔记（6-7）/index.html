@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;4，6，7章主要讲解作用域链、JavaScript面向对象、原型-构造函数机制、闭包等概念，这些都是JavaScript的重中之重">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-03T08:40:06.329Z">
+<meta property="og:updated_time" content="2018-02-07T06:25:06.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记（6-7）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;4，6，7章主要讲解作用域链、JavaScript面向对象、原型-构造函数机制、闭包等概念，这些都是JavaScript的重中之重">
@@ -367,11 +367,89 @@
 <a id="more"></a>
 <hr>
 <h2 id="第六章-面向对象的程序设计"><a href="#第六章-面向对象的程序设计" class="headerlink" title="第六章 面向对象的程序设计"></a>第六章 面向对象的程序设计</h2><p>&#160; &#160;&#160; &#160;面向对象语言有一个标志，那就是它们都有类的概念，而通过类可以创建任意多个具有相同属性和方法的对象，但是ES没有类，所以它的对象也与其他语言中的对象有所不同，每个对象都是基于一个引用类型创建的，可以是原生类型，也可以是自己定义的</p>
-<h3 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a><strong>理解对象</strong></h3><p> 理解对象，可以创建一个Object对象，但现在对象字面量称为创建对象的首选模式</p>
-<ul>
-<li>属性类型</li>
+<h3 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h3><p>&#160; &#160;&#160; &#160;可以创建一个Object对象，但现在对象字面量称为创建对象的首选模式</p>
+<h4 id="属性类型"><a href="#属性类型" class="headerlink" title="属性类型"></a>属性类型</h4><ul>
+<li>数据属性，包含一个数据值的位置，在这个位置可以读取和写入值</li>
 </ul>
-
+<table>
+<thead>
+<tr>
+<th style="text-align:left">数据属性</th>
+<th style="text-align:left">默认值</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">[[Configurable]]</td>
+<td style="text-align:left">true</td>
+<td style="text-align:center">表示能否通过delete删除属性从而重新定义属性</td>
+</tr>
+<tr>
+<td style="text-align:left">[[Enumerable]]</td>
+<td style="text-align:left">true</td>
+<td style="text-align:center">表示可否通过for-in循环返回属性</td>
+</tr>
+<tr>
+<td style="text-align:left">[[Writable]]</td>
+<td style="text-align:left">true</td>
+<td style="text-align:center">表示可否修改属性的值</td>
+</tr>
+<tr>
+<td style="text-align:left">[[Value]]</td>
+<td style="text-align:left">undefined</td>
+<td style="text-align:center">包含这个属性的数据值，读取属性值的时候从这个位置读，写入的新值保存在这个位置</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>若要改变属性默认的特性，ES5提供了一个方法：<code>Object.defineProperty()</code>方法，该方法接受三个参数：属性所在的对象、属性的名字和一个描述符对象，其中描述符（descriptor）对象的属性必须是：configurable、enumerable、writable和value，不要在ie8上使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var person = &#123;&#125;;</span><br><span class="line">Object.defineProperty(person,&quot;name&quot;,&#123;</span><br><span class="line">    writable:   false,</span><br><span class="line">    value:      &quot;Nicholas&quot;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问器属性，ES5：Object.defineProperty()方法，旧方法：<code>__defineGetter__()</code>，<code>__defineSetter__</code></p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">访问器属性</th>
+<th style="text-align:left">默认值</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">[[Configurable]]</td>
+<td style="text-align:left">true</td>
+<td style="text-align:center">表示能否通过delete删除属性从而重新定义属性</td>
+</tr>
+<tr>
+<td style="text-align:left">[[Enumerable]]</td>
+<td style="text-align:left">true</td>
+<td style="text-align:center">表示可否通过for-in循环返回属性</td>
+</tr>
+<tr>
+<td style="text-align:left">[[Get]]</td>
+<td style="text-align:left">undefined</td>
+<td style="text-align:center">在读取属性时调用的函数</td>
+</tr>
+<tr>
+<td style="text-align:left">[[Set]]</td>
+<td style="text-align:left">undefined</td>
+<td style="text-align:center">在写入属性时调用的函数</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var book = &#123;</span><br><span class="line">    _year:      2004;</span><br><span class="line">    edition:    1;</span><br><span class="line">&#125;;</span><br><span class="line">Object.defineProperty(book,&quot;year&quot;,&#123;</span><br><span class="line">    get:    function()&#123;</span><br><span class="line">        return this._year;</span><br><span class="line">    &#125;, </span><br><span class="line">    set:    function(newValue)&#123;</span><br><span class="line">        if (newValue &gt; 2004) &#123;</span><br><span class="line">            this._year = newValue;</span><br><span class="line">            this.edtion += newValue - 2004;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="定义多个属性"><a href="#定义多个属性" class="headerlink" title="定义多个属性"></a>定义多个属性</h4><p>&#160; &#160;&#160; &#160;Object.defineProperties()方法</p>
+<h4 id="读取属性的特性"><a href="#读取属性的特性" class="headerlink" title="读取属性的特性"></a>读取属性的特性</h4><p>&#160; &#160;&#160; &#160;Object.getOwnPropertyDescriptor()方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var descriptor = Object.getOwnPropertyDescriptor(book,&quot;_year&quot;);</span><br><span class="line">alert(descriptor.value);    //2004</span><br><span class="line">alert(descriptor.configurable); //false</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><p>&#160; &#160;&#160; &#160;Object构造函数或对象字面量都可以用来创建单个对象，但是同一个接口创建多个对象，会产生大量重复代码</p>
+<h4 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h4><p>&#160; &#160;&#160; &#160;该设计模式抽象了创建具体对象的过程，ES无法创建类，于是发明了一种函数，可以封装以特定接口创建对象的细节</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function createPerson(name,age,job) &#123;</span><br><span class="line">    var o = new Project();</span><br><span class="line">    o.name = name;</span><br><span class="line">    o.age = age;</span><br><span class="line">    o.job = job;</span><br><span class="line">    o.sayName = function() &#123;</span><br><span class="line">        alert(this.name);</span><br><span class="line">    &#125;</span><br><span class="line">    return o;</span><br><span class="line">&#125;</span><br><span class="line">var person = createPerson(&quot;Greg&quot;,27,&quot;Doctor&quot;);</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160;&#160; &#160;该方法虽然解决了创建多个相似对象的问题，但是却没解决对象识别的问题</p>
+<h4 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h4><p>&#160; &#160;&#160; &#160;构造函数可用来创建特定类型的对象，也可以创建自定义的构造函数，从而定义自定义对象类型的属性和方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function Person(name, age, job) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">    this.job = job;</span><br><span class="line">    this.sayName = function() &#123;</span><br><span class="line">        alert(this.name);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">var person = new Person(&quot;Grey&quot;,&quot;27&quot;,&quot;Doctor&quot;);</span><br><span class="line">alert(person.constructor == Person); //true</span><br><span class="line">alert(person instanceof Object);    //true</span><br><span class="line">alert(person instanceof Person);   //true</span><br></pre></td></tr></table></figure></p>
+<p>&#160; &#160;&#160; &#160;创建自定义的构造函式可以将它的实例标识为一种特定的类型，这是构造函数模式胜过工厂模式的地方。使用构造函数模式的主要问题是，每个方法都要在每个实例上重新创建一遍，而将这个方法转移到构造函数外部，但是又存在一个问题全局作用域中定义的函数实际上只被某个对象调用，尤其是如果有多个这样的函数存在，整个引用类型就毫无封装性可言。</p>
+<h4 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h4>
       
     </div>
     
@@ -569,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章-面向对象的程序设计"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x516D;&#x7AE0;-&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;" class="headerlink" title="&#x7B2C;&#x516D;&#x7AE0; &#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;"></a>&#x7B2C;&#x516D;&#x7AE0; &#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#理解对象"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x7406;&#x89E3;&#x5BF9;&#x8C61;" class="headerlink" title="&#x7406;&#x89E3;&#x5BF9;&#x8C61;"></a><strong>&#x7406;&#x89E3;&#x5BF9;&#x8C61;</strong></span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章-面向对象的程序设计"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x516D;&#x7AE0;-&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;" class="headerlink" title="&#x7B2C;&#x516D;&#x7AE0; &#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;"></a>&#x7B2C;&#x516D;&#x7AE0; &#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#理解对象"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x7406;&#x89E3;&#x5BF9;&#x8C61;" class="headerlink" title="&#x7406;&#x89E3;&#x5BF9;&#x8C61;"></a>&#x7406;&#x89E3;&#x5BF9;&#x8C61;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性类型"><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#&#x5C5E;&#x6027;&#x7C7B;&#x578B;" class="headerlink" title="&#x5C5E;&#x6027;&#x7C7B;&#x578B;"></a>&#x5C5E;&#x6027;&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义多个属性"><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#&#x5B9A;&#x4E49;&#x591A;&#x4E2A;&#x5C5E;&#x6027;" class="headerlink" title="&#x5B9A;&#x4E49;&#x591A;&#x4E2A;&#x5C5E;&#x6027;"></a>&#x5B9A;&#x4E49;&#x591A;&#x4E2A;&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读取属性的特性"><span class="nav-number">2.1.3.</span> <span class="nav-text"><a href="#&#x8BFB;&#x53D6;&#x5C5E;&#x6027;&#x7684;&#x7279;&#x6027;" class="headerlink" title="&#x8BFB;&#x53D6;&#x5C5E;&#x6027;&#x7684;&#x7279;&#x6027;"></a>&#x8BFB;&#x53D6;&#x5C5E;&#x6027;&#x7684;&#x7279;&#x6027;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建对象"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x521B;&#x5EFA;&#x5BF9;&#x8C61;" class="headerlink" title="&#x521B;&#x5EFA;&#x5BF9;&#x8C61;"></a>&#x521B;&#x5EFA;&#x5BF9;&#x8C61;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#工厂模式"><span class="nav-number">2.2.1.</span> <span class="nav-text"><a href="#&#x5DE5;&#x5382;&#x6A21;&#x5F0F;" class="headerlink" title="&#x5DE5;&#x5382;&#x6A21;&#x5F0F;"></a>&#x5DE5;&#x5382;&#x6A21;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造函数模式"><span class="nav-number">2.2.2.</span> <span class="nav-text"><a href="#&#x6784;&#x9020;&#x51FD;&#x6570;&#x6A21;&#x5F0F;" class="headerlink" title="&#x6784;&#x9020;&#x51FD;&#x6570;&#x6A21;&#x5F0F;"></a>&#x6784;&#x9020;&#x51FD;&#x6570;&#x6A21;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原型模式"><span class="nav-number">2.2.3.</span> <span class="nav-text"><a href="#&#x539F;&#x578B;&#x6A21;&#x5F0F;" class="headerlink" title="&#x539F;&#x578B;&#x6A21;&#x5F0F;"></a>&#x539F;&#x578B;&#x6A21;&#x5F0F;</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
