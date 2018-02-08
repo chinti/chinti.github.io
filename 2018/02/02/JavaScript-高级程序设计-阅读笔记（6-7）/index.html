@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;4，6，7章主要讲解作用域链、JavaScript面向对象、原型-构造函数机制、闭包等概念，这些都是JavaScript的重中之重">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-07T06:25:06.634Z">
+<meta property="og:updated_time" content="2018-02-08T13:57:24.593Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记（6-7）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;4，6，7章主要讲解作用域链、JavaScript面向对象、原型-构造函数机制、闭包等概念，这些都是JavaScript的重中之重">
@@ -449,7 +449,76 @@
 <p>&#160; &#160;&#160; &#160;该方法虽然解决了创建多个相似对象的问题，但是却没解决对象识别的问题</p>
 <h4 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h4><p>&#160; &#160;&#160; &#160;构造函数可用来创建特定类型的对象，也可以创建自定义的构造函数，从而定义自定义对象类型的属性和方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function Person(name, age, job) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">    this.job = job;</span><br><span class="line">    this.sayName = function() &#123;</span><br><span class="line">        alert(this.name);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">var person = new Person(&quot;Grey&quot;,&quot;27&quot;,&quot;Doctor&quot;);</span><br><span class="line">alert(person.constructor == Person); //true</span><br><span class="line">alert(person instanceof Object);    //true</span><br><span class="line">alert(person instanceof Person);   //true</span><br></pre></td></tr></table></figure></p>
 <p>&#160; &#160;&#160; &#160;创建自定义的构造函式可以将它的实例标识为一种特定的类型，这是构造函数模式胜过工厂模式的地方。使用构造函数模式的主要问题是，每个方法都要在每个实例上重新创建一遍，而将这个方法转移到构造函数外部，但是又存在一个问题全局作用域中定义的函数实际上只被某个对象调用，尤其是如果有多个这样的函数存在，整个引用类型就毫无封装性可言。</p>
-<h4 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h4>
+<h4 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h4><p>&#160; &#160;&#160; &#160;我们所创建的每个函数都有一个prototype属性，该属性是一个指针指向一个对象，这个对象包含可以由特定类型的所有实例共享的属性和方法，使用原型对象的好处是可以让所有对象实例共享它所包含的属性和方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function Person() &#123;</span><br><span class="line">    Person.prototype.name = &quot;Nicholas&quot;;</span><br><span class="line">    Person.prototype.age = 29;</span><br><span class="line">    Person.prototype.job = &quot;Software Engineer&quot;;</span><br><span class="line">    Person.prototype.sayName = function()&#123;</span><br><span class="line">        alert(this.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var person1 = new Person();</span><br><span class="line">person1.sayName(); //Nicholas</span><br><span class="line">var person2 = new Person();</span><br><span class="line">person2.sayName(); //Nicholas</span><br><span class="line"></span><br><span class="line">alert(person1.sayName == person2.sayName);       //true</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>理解原型对象</li>
+</ul>
+<blockquote>
+<p>&#160; &#160;&#160; &#160;只要创建了一个新函数，就会根据一组特定规则为该函数创建一个prototype属性，这个属性指向函数的原型对象。默认情况下，所有原型对象会自动获取一个constructor（构造函数）属性，这个属性是一个指向prototype属性所在函数的指针。</p>
+</blockquote>
+<p>&#160; &#160;&#160; &#160;比如之前的代码，Person的prototype属性以及Person1与Person2的[[Prototype]]属性指向Person Prototype，然后Person Prototype的constructor属性指向Person</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数名</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">isPrototypeOf()</td>
+<td style="text-align:left">确定对象之间是否存在原型关系</td>
+<td style="text-align:left">alert(Person.prototype.isPrototypeOf(person1));        //true</td>
+</tr>
+<tr>
+<td style="text-align:left">Object.getPrototypeOf()</td>
+<td style="text-align:left">该方法返回[[Prototype]]的值</td>
+<td style="text-align:left">alert(Object.getPrototypeOf(person1) == Person.prototype);  //true</td>
+</tr>
+<tr>
+<td style="text-align:left">hasOwnProperty()</td>
+<td style="text-align:left">检测一个属性是否存在于实例中（存在于原型中返回false）</td>
+<td style="text-align:left">alert(person1.hasOwnProperty(“name”));  //false</td>
+</tr>
+<tr>
+<td style="text-align:left">in</td>
+<td style="text-align:left">通过对象能够访问给定属性时返回true(无论是实例还是原型中)</td>
+<td style="text-align:left">alert(“name” in person1);  //true</td>
+</tr>
+<tr>
+<td style="text-align:left">for-in</td>
+<td style="text-align:left">返回的是所有能够通过对象访问的、可枚举属性(无论是实例中的还是原型中的)</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Object.keys()</td>
+<td style="text-align:left">接受一个对象作为参数，返回一个包含所有可枚举属性的字符串数组</td>
+<td style="text-align:left">alert(Object.keys(person.prototype));   //“name,age,job,sayName”</td>
+</tr>
+<tr>
+<td style="text-align:left">Object.getOwnPropertyName()</td>
+<td style="text-align:left">可以取得所有实例属性，无论是否枚举</td>
+<td style="text-align:left">alert(Object.getOwnPropertyNames(Person.prototype));  //“constructor,name,age,job,sayName”</td>
+</tr>
+</tbody>
+</table>
+<p>&#160; &#160;&#160; &#160;可以通过对象实例访问保存在原型中的值，但却不能通过对象实例重写原型中的值，如果在实例中添加了一个同名属性，该属性将会屏蔽原型中的那个属性，使用delete操作符可以删除实例属性，从而恢复访问</p>
+<ul>
+<li>更简单的原型语法</li>
+</ul>
+<p>&#160; &#160;&#160; &#160;每添加一个属性和方法就要敲一遍Person.prototype，为了视觉上更好的封装原型，可以采用一个包含所有属性和方法的对象字面量来重写整个原型<br>&#160; &#160;&#160; &#160;[注]使用该方法封装原型，本质上完全重写了prototype对象，因此constructor属性变成了新对象的属性，即指向了Object</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function Person() &#123;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype = &#123;</span><br><span class="line">    //constructor:  Person,  //包含这句，可以确保该属性的值为Person，但是同样会变为可枚举</span><br><span class="line">    name:   &quot;Nicholas&quot;,</span><br><span class="line">    age:    29,</span><br><span class="line">    job:    &quot;Software Engineer&quot;,</span><br><span class="line">    sayName: function() &#123;</span><br><span class="line">        alert(this.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var friend = new Person();</span><br><span class="line">alert(friend instanceof Person);   //true  检测是否存在prototype属性</span><br><span class="line">alert(friend instanceof Object); //true</span><br><span class="line">alert(friend.constructor == Person); //false  //若加上之前那条，该属性会变成true</span><br><span class="line">alert(friend.constructor == Object); //true</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160;&#160; &#160;ES5之后可以使用Object.defineProperty()将construct属性改为不可枚举</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Object.defineProperty(Person.prototype,&quot;constructor&quot;, &#123;</span><br><span class="line">   enumerable:  false;</span><br><span class="line">   value:       Person</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>原型的动态性，尽管可以随时为原型添加属性和方法，并且修改能够立即在所有对象实例中反映出来；<strong>重写整个原型对象会切断现有原型与任何之前已经存在的对象实例之间的联系，它们引用的仍是最初的原型</strong>，<strong>P157</strong>，有点绕</p>
+</li>
+<li><p>原生对象的原型，所有原生的引用类型也是采用这种模式创建的；通过原生对象的原型，不仅可以取得所有默认方法的引用，而且也可以定义新方法，但是最好不要这么干</p>
+</li>
+<li>原型对象的问题，它省略了构造函数传递初始化参数，导致默认情况下会取得相同的属性，但最大的问题还是它<strong>共享</strong>的本性导致的</li>
+</ul>
+<h4 id="组合使用构造模式和原型模式"><a href="#组合使用构造模式和原型模式" class="headerlink" title="组合使用构造模式和原型模式"></a>组合使用构造模式和原型模式</h4>
       
     </div>
     
@@ -647,7 +716,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章-面向对象的程序设计"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x516D;&#x7AE0;-&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;" class="headerlink" title="&#x7B2C;&#x516D;&#x7AE0; &#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;"></a>&#x7B2C;&#x516D;&#x7AE0; &#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#理解对象"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x7406;&#x89E3;&#x5BF9;&#x8C61;" class="headerlink" title="&#x7406;&#x89E3;&#x5BF9;&#x8C61;"></a>&#x7406;&#x89E3;&#x5BF9;&#x8C61;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性类型"><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#&#x5C5E;&#x6027;&#x7C7B;&#x578B;" class="headerlink" title="&#x5C5E;&#x6027;&#x7C7B;&#x578B;"></a>&#x5C5E;&#x6027;&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义多个属性"><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#&#x5B9A;&#x4E49;&#x591A;&#x4E2A;&#x5C5E;&#x6027;" class="headerlink" title="&#x5B9A;&#x4E49;&#x591A;&#x4E2A;&#x5C5E;&#x6027;"></a>&#x5B9A;&#x4E49;&#x591A;&#x4E2A;&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读取属性的特性"><span class="nav-number">2.1.3.</span> <span class="nav-text"><a href="#&#x8BFB;&#x53D6;&#x5C5E;&#x6027;&#x7684;&#x7279;&#x6027;" class="headerlink" title="&#x8BFB;&#x53D6;&#x5C5E;&#x6027;&#x7684;&#x7279;&#x6027;"></a>&#x8BFB;&#x53D6;&#x5C5E;&#x6027;&#x7684;&#x7279;&#x6027;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建对象"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x521B;&#x5EFA;&#x5BF9;&#x8C61;" class="headerlink" title="&#x521B;&#x5EFA;&#x5BF9;&#x8C61;"></a>&#x521B;&#x5EFA;&#x5BF9;&#x8C61;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#工厂模式"><span class="nav-number">2.2.1.</span> <span class="nav-text"><a href="#&#x5DE5;&#x5382;&#x6A21;&#x5F0F;" class="headerlink" title="&#x5DE5;&#x5382;&#x6A21;&#x5F0F;"></a>&#x5DE5;&#x5382;&#x6A21;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造函数模式"><span class="nav-number">2.2.2.</span> <span class="nav-text"><a href="#&#x6784;&#x9020;&#x51FD;&#x6570;&#x6A21;&#x5F0F;" class="headerlink" title="&#x6784;&#x9020;&#x51FD;&#x6570;&#x6A21;&#x5F0F;"></a>&#x6784;&#x9020;&#x51FD;&#x6570;&#x6A21;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原型模式"><span class="nav-number">2.2.3.</span> <span class="nav-text"><a href="#&#x539F;&#x578B;&#x6A21;&#x5F0F;" class="headerlink" title="&#x539F;&#x578B;&#x6A21;&#x5F0F;"></a>&#x539F;&#x578B;&#x6A21;&#x5F0F;</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章-面向对象的程序设计"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x516D;&#x7AE0;-&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;" class="headerlink" title="&#x7B2C;&#x516D;&#x7AE0; &#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;"></a>&#x7B2C;&#x516D;&#x7AE0; &#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#理解对象"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x7406;&#x89E3;&#x5BF9;&#x8C61;" class="headerlink" title="&#x7406;&#x89E3;&#x5BF9;&#x8C61;"></a>&#x7406;&#x89E3;&#x5BF9;&#x8C61;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性类型"><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#&#x5C5E;&#x6027;&#x7C7B;&#x578B;" class="headerlink" title="&#x5C5E;&#x6027;&#x7C7B;&#x578B;"></a>&#x5C5E;&#x6027;&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义多个属性"><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#&#x5B9A;&#x4E49;&#x591A;&#x4E2A;&#x5C5E;&#x6027;" class="headerlink" title="&#x5B9A;&#x4E49;&#x591A;&#x4E2A;&#x5C5E;&#x6027;"></a>&#x5B9A;&#x4E49;&#x591A;&#x4E2A;&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读取属性的特性"><span class="nav-number">2.1.3.</span> <span class="nav-text"><a href="#&#x8BFB;&#x53D6;&#x5C5E;&#x6027;&#x7684;&#x7279;&#x6027;" class="headerlink" title="&#x8BFB;&#x53D6;&#x5C5E;&#x6027;&#x7684;&#x7279;&#x6027;"></a>&#x8BFB;&#x53D6;&#x5C5E;&#x6027;&#x7684;&#x7279;&#x6027;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建对象"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x521B;&#x5EFA;&#x5BF9;&#x8C61;" class="headerlink" title="&#x521B;&#x5EFA;&#x5BF9;&#x8C61;"></a>&#x521B;&#x5EFA;&#x5BF9;&#x8C61;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#工厂模式"><span class="nav-number">2.2.1.</span> <span class="nav-text"><a href="#&#x5DE5;&#x5382;&#x6A21;&#x5F0F;" class="headerlink" title="&#x5DE5;&#x5382;&#x6A21;&#x5F0F;"></a>&#x5DE5;&#x5382;&#x6A21;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造函数模式"><span class="nav-number">2.2.2.</span> <span class="nav-text"><a href="#&#x6784;&#x9020;&#x51FD;&#x6570;&#x6A21;&#x5F0F;" class="headerlink" title="&#x6784;&#x9020;&#x51FD;&#x6570;&#x6A21;&#x5F0F;"></a>&#x6784;&#x9020;&#x51FD;&#x6570;&#x6A21;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原型模式"><span class="nav-number">2.2.3.</span> <span class="nav-text"><a href="#&#x539F;&#x578B;&#x6A21;&#x5F0F;" class="headerlink" title="&#x539F;&#x578B;&#x6A21;&#x5F0F;"></a>&#x539F;&#x578B;&#x6A21;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组合使用构造模式和原型模式"><span class="nav-number">2.2.4.</span> <span class="nav-text"><a href="#&#x7EC4;&#x5408;&#x4F7F;&#x7528;&#x6784;&#x9020;&#x6A21;&#x5F0F;&#x548C;&#x539F;&#x578B;&#x6A21;&#x5F0F;" class="headerlink" title="&#x7EC4;&#x5408;&#x4F7F;&#x7528;&#x6784;&#x9020;&#x6A21;&#x5F0F;&#x548C;&#x539F;&#x578B;&#x6A21;&#x5F0F;"></a>&#x7EC4;&#x5408;&#x4F7F;&#x7528;&#x6784;&#x9020;&#x6A21;&#x5F0F;&#x548C;&#x539F;&#x578B;&#x6A21;&#x5F0F;</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
