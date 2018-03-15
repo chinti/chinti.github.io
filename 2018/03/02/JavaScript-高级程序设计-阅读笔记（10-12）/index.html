@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;10、11、12章研究都是DOM相关的知识点，在之前DOM编程艺术这本书中有过一定的了解；DOM:文档对象模型，是针对HTML和XML文档的一个API（应用程序接口）；描绘了一个层次化的节点树，允许开发人员添加、移除和修改页面的一部分">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-08T13:15:35.519Z">
+<meta property="og:updated_time" content="2018-03-15T13:03:26.333Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记（10-12）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;10、11、12章研究都是DOM相关的知识点，在之前DOM编程艺术这本书中有过一定的了解；DOM:文档对象模型，是针对HTML和XML文档的一个API（应用程序接口）；描绘了一个层次化的节点树，允许开发人员添加、移除和修改页面的一部分">
@@ -366,7 +366,56 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&#160; &#160;&#160; &#160;10、11、12章研究都是DOM相关的知识点，在之前DOM编程艺术这本书中有过一定的了解；DOM:文档对象模型，是针对HTML和XML文档的一个API（应用程序接口）；描绘了一个层次化的节点树，允许开发人员添加、移除和修改页面的一部分</p>
 <a id="more"></a>
 <hr>
-<h2 id="第十章-DOM"><a href="#第十章-DOM" class="headerlink" title="第十章 DOM"></a>第十章 DOM</h2>
+<h2 id="第十章-DOM"><a href="#第十章-DOM" class="headerlink" title="第十章 DOM"></a>第十章 DOM</h2><p>&#160; &#160; &#160;&#160;本章主要理解包含不同层次节点的DOM，使用不同的节点类型以及克服浏览器兼容性问题等</p>
+<h3 id="节点层次"><a href="#节点层次" class="headerlink" title="节点层次"></a>节点层次</h3><h4 id="Node类型"><a href="#Node类型" class="headerlink" title="Node类型"></a>Node类型</h4><p>&#160; &#160; &#160;&#160;DOM1定义了一个Node接口，JS所有节点类型都继承自Node类型；每个节点都有nodeType属性，请用数值常量进行比较，可以兼容所有浏览器</p>
+<ul>
+<li>nodeName和nodeValue属性</li>
+<li><p>节点关系</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var firstChild = someNode.childNodes[0];</span><br><span class="line">var secondChild = someNode.childNodes.item(1);</span><br><span class="line">var count = someNode.childNodes.length;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>childNodes,parentNode,previousSibling和nextSibling属性；在IE中将NodeList转换成数组，必须手动枚举所有成员</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function convertToArray(nodes)&#123;</span><br><span class="line">    var array = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        array = Array.prototype.slice.call(nodes,0);//针对非IE浏览器</span><br><span class="line">    &#125;catch(ex)&#123;</span><br><span class="line">        array = new Array();</span><br><span class="line">        for (var i=0, len=nodes.length;i&lt;len;i++)&#123;</span><br><span class="line">            array.push(nodes[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>hasChildNodes()，在节点包含一或多个子节点的情况下返回true</p>
+</li>
+<li>操作节点<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">someNode.appendChild(newNode)  //在末尾添加节点，若是已有节点，则移到末尾</span><br><span class="line">someNode.lastChild</span><br><span class="line">someNode.firstChild</span><br><span class="line">someNode.childNodes //获取所有子节点</span><br><span class="line">someNode.insertBefore(newNode,null) //前插，该例与appendChild()执行相同操作</span><br><span class="line">someNode.replaceChild(newNode,someNode.firstChild) //前参数替换后参数，并返回被替换的节点</span><br><span class="line">someNode.removeChild(someNode.lastChild)//移除节点</span><br><span class="line">someNode.cloneChild(true) //复制节点，true深复制，false浅复制</span><br><span class="line">normalize() //找到空文本节点，删除它；相邻的文本节点，则将它们合并为一个文本节点</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Document类型"><a href="#Document类型" class="headerlink" title="Document类型"></a>Document类型</h4><p>&#160; &#160; &#160;&#160;具有以下特征</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">变量</th>
+<th style="text-align:left">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">nodeType</td>
+<td style="text-align:left">9</td>
+</tr>
+<tr>
+<td style="text-align:left">nodeName</td>
+<td style="text-align:left">“#document”</td>
+</tr>
+<tr>
+<td style="text-align:left">parentNode</td>
+<td style="text-align:left">null</td>
+</tr>
+<tr>
+<td style="text-align:left">ownerDocument</td>
+<td style="text-align:left">null</td>
+</tr>
+</tbody>
+</table>
+<p>&#160; &#160; &#160;&#160;其子节点可能是一个DocumentType（最多一个）、Element（最多一个）、ProcessingInstruction或Comment</p>
+<ul>
+<li>文档的子节点，documentElement属性始终指向<html>节点，P254</html></li>
+<li>文档信息，document对象是HTMLDocument的一个实例，同时还具有一些其他的属性，title(页面标题)、URL（地址栏中显示的URL）、domain（页面的域名；可有限制的设置）和referrer（来源页面的URL，可能是空字符串）；这些信息存在于请求的HTTP头部</li>
+<li>查找元素，getElementById()和getElementsByTagName，严格匹配，IE7以下有怪癖</li>
+<li></li>
+</ul>
+
       
     </div>
     
@@ -564,7 +613,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十章-DOM"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x5341;&#x7AE0;-DOM" class="headerlink" title="&#x7B2C;&#x5341;&#x7AE0; DOM"></a>&#x7B2C;&#x5341;&#x7AE0; DOM</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十章-DOM"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x5341;&#x7AE0;-DOM" class="headerlink" title="&#x7B2C;&#x5341;&#x7AE0; DOM"></a>&#x7B2C;&#x5341;&#x7AE0; DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#节点层次"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x8282;&#x70B9;&#x5C42;&#x6B21;" class="headerlink" title="&#x8282;&#x70B9;&#x5C42;&#x6B21;"></a>&#x8282;&#x70B9;&#x5C42;&#x6B21;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node类型"><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#Node&#x7C7B;&#x578B;" class="headerlink" title="Node&#x7C7B;&#x578B;"></a>Node&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Document类型"><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#Document&#x7C7B;&#x578B;" class="headerlink" title="Document&#x7C7B;&#x578B;"></a>Document&#x7C7B;&#x578B;</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
