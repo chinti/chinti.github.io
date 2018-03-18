@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;10、11、12章研究都是DOM相关的知识点，在之前DOM编程艺术这本书中有过一定的了解；DOM:文档对象模型，是针对HTML和XML文档的一个API（应用程序接口）；描绘了一个层次化的节点树，允许开发人员添加、移除和修改页面的一部分">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-17T12:20:56.339Z">
+<meta property="og:updated_time" content="2018-03-18T13:57:35.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记（10-12）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;10、11、12章研究都是DOM相关的知识点，在之前DOM编程艺术这本书中有过一定的了解；DOM:文档对象模型，是针对HTML和XML文档的一个API（应用程序接口）；描绘了一个层次化的节点树，允许开发人员添加、移除和修改页面的一部分">
@@ -413,15 +413,51 @@
 <li>文档的子节点，documentElement属性始终指向<html>节点，P254</html></li>
 <li>文档信息，document对象是HTMLDocument的一个实例，同时还具有一些其他的属性，title(页面标题)、URL（地址栏中显示的URL）、domain（页面的域名；可有限制的设置）和referrer（来源页面的URL，可能是空字符串）；这些信息存在于请求的HTTP头部</li>
 <li>查找元素，getElementById()和getElementsByTagName，严格匹配，IE7以下有怪癖；HTMLCollection对象有一个方法，namedItem()，可以通过属性获取集合中的项；还可以通过按名称访问项，<code>var  myImage = images[&quot;myImage&quot;]</code>；”*”代表通配符；第三个方法，getElementsByName()只存在于HTMLDocument中</li>
-<li><p>特殊集合，除了属性和方法，还有一些特殊的HTMLCollection对象集合<br>|变量|说明|<br>|:–|:–|<br>|document.anchors|包含文档中所有带name特性的<a>元素|<br>|document.applets|包含文档中所有的<applet>元素（该元素基本已不再被使用）|<br>|document.forms|包含文档中所有的<form>元素，（document.getElementsByTagName(“form”)）|<br>|document.images|包含文档中所有的<img>元素，（document.getElementsByTagName(“img”)）|<br>|document.links|包含文档中所有带href特性的<a>元素|</a></form></applet></a></p>
-</li>
-<li><p>DOM一致性检测，document.implement属性中的，hasFeature()方法，该方法很方便，但是需要与能力检测一同使用，P259</p>
-</li>
+<li>特殊集合，除了属性和方法，还有一些特殊的HTMLCollection对象集合<br>|变量|说明|<br>|:–|:–|<br>|document.anchors|包含文档中所有带name特性的<a>元素|<br>|document.applets|包含文档中所有的<applet>元素（该元素基本已不再被使用）|<br>|document.forms|包含文档中所有的<form>元素，（document.getElementsByTagName(“form”)）|<br>|document.images|包含文档中所有的<img>元素，（document.getElementsByTagName(“img”)）|<br>|document.links|包含文档中所有带href特性的<a>元素|</a></form></applet></a></li>
+</ul>
+<ul>
+<li>DOM一致性检测，document.implement属性中的，hasFeature()方法，该方法很方便，但是需要与能力检测一同使用，P259</li>
 <li>文档写入，write()、writeln()、open()和close()，前者XHTML中不支持，后者分别用于打开和关闭网页的输出流，若加载页面期间使用前两种方法，则不需要用到这两种方法</li>
 </ul>
-<h4 id="Element类型"><a href="#Element类型" class="headerlink" title="Element类型"></a>Element类型</h4><p>&#160; &#160; &#160;&#160;具有以下特征：<br>|变量|值|<br>|:–|:–|<br>|nodeType|1|<br>|nodeName|元素的标签名|<br>|nodeValue|null|<br>|parentNode|Document或Element|</p>
+<h4 id="Element类型"><a href="#Element类型" class="headerlink" title="Element类型"></a>Element类型</h4><p>&#160; &#160; &#160;&#160;具有以下特征：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">变量</th>
+<th style="text-align:left">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">nodeType</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:left">nodeName</td>
+<td style="text-align:left">元素的标签名</td>
+</tr>
+<tr>
+<td style="text-align:left">nodeValue</td>
+<td style="text-align:left">null</td>
+</tr>
+<tr>
+<td style="text-align:left">parentNode</td>
+<td style="text-align:left">Document或Element</td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li>HTML元素，</li>
+<li>HTML元素，继承了Element，还有些其他的标准特性<br>|变量|值|<br>|:–|:–|<br>|id|元素在文档中的标识符|<br>|title|有关元素的附加说明，一般通过工具提示条显示出来|<br>|lang|元素内容的语言代码|<br>|dir|语言的方向，”ltr”和”rtl”|<br>|className|类|</li>
+</ul>
+<ul>
+<li><p>操作特性，getAttribute()、setAttribute()、removeAttribute()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var div = document.getElementById(&quot;myDiv&quot;);</span><br><span class="line">alert(div.getAttribute(&quot;id&quot;));</span><br><span class="line">div.setAttribute(&quot;id&quot;,&quot;someOtherId&quot;);</span><br><span class="line">div.removeAttribute(&quot;id&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>attributes属性，每个Attr节点都保存在NameNodeMap对象中，该对象具有下列方法<br>|方法|说明|<br>|:–|:–|<br>|getNamedItem(name)|返回nodeName属性等于name的节点|<br>|removeNamedItem(name)|移除节点|<br>|setNamedItem(node)|添加节点，以节点的nodeName属性为索引|<br>|item(pos)|返回位于数字pos位置的节点|</p>
+</li>
+</ul>
+<ul>
+<li>创建元素</li>
 </ul>
 
       
