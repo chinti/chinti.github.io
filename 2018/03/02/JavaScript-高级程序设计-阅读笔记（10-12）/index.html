@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;10、11、12章研究都是DOM相关的知识点，在之前DOM编程艺术这本书中有过一定的了解；DOM:文档对象模型，是针对HTML和XML文档的一个API（应用程序接口）；描绘了一个层次化的节点树，允许开发人员添加、移除和修改页面的一部分">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-18T13:57:35.363Z">
+<meta property="og:updated_time" content="2018-04-01T15:49:48.607Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记（10-12）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;10、11、12章研究都是DOM相关的知识点，在之前DOM编程艺术这本书中有过一定的了解；DOM:文档对象模型，是针对HTML和XML文档的一个API（应用程序接口）；描绘了一个层次化的节点树，允许开发人员添加、移除和修改页面的一部分">
@@ -453,13 +453,259 @@
 <li><p>操作特性，getAttribute()、setAttribute()、removeAttribute()</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var div = document.getElementById(&quot;myDiv&quot;);</span><br><span class="line">alert(div.getAttribute(&quot;id&quot;));</span><br><span class="line">div.setAttribute(&quot;id&quot;,&quot;someOtherId&quot;);</span><br><span class="line">div.removeAttribute(&quot;id&quot;);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>attributes属性，每个Attr节点都保存在NameNodeMap对象中，该对象具有下列方法<br>|方法|说明|<br>|:–|:–|<br>|getNamedItem(name)|返回nodeName属性等于name的节点|<br>|removeNamedItem(name)|移除节点|<br>|setNamedItem(node)|添加节点，以节点的nodeName属性为索引|<br>|item(pos)|返回位于数字pos位置的节点|</p>
+<li><p>attributes属性，每个Attr节点都保存在NameNodeMap对象中，该对象具有下列方法，不同浏览器返回的顺序不同<br>|方法|说明|<br>|:–|:–|<br>|getNamedItem(name)|返回nodeName属性等于name的节点|<br>|removeNamedItem(name)|移除节点|<br>|setNamedItem(node)|添加节点，以节点的nodeName属性为索引|<br>|item(pos)|返回位于数字pos位置的节点|</p>
 </li>
 </ul>
 <ul>
-<li>创建元素</li>
+<li>创建元素，document.createElement()，然后可以通过appendChild()、insertBefore()或replaceChild()方法将新元素添加到文档树中（在IE7及更早版本前可能会有些问题P269）</li>
+<li>元素的子节点，遍历节点时要检查nodeType属性</li>
 </ul>
-
+<h4 id="Text类型"><a href="#Text类型" class="headerlink" title="Text类型"></a>Text类型</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">特征</th>
+<th style="text-align:left">说明/值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">nodeType</td>
+<td style="text-align:left">3</td>
+</tr>
+<tr>
+<td style="text-align:left">nodeName</td>
+<td style="text-align:left">“#text”</td>
+</tr>
+<tr>
+<td style="text-align:left">nodeValue</td>
+<td style="text-align:left">节点所包含文本</td>
+</tr>
+<tr>
+<td style="text-align:left">parentNode</td>
+<td style="text-align:left">一个Element</td>
+</tr>
+<tr>
+<td style="text-align:left">不支持（没有）子节点</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">appendData(text)</td>
+<td style="text-align:left">将text添加到节点的末尾</td>
+</tr>
+<tr>
+<td style="text-align:left">deleteData(offset,count)</td>
+<td style="text-align:left">从offset指定的位置开始删除count个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">insertData(offset,text)</td>
+<td style="text-align:left">指定位置插入</td>
+</tr>
+<tr>
+<td style="text-align:left">replaceData(offset,count,text)</td>
+<td style="text-align:left">用text替换从offset开始共计count个的文本</td>
+</tr>
+<tr>
+<td style="text-align:left">splitText(offset)</td>
+<td style="text-align:left">分割成两个文本节点</td>
+</tr>
+<tr>
+<td style="text-align:left">substringData(offset,count)</td>
+<td style="text-align:left">提取字符串</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>创建文本节点，document.createTextNode()</li>
+<li>规范化文本节点，在一个包含两个或多个文本节点的父元素上调用normalize()方法</li>
+<li>分割文本节点，splitText()，作用与前者相反</li>
+</ul>
+<h4 id="Comment类型"><a href="#Comment类型" class="headerlink" title="Comment类型"></a>Comment类型</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">特征</th>
+<th style="text-align:left">说明/值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">nodeType</td>
+<td style="text-align:left">8</td>
+</tr>
+<tr>
+<td style="text-align:left">nodeName</td>
+<td style="text-align:left">“#comment”</td>
+</tr>
+<tr>
+<td style="text-align:left">nodeValue</td>
+<td style="text-align:left">注释的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">parentNode</td>
+<td style="text-align:left">Document或Element</td>
+</tr>
+<tr>
+<td style="text-align:left">不支持（没有）子节点</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>document.createComment()可以传递注释文本也可以创建注释节点，访问注释节点要保证他们是<html>元素的后代</html></li>
+</ul>
+<h4 id="CDATASection类型"><a href="#CDATASection类型" class="headerlink" title="CDATASection类型"></a>CDATASection类型</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">特征</th>
+<th style="text-align:left">说明/值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">nodeType</td>
+<td style="text-align:left">4</td>
+</tr>
+<tr>
+<td style="text-align:left">nodeName</td>
+<td style="text-align:left">“#cdata-section”</td>
+</tr>
+<tr>
+<td style="text-align:left">nodeValue</td>
+<td style="text-align:left">CDATA区域中的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">parentNode</td>
+<td style="text-align:left">Document或Element</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>CDATA区域主流浏览器不能够正确解析，在真正的XML文档中，可以document.createCDataSection()创建并传入节点内容</li>
+</ul>
+<h4 id="DocumentType类型"><a href="#DocumentType类型" class="headerlink" title="DocumentType类型"></a>DocumentType类型</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">特征</th>
+<th style="text-align:left">说明/值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">nodeType</td>
+<td style="text-align:left">10</td>
+</tr>
+<tr>
+<td style="text-align:left">nodeName</td>
+<td style="text-align:left">doctype的名称</td>
+</tr>
+<tr>
+<td style="text-align:left">nodeValue</td>
+<td style="text-align:left">null</td>
+</tr>
+<tr>
+<td style="text-align:left">parentNode</td>
+<td style="text-align:left">Document</td>
+</tr>
+<tr>
+<td style="text-align:left">不支持（没有）子节点</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>该类型不常用</li>
+</ul>
+<h4 id="DocumentFragment类型"><a href="#DocumentFragment类型" class="headerlink" title="DocumentFragment类型"></a>DocumentFragment类型</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">特征</th>
+<th style="text-align:left">说明/值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">nodeType</td>
+<td style="text-align:left">11</td>
+</tr>
+<tr>
+<td style="text-align:left">nodeName</td>
+<td style="text-align:left">“#document-fragment”</td>
+</tr>
+<tr>
+<td style="text-align:left">nodeValue</td>
+<td style="text-align:left">null</td>
+</tr>
+<tr>
+<td style="text-align:left">parentNode</td>
+<td style="text-align:left">null</td>
+</tr>
+<tr>
+<td style="text-align:left">子节点可以是Element、ProcessingInstruction、Comment、Text、CDATASection或EntityReference</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>是一种“轻量级”的文档，可以包含和控制节点；不能将文档片段直接添加到文档中，单可以当作一个仓库，document.createDocumentFragment()，文档片段继承了Node的所有方法</li>
+</ul>
+<h4 id="Attr类型"><a href="#Attr类型" class="headerlink" title="Attr类型"></a>Attr类型</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">特征</th>
+<th style="text-align:left">说明/值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">nodeType</td>
+<td style="text-align:left">2</td>
+</tr>
+<tr>
+<td style="text-align:left">nodeName</td>
+<td style="text-align:left">特性的名称</td>
+</tr>
+<tr>
+<td style="text-align:left">nodeValue</td>
+<td style="text-align:left">特性的值</td>
+</tr>
+<tr>
+<td style="text-align:left">parentNode</td>
+<td style="text-align:left">null</td>
+</tr>
+<tr>
+<td style="text-align:left">在HTML中不支持（没有）子节点</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">XML中子节点可以是Text或EntityReference</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>不被认为是文档树的一部分；不直接引用特性节点，具有三个属性（name、value和specified）；document.createAttribute(),getAttribute()、setAttribute和removeAttribute</li>
+</ul>
+<h3 id="DOM操作技术"><a href="#DOM操作技术" class="headerlink" title="DOM操作技术"></a>DOM操作技术</h3><p>&#160; &#160; &#160;&#160;由于浏览器中隐藏的问题导致JS处理DOM比其他更为麻烦些</p>
+<h4 id="动态脚本"><a href="#动态脚本" class="headerlink" title="动态脚本"></a>动态脚本</h4><ul>
+<li>利用<script>元素向页面中插入JS代码；动态脚本指的是在页面加载时不存在，在某一时刻通过修改DOM动态添加的脚本；P278；IE不太支持某些模式，因为IE将<script>视为一个特殊的元素，不允许DOM访问其节点</li>
+</ul>
+<h4 id="动态样式"><a href="#动态样式" class="headerlink" title="动态样式"></a>动态样式</h4><ul>
+<li>动态样式是指在页面刚加载时不存在的样式；通过操作<link>很方便就可以构成</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel = &quot;stylesheet&quot; type = &quot;text/css&quot; href = &quot;styles.css&quot;&gt;</span><br><span class="line"></span><br><span class="line">================================</span><br><span class="line">function loadStyles(url) &#123;</span><br><span class="line">    var link = document.createElement(&quot;link&quot;);</span><br><span class="line">    link.rel = &quot;stylesheet&quot;;</span><br><span class="line">    link.type = &quot;text/css&quot;;</span><br><span class="line">    link.href = url;</span><br><span class="line">    var head = documentElementsByTagName(&quot;head&quot;)[0];</span><br><span class="line">    head.appendChild(link);    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">loadStyles(&quot;styles.css&quot;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>也可以操作<style>元素，要注意IE操作styleSheet可能会崩溃（书上写的，没有试验过）</li>
+</ul>
+<h4 id="操作表格"><a href="#操作表格" class="headerlink" title="操作表格"></a>操作表格</h4><p>&#160; &#160; &#160;&#160;我记得DOM编程艺术里有重点强调过，这个操作起来很麻烦；P282有HTML DOM为表格元素添加了一些属性和方法</p>
+<h4 id="使用NodeList"><a href="#使用NodeList" class="headerlink" title="使用NodeList"></a>使用NodeList</h4><ul>
+<li>要理解NodeList及其近亲NameNodeMap和HTMLCollection；它们是动态的所以每次文档结构变化时，它们都会得到更新，所以要注意实时查询可能会死循环</li>
+</ul>
+<hr>
+<h2 id="第十一章-DOM扩展"><a href="#第十一章-DOM扩展" class="headerlink" title="第十一章 DOM扩展"></a>第十一章 DOM扩展</h2></script></li></ul>
       
     </div>
     
@@ -657,7 +903,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十章-DOM"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x5341;&#x7AE0;-DOM" class="headerlink" title="&#x7B2C;&#x5341;&#x7AE0; DOM"></a>&#x7B2C;&#x5341;&#x7AE0; DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#节点层次"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x8282;&#x70B9;&#x5C42;&#x6B21;" class="headerlink" title="&#x8282;&#x70B9;&#x5C42;&#x6B21;"></a>&#x8282;&#x70B9;&#x5C42;&#x6B21;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node类型"><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#Node&#x7C7B;&#x578B;" class="headerlink" title="Node&#x7C7B;&#x578B;"></a>Node&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Document类型"><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#Document&#x7C7B;&#x578B;" class="headerlink" title="Document&#x7C7B;&#x578B;"></a>Document&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Element类型"><span class="nav-number">2.1.3.</span> <span class="nav-text"><a href="#Element&#x7C7B;&#x578B;" class="headerlink" title="Element&#x7C7B;&#x578B;"></a>Element&#x7C7B;&#x578B;</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十章-DOM"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x5341;&#x7AE0;-DOM" class="headerlink" title="&#x7B2C;&#x5341;&#x7AE0; DOM"></a>&#x7B2C;&#x5341;&#x7AE0; DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#节点层次"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x8282;&#x70B9;&#x5C42;&#x6B21;" class="headerlink" title="&#x8282;&#x70B9;&#x5C42;&#x6B21;"></a>&#x8282;&#x70B9;&#x5C42;&#x6B21;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node类型"><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#Node&#x7C7B;&#x578B;" class="headerlink" title="Node&#x7C7B;&#x578B;"></a>Node&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Document类型"><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#Document&#x7C7B;&#x578B;" class="headerlink" title="Document&#x7C7B;&#x578B;"></a>Document&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Element类型"><span class="nav-number">2.1.3.</span> <span class="nav-text"><a href="#Element&#x7C7B;&#x578B;" class="headerlink" title="Element&#x7C7B;&#x578B;"></a>Element&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Text类型"><span class="nav-number">2.1.4.</span> <span class="nav-text"><a href="#Text&#x7C7B;&#x578B;" class="headerlink" title="Text&#x7C7B;&#x578B;"></a>Text&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Comment类型"><span class="nav-number">2.1.5.</span> <span class="nav-text"><a href="#Comment&#x7C7B;&#x578B;" class="headerlink" title="Comment&#x7C7B;&#x578B;"></a>Comment&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CDATASection类型"><span class="nav-number">2.1.6.</span> <span class="nav-text"><a href="#CDATASection&#x7C7B;&#x578B;" class="headerlink" title="CDATASection&#x7C7B;&#x578B;"></a>CDATASection&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DocumentType类型"><span class="nav-number">2.1.7.</span> <span class="nav-text"><a href="#DocumentType&#x7C7B;&#x578B;" class="headerlink" title="DocumentType&#x7C7B;&#x578B;"></a>DocumentType&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DocumentFragment类型"><span class="nav-number">2.1.8.</span> <span class="nav-text"><a href="#DocumentFragment&#x7C7B;&#x578B;" class="headerlink" title="DocumentFragment&#x7C7B;&#x578B;"></a>DocumentFragment&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Attr类型"><span class="nav-number">2.1.9.</span> <span class="nav-text"><a href="#Attr&#x7C7B;&#x578B;" class="headerlink" title="Attr&#x7C7B;&#x578B;"></a>Attr&#x7C7B;&#x578B;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM操作技术"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#DOM&#x64CD;&#x4F5C;&#x6280;&#x672F;" class="headerlink" title="DOM&#x64CD;&#x4F5C;&#x6280;&#x672F;"></a>DOM&#x64CD;&#x4F5C;&#x6280;&#x672F;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#动态脚本"><span class="nav-number">2.2.1.</span> <span class="nav-text"><a href="#&#x52A8;&#x6001;&#x811A;&#x672C;" class="headerlink" title="&#x52A8;&#x6001;&#x811A;&#x672C;"></a>&#x52A8;&#x6001;&#x811A;&#x672C;</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
