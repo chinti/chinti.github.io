@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;10、11、12章研究都是DOM相关的知识点，在之前DOM编程艺术这本书中有过一定的了解；DOM:文档对象模型，是针对HTML和XML文档的一个API（应用程序接口）；描绘了一个层次化的节点树，允许开发人员添加、移除和修改页面的一部分">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-09T15:33:26.666Z">
+<meta property="og:updated_time" content="2018-04-14T07:39:55.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记（10-12）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;10、11、12章研究都是DOM相关的知识点，在之前DOM编程艺术这本书中有过一定的了解；DOM:文档对象模型，是针对HTML和XML文档的一个API（应用程序接口）；描绘了一个层次化的节点树，允许开发人员添加、移除和修改页面的一部分">
@@ -916,7 +916,49 @@
 <h4 id="其他方面的变化"><a href="#其他方面的变化" class="headerlink" title="其他方面的变化"></a>其他方面的变化</h4><p>&#160; &#160; &#160;&#160;这些变化与XML命名空间无关，更倾向于确保API的完整性和可靠性</p>
 <ul>
 <li>DocumentType类型的变化，新增3个属性：publicID、systemID表示的是文档类型声明中的两个信息段，在DOM1级中无法访问internalSubset，用于访问包含在文档类型声明中的额外定义</li>
-<li></li>
+<li>Document类型的变化，importNode()，用途是从一个文档中取得一个节点，然后将其导入到另一个文档，使其成为这个文档结构的一部分；若调用appendChild()时传入的节点属于不同的文档，则会导致错误；接受两个参数，要复制的节点和一个表示是否复制子节点的布尔值，返回原来节点的副本，但能够在当前文档中使用</li>
+<li>Node类型的变化，isSupport()方法，用于确定当前节点具有什么能力；这个方法接受两个参数：特性名和特性版本号，若浏览器实现了该特性则返回true；isSameNode()和isEqualNode()，这两个方法都接受一个节点参数，并在传入节点与引用节点相同或者相等时返回true（相同指的是两个节点引用的是同一个对象；相等指的是相同类型，即具有相同的属性）</li>
+<li>框架的变化，框架和内嵌框架分别用HTMLFrameElement和HTMLFrameElement表示，他们在DOM2级中都有了个新属性叫做contentDocument，指向表示框架内容的文档对象；在此之前只能利用iframe集合取得这个文档对象；IE8之前不支持该属性；所有浏览器都支持contentWindow属性</li>
+</ul>
+<h3 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h3><p>&#160; &#160; &#160;&#160;HTML中定义样式的方式有3种：通过<code>&lt;link/&gt;</code>元素包含外部样式表文件、使用<code>&lt;style/&gt;</code>元素定义嵌入式样式，以及使用style特性定义针对特定元素的样式</p>
+<h4 id="访问元素的样式"><a href="#访问元素的样式" class="headerlink" title="访问元素的样式"></a>访问元素的样式</h4><p>&#160; &#160; &#160;&#160;style对象包含了style特性指定的所有的样式信息，但不包括与外部样式表或嵌入样式表经层叠而来的样式；对于使用短划线的css属性名，必须将其转换为驼峰大小写形式</p>
+<ul>
+<li>DOM样式属性和方法，这些属性和方法在提供元素的style特性值的同时，也可以修改样式<br>|属性/方法|说明|<br>|:-|:-|<br>|cssText|访问style特性中的CSS代码|<br>|length|应用给元素的CSS属性的数量|<br>|parentRule|表示CSS信息的CSSRule对象|<br>|getPropertyCSSValue (propertyName)|返回包含给定属性值的CSSValue对象(cssText和cssValueType)|<br>|getPropertyPriority (propertyName)|如果给定的属性使用了!important设置，则返回 “important”，否则，返回空字符串|<br>|gePropertyValue (propertyName)|返回给定属性的字符串值|<br>|item (index)|返回给定位置的css属性的名称|<br>|removeProperty (propertyName)|从样式中删除给定属性|<br>|setProperty (propertyName,value,priority)|将给定属性设置为相应的值，并加上优先权标志( !important  或   一个空字符串)|</li>
+</ul>
+<ul>
+<li>计算的样式<ul>
+<li>document.defaultView.getComputedStyle()，该方法接受两个参数：要取得计算样式的元素和一个伪元素字符串（如<code>:after</code>），如不需要伪元素信息，第二个参数可以是null；该方法返回一个CSSStyleDeclaration对象（与style属性的类型相同），其中包含当前元素的所有计算的样式</li>
+<li>IE有一个类似的概念，每个具有style属性的元素还有个currentStyle属性；这两个属性，都不返回border样式，因为这是一个综合属性；且这些计算出来的样式都是只读，不能修改；你需要元素具有某个特定的默认值，应手工在样式表中指定该值</li>
+</ul>
+</li>
+</ul>
+<h4 id="操作样式表"><a href="#操作样式表" class="headerlink" title="操作样式表"></a>操作样式表</h4><p>&#160; &#160; &#160;&#160; CSSStyleSheet类型继承自StyleSheet</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">disabled</td>
+<td style="text-align:left">表示样式表是否被禁用的布尔值；这个属性是可读/写的，设置为true可以禁用样式表</td>
+</tr>
+<tr>
+<td style="text-align:left">href</td>
+<td style="text-align:left">若样式表是通过<code>&lt;link&gt;</code>包含的，则是样式表的URL；否则是null</td>
+</tr>
+<tr>
+<td style="text-align:left">media</td>
+<td style="text-align:left">当前样式表支持的所有类型的集合；在IE中，media是一个反映<code>&lt;link&gt;</code>和<code>&lt;style&gt;</code>元素media特性值的字符串</td>
+</tr>
+</tbody>
+</table>
+<p>&#160; &#160; &#160;&#160;其余的几个属性，个人感觉不是很常用，且大多IE不支持这些方法</p>
+<ul>
+<li>CSS规则，CSSRule对象表示样式表中的每一条规则；它是一个基类型；最常见的如CSSStyleRule对象，但是它包含的属性IE基本不支持（P318），其中较为常用的属性是：cssText、selectorText和style</li>
+<li>创建规则，使用insertRule方法，接受两个参数：规则文本和表示在哪里插入规则的索引；IE8及早期版本支持类似方法addRule，接受两个参数：选择符文本和CSS样式信息，一个可选参数：插入规则位置，addRule上限4095条样式规则；还是建议采用第十章的动态加载样式表的技术</li>
 </ul>
 </script></li></ul>
       
