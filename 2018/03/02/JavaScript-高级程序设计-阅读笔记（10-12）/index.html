@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;10、11、12章研究都是DOM相关的知识点，在之前DOM编程艺术这本书中有过一定的了解；DOM:文档对象模型，是针对HTML和XML文档的一个API（应用程序接口）；描绘了一个层次化的节点树，允许开发人员添加、移除和修改页面的一部分">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-14T07:39:55.012Z">
+<meta property="og:updated_time" content="2018-04-14T07:45:01.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记（10-12）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;10、11、12章研究都是DOM相关的知识点，在之前DOM编程艺术这本书中有过一定的了解；DOM:文档对象模型，是针对HTML和XML文档的一个API（应用程序接口）；描绘了一个层次化的节点树，允许开发人员添加、移除和修改页面的一部分">
@@ -413,8 +413,38 @@
 <li>文档的子节点，documentElement属性始终指向<html>节点，P254</html></li>
 <li>文档信息，document对象是HTMLDocument的一个实例，同时还具有一些其他的属性，title(页面标题)、URL（地址栏中显示的URL）、domain（页面的域名；可有限制的设置）和referrer（来源页面的URL，可能是空字符串）；这些信息存在于请求的HTTP头部</li>
 <li>查找元素，getElementById()和getElementsByTagName，严格匹配，IE7以下有怪癖；HTMLCollection对象有一个方法，namedItem()，可以通过属性获取集合中的项；还可以通过按名称访问项，<code>var  myImage = images[&quot;myImage&quot;]</code>；”*”代表通配符；第三个方法，getElementsByName()只存在于HTMLDocument中</li>
-<li>特殊集合，除了属性和方法，还有一些特殊的HTMLCollection对象集合<br>|变量|说明|<br>|:–|:–|<br>|document.anchors|包含文档中所有带name特性的<a>元素|<br>|document.applets|包含文档中所有的<applet>元素（该元素基本已不再被使用）|<br>|document.forms|包含文档中所有的<form>元素，（document.getElementsByTagName(“form”)）|<br>|document.images|包含文档中所有的<img>元素，（document.getElementsByTagName(“img”)）|<br>|document.links|包含文档中所有带href特性的<a>元素|</a></form></applet></a></li>
+<li>特殊集合，除了属性和方法，还有一些特殊的HTMLCollection对象集合</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">变量</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">document.anchors</td>
+<td style="text-align:left">包含文档中所有带name特性的<a>元素</a></td>
+</tr>
+<tr>
+<td style="text-align:left">document.applets</td>
+<td style="text-align:left">包含文档中所有的<applet>元素（该元素基本已不再被使用）</applet></td>
+</tr>
+<tr>
+<td style="text-align:left">document.forms</td>
+<td style="text-align:left">包含文档中所有的<form>元素，（document.getElementsByTagName(“form”)）</form></td>
+</tr>
+<tr>
+<td style="text-align:left">document.images</td>
+<td style="text-align:left">包含文档中所有的<img>元素，（document.getElementsByTagName(“img”)）</td>
+</tr>
+<tr>
+<td style="text-align:left">document.links</td>
+<td style="text-align:left">包含文档中所有带href特性的<a>元素</a></td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>DOM一致性检测，document.implement属性中的，hasFeature()方法，该方法很方便，但是需要与能力检测一同使用，P259</li>
 <li>文档写入，write()、writeln()、open()和close()，前者XHTML中不支持，后者分别用于打开和关闭网页的输出流，若加载页面期间使用前两种方法，则不需要用到这两种方法</li>
@@ -447,15 +477,71 @@
 </tbody>
 </table>
 <ul>
-<li>HTML元素，继承了Element，还有些其他的标准特性<br>|变量|值|<br>|:–|:–|<br>|id|元素在文档中的标识符|<br>|title|有关元素的附加说明，一般通过工具提示条显示出来|<br>|lang|元素内容的语言代码|<br>|dir|语言的方向，”ltr”和”rtl”|<br>|className|类|</li>
+<li>HTML元素，继承了Element，还有些其他的标准特性</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">变量</th>
+<th style="text-align:left">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">id</td>
+<td style="text-align:left">元素在文档中的标识符</td>
+</tr>
+<tr>
+<td style="text-align:left">title</td>
+<td style="text-align:left">有关元素的附加说明，一般通过工具提示条显示出来</td>
+</tr>
+<tr>
+<td style="text-align:left">lang</td>
+<td style="text-align:left">元素内容的语言代码</td>
+</tr>
+<tr>
+<td style="text-align:left">dir</td>
+<td style="text-align:left">语言的方向，”ltr”和”rtl”</td>
+</tr>
+<tr>
+<td style="text-align:left">className</td>
+<td style="text-align:left">类</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li><p>操作特性，getAttribute()、setAttribute()、removeAttribute()</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var div = document.getElementById(&quot;myDiv&quot;);</span><br><span class="line">alert(div.getAttribute(&quot;id&quot;));</span><br><span class="line">div.setAttribute(&quot;id&quot;,&quot;someOtherId&quot;);</span><br><span class="line">div.removeAttribute(&quot;id&quot;);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>attributes属性，每个Attr节点都保存在NameNodeMap对象中，该对象具有下列方法，不同浏览器返回的顺序不同<br>|方法|说明|<br>|:–|:–|<br>|getNamedItem(name)|返回nodeName属性等于name的节点|<br>|removeNamedItem(name)|移除节点|<br>|setNamedItem(node)|添加节点，以节点的nodeName属性为索引|<br>|item(pos)|返回位于数字pos位置的节点|</p>
+<li><p>attributes属性，每个Attr节点都保存在NameNodeMap对象中，该对象具有下列方法，不同浏览器返回的顺序不同</p>
 </li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">getNamedItem(name)</td>
+<td style="text-align:left">返回nodeName属性等于name的节点</td>
+</tr>
+<tr>
+<td style="text-align:left">removeNamedItem(name)</td>
+<td style="text-align:left">移除节点</td>
+</tr>
+<tr>
+<td style="text-align:left">setNamedItem(node)</td>
+<td style="text-align:left">添加节点，以节点的nodeName属性为索引</td>
+</tr>
+<tr>
+<td style="text-align:left">item(pos)</td>
+<td style="text-align:left">返回位于数字pos位置的节点</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>创建元素，document.createElement()，然后可以通过appendChild()、insertBefore()或replaceChild()方法将新元素添加到文档树中（在IE7及更早版本前可能会有些问题P269）</li>
 <li>元素的子节点，遍历节点时要检查nodeType属性</li>
@@ -691,14 +777,14 @@
 </ul>
 <h3 id="DOM操作技术"><a href="#DOM操作技术" class="headerlink" title="DOM操作技术"></a>DOM操作技术</h3><p>&#160; &#160; &#160;&#160;由于浏览器中隐藏的问题导致JS处理DOM比其他更为麻烦些</p>
 <h4 id="动态脚本"><a href="#动态脚本" class="headerlink" title="动态脚本"></a>动态脚本</h4><ul>
-<li>利用<script>元素向页面中插入JS代码；动态脚本指的是在页面加载时不存在，在某一时刻通过修改DOM动态添加的脚本；P278；IE不太支持某些模式，因为IE将<script>视为一个特殊的元素，不允许DOM访问其节点</li>
+<li>利用<code>&lt;script&gt;</code>元素向页面中插入JS代码；动态脚本指的是在页面加载时不存在，在某一时刻通过修改DOM动态添加的脚本；P278；IE不太支持某些模式，因为IE将<code>&lt;script&gt;</code>视为一个特殊的元素，不允许DOM访问其节点</li>
 </ul>
 <h4 id="动态样式"><a href="#动态样式" class="headerlink" title="动态样式"></a>动态样式</h4><ul>
-<li>动态样式是指在页面刚加载时不存在的样式；通过操作<link>很方便就可以构成</li>
+<li>动态样式是指在页面刚加载时不存在的样式；通过操作<code>&lt;link&gt;</code>很方便就可以构成</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel = &quot;stylesheet&quot; type = &quot;text/css&quot; href = &quot;styles.css&quot;&gt;</span><br><span class="line"></span><br><span class="line">================================</span><br><span class="line">function loadStyles(url) &#123;</span><br><span class="line">    var link = document.createElement(&quot;link&quot;);</span><br><span class="line">    link.rel = &quot;stylesheet&quot;;</span><br><span class="line">    link.type = &quot;text/css&quot;;</span><br><span class="line">    link.href = url;</span><br><span class="line">    var head = documentElementsByTagName(&quot;head&quot;)[0];</span><br><span class="line">    head.appendChild(link);    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">loadStyles(&quot;styles.css&quot;);</span><br></pre></td></tr></table></figure>
 <ul>
-<li>也可以操作<style>元素，要注意IE操作styleSheet可能会崩溃（书上写的，没有试验过）</li>
+<li>也可以操作<code>&lt;style&gt;</code>元素，要注意IE操作styleSheet可能会崩溃（书上写的，没有试验过）</li>
 </ul>
 <h4 id="操作表格"><a href="#操作表格" class="headerlink" title="操作表格"></a>操作表格</h4><p>&#160; &#160; &#160;&#160;我记得DOM编程艺术里有重点强调过，这个操作起来很麻烦；P282有HTML DOM为表格元素添加了一些属性和方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&lt;table border = &quot;1&quot; width = &quot;100%&quot;&gt;</span><br><span class="line">    &lt;tbody&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;Cell 1,1&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;Cell 2,1&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    &lt;/tbody&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line"></span><br><span class="line">======================</span><br><span class="line">//创建table</span><br><span class="line">var table = document.createElement(&quot;table&quot;);</span><br><span class="line">table.border = 1;</span><br><span class="line">table.width = 100%;</span><br><span class="line"></span><br><span class="line">//创建tbody</span><br><span class="line">var tbody = document.createElemet(&quot;tbody&quot;);</span><br><span class="line">table.appendChild(tbody);</span><br><span class="line"></span><br><span class="line">-----------------------</span><br><span class="line">//创建第一行</span><br><span class="line">var row1 = document.createElement(&quot;tr&quot;);</span><br><span class="line">tbody.appendChild(row1);</span><br><span class="line">var cell1_1 = document.createElement(&quot;td&quot;);</span><br><span class="line">cell1_1.appendChild(document.createTextNode(&quot;Cell 1,1&quot;));</span><br><span class="line">row1.appendChild(cell1_1);</span><br><span class="line">var cell2_1 = document.createElement(&quot;td&quot;);</span><br><span class="line">cell2_1.appendChild(document.createTextNode(&quot;Cell 2,1&quot;));</span><br><span class="line">row1.appendChild(cell2_1);</span><br><span class="line"></span><br><span class="line">//创建第二行</span><br><span class="line">var row2 = document.createElement(&quot;tr&quot;);</span><br><span class="line">tbody.appendChild(row2);</span><br><span class="line">var cell1_2 = document.createElement(&quot;td&quot;);</span><br><span class="line">cell1_2.appendChild(document.createTextNode(&quot;Cell 1,2&quot;));</span><br><span class="line">row2.appendChild(cell1_2);</span><br><span class="line">cell2_2.appendChild(document.createTextNode(&quot;Cell 2,2&quot;));</span><br><span class="line">row2.appendChild(cell2_2); </span><br><span class="line"></span><br><span class="line">-------------------------</span><br><span class="line">//采用HTML DOM添加的一些属性和方法后</span><br><span class="line">//创建第一行</span><br><span class="line">tbody.insertRow(0);</span><br><span class="line">tbody.rows[0].insertCell(0);</span><br><span class="line">tbody.rows[0].cells[0].appendChild(document.createTextNode(&quot;Cell 1,1&quot;));</span><br><span class="line">tbody.rows[0].insertCell(1);</span><br><span class="line">tbody.rows[0].cells[1].appendChild(document.createTextNode(&quot;Cell 2,1&quot;));</span><br><span class="line"></span><br><span class="line">//创建第二行</span><br><span class="line">tbody.insertRow(1);</span><br><span class="line">tbody.rows[1].insertCell(0);</span><br><span class="line">tbody.rows[1].cells[0].appendChild(document.createTextNode(&quot;Cell 1,2&quot;));</span><br><span class="line">tbody.rows[1].insertCell(1);</span><br><span class="line">tbody.rows[1].cells[1].appendChild(document.createTextNode(&quot;Cell 2,2&quot;));</span><br><span class="line"></span><br><span class="line">----------------------------</span><br><span class="line">//将表格添加到文档主体中</span><br><span class="line">document.body.appendChild(table);</span><br></pre></td></tr></table></figure>
@@ -712,7 +798,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//取得body元素</span><br><span class="line">var body = document.querySelector(&quot;body&quot;);</span><br><span class="line">//取得ID为“myDiv”的元素</span><br><span class="line">var myDiv = document.querySelector(&quot;#myDiv&quot;);</span><br><span class="line">//取得类名为“selected”的第一个元素</span><br><span class="line">var selected = document.querySelector(&quot;.selected&quot;);</span><br><span class="line">//取得类为“button”的第一个图像元素</span><br><span class="line">var img = document.body.querySelector(&quot;img.button&quot;);</span><br></pre></td></tr></table></figure>
 <h4 id="querySelectorAll-方法"><a href="#querySelectorAll-方法" class="headerlink" title="querySelectorAll()方法"></a>querySelectorAll()方法</h4><p>&#160; &#160; &#160;&#160;同样，接受一个CSS选择符，返回所有匹配的元素（一个NodeList对象），可以采用item()方法，也可以使用方括号语法</p>
 <h4 id="matchesSelector-方法"><a href="#matchesSelector-方法" class="headerlink" title="matchesSelector()方法"></a>matchesSelector()方法</h4><p>&#160; &#160; &#160;&#160;Selectors API Level2规范为Element类型增加了 matchesSelector()方法，该方法同样接受一个CSS选择符，若调用元素与选择符匹配则返回true；否则，反之；截至2011年主流浏览器还未支持该方法，可能需要用到一个包装函数；P288</p>
-<h3 id="元素遍历"><a href="#元素遍历" class="headerlink" title="元素遍历"></a>元素遍历</h3><p>&#160; &#160; &#160;&#160;元素间的空格，IE9及之前版本，不会返回文本节点，而且他浏览器则会返回文本节点，所以使用childNodes和firstChild等属性可能会结果不一致；为此，<a href="https://www.w3.org/TR/ElementTraversal/">Element Traversal 规范</a>新定义了一组属性</p>
+<h3 id="元素遍历"><a href="#元素遍历" class="headerlink" title="元素遍历"></a>元素遍历</h3><p>&#160; &#160; &#160;&#160;元素间的空格，IE9及之前版本，不会返回文本节点，而且他浏览器则会返回文本节点，所以使用childNodes和firstChild等属性可能会结果不一致；为此，<a href="https://www.w3.org/TR/ElementTraversal/" target="_blank" rel="noopener">Element Traversal 规范</a>新定义了一组属性</p>
 <table>
 <thead>
 <tr>
@@ -852,8 +938,38 @@
 <h4 id="children模式"><a href="#children模式" class="headerlink" title="children模式"></a>children模式</h4><p>&#160; &#160; &#160;&#160;该属性是HTMLCollection的实例，只包含元素中同样还是元素的子节点，除此之外和childNodes没有什么差别</p>
 <h4 id="contains-方法"><a href="#contains-方法" class="headerlink" title="contains()方法"></a>contains()方法</h4><p>&#160; &#160; &#160;&#160;调用contains()方法的应该是祖先节点，也就是搜索开始的节点，该方法接受一个参数，若是后代节点返回true</p>
 <ul>
-<li>compareDocumentPosition()也能确定节点间关系，返回一个位掩码<br>|掩码|关系|<br>|:-|:-|<br>|1|无关|<br>|2|居前|<br>|4|居后|<br>|8|包含|<br>|16|被包含|</li>
+<li>compareDocumentPosition()也能确定节点间关系，返回一个位掩码</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">掩码</th>
+<th style="text-align:left">关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">无关</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">居前</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left">居后</td>
+</tr>
+<tr>
+<td style="text-align:left">8</td>
+<td style="text-align:left">包含</td>
+</tr>
+<tr>
+<td style="text-align:left">16</td>
+<td style="text-align:left">被包含</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>WebKit版本小于522（safari3），contains()方法不能正常使用</li>
 </ul>
@@ -923,8 +1039,54 @@
 <h3 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h3><p>&#160; &#160; &#160;&#160;HTML中定义样式的方式有3种：通过<code>&lt;link/&gt;</code>元素包含外部样式表文件、使用<code>&lt;style/&gt;</code>元素定义嵌入式样式，以及使用style特性定义针对特定元素的样式</p>
 <h4 id="访问元素的样式"><a href="#访问元素的样式" class="headerlink" title="访问元素的样式"></a>访问元素的样式</h4><p>&#160; &#160; &#160;&#160;style对象包含了style特性指定的所有的样式信息，但不包括与外部样式表或嵌入样式表经层叠而来的样式；对于使用短划线的css属性名，必须将其转换为驼峰大小写形式</p>
 <ul>
-<li>DOM样式属性和方法，这些属性和方法在提供元素的style特性值的同时，也可以修改样式<br>|属性/方法|说明|<br>|:-|:-|<br>|cssText|访问style特性中的CSS代码|<br>|length|应用给元素的CSS属性的数量|<br>|parentRule|表示CSS信息的CSSRule对象|<br>|getPropertyCSSValue (propertyName)|返回包含给定属性值的CSSValue对象(cssText和cssValueType)|<br>|getPropertyPriority (propertyName)|如果给定的属性使用了!important设置，则返回 “important”，否则，返回空字符串|<br>|gePropertyValue (propertyName)|返回给定属性的字符串值|<br>|item (index)|返回给定位置的css属性的名称|<br>|removeProperty (propertyName)|从样式中删除给定属性|<br>|setProperty (propertyName,value,priority)|将给定属性设置为相应的值，并加上优先权标志( !important  或   一个空字符串)|</li>
+<li>DOM样式属性和方法，这些属性和方法在提供元素的style特性值的同时，也可以修改样式</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性/方法</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">cssText</td>
+<td style="text-align:left">访问style特性中的CSS代码</td>
+</tr>
+<tr>
+<td style="text-align:left">length</td>
+<td style="text-align:left">应用给元素的CSS属性的数量</td>
+</tr>
+<tr>
+<td style="text-align:left">parentRule</td>
+<td style="text-align:left">表示CSS信息的CSSRule对象</td>
+</tr>
+<tr>
+<td style="text-align:left">getPropertyCSSValue (propertyName)</td>
+<td style="text-align:left">返回包含给定属性值的CSSValue对象(cssText和cssValueType)</td>
+</tr>
+<tr>
+<td style="text-align:left">getPropertyPriority (propertyName)</td>
+<td style="text-align:left">如果给定的属性使用了!important设置，则返回 “important”，否则，返回空字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">gePropertyValue (propertyName)</td>
+<td style="text-align:left">返回给定属性的字符串值</td>
+</tr>
+<tr>
+<td style="text-align:left">item (index)</td>
+<td style="text-align:left">返回给定位置的css属性的名称</td>
+</tr>
+<tr>
+<td style="text-align:left">removeProperty (propertyName)</td>
+<td style="text-align:left">从样式中删除给定属性</td>
+</tr>
+<tr>
+<td style="text-align:left">setProperty (propertyName,value,priority)</td>
+<td style="text-align:left">将给定属性设置为相应的值，并加上优先权标志( !important  或   一个空字符串)</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>计算的样式<ul>
 <li>document.defaultView.getComputedStyle()，该方法接受两个参数：要取得计算样式的元素和一个伪元素字符串（如<code>:after</code>），如不需要伪元素信息，第二个参数可以是null；该方法返回一个CSSStyleDeclaration对象（与style属性的类型相同），其中包含当前元素的所有计算的样式</li>
@@ -1158,7 +1320,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十章-DOM"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x5341;&#x7AE0;-DOM" class="headerlink" title="&#x7B2C;&#x5341;&#x7AE0; DOM"></a>&#x7B2C;&#x5341;&#x7AE0; DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#节点层次"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x8282;&#x70B9;&#x5C42;&#x6B21;" class="headerlink" title="&#x8282;&#x70B9;&#x5C42;&#x6B21;"></a>&#x8282;&#x70B9;&#x5C42;&#x6B21;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node类型"><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#Node&#x7C7B;&#x578B;" class="headerlink" title="Node&#x7C7B;&#x578B;"></a>Node&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Document类型"><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#Document&#x7C7B;&#x578B;" class="headerlink" title="Document&#x7C7B;&#x578B;"></a>Document&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Element类型"><span class="nav-number">2.1.3.</span> <span class="nav-text"><a href="#Element&#x7C7B;&#x578B;" class="headerlink" title="Element&#x7C7B;&#x578B;"></a>Element&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Text类型"><span class="nav-number">2.1.4.</span> <span class="nav-text"><a href="#Text&#x7C7B;&#x578B;" class="headerlink" title="Text&#x7C7B;&#x578B;"></a>Text&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Comment类型"><span class="nav-number">2.1.5.</span> <span class="nav-text"><a href="#Comment&#x7C7B;&#x578B;" class="headerlink" title="Comment&#x7C7B;&#x578B;"></a>Comment&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CDATASection类型"><span class="nav-number">2.1.6.</span> <span class="nav-text"><a href="#CDATASection&#x7C7B;&#x578B;" class="headerlink" title="CDATASection&#x7C7B;&#x578B;"></a>CDATASection&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DocumentType类型"><span class="nav-number">2.1.7.</span> <span class="nav-text"><a href="#DocumentType&#x7C7B;&#x578B;" class="headerlink" title="DocumentType&#x7C7B;&#x578B;"></a>DocumentType&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DocumentFragment类型"><span class="nav-number">2.1.8.</span> <span class="nav-text"><a href="#DocumentFragment&#x7C7B;&#x578B;" class="headerlink" title="DocumentFragment&#x7C7B;&#x578B;"></a>DocumentFragment&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Attr类型"><span class="nav-number">2.1.9.</span> <span class="nav-text"><a href="#Attr&#x7C7B;&#x578B;" class="headerlink" title="Attr&#x7C7B;&#x578B;"></a>Attr&#x7C7B;&#x578B;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM操作技术"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#DOM&#x64CD;&#x4F5C;&#x6280;&#x672F;" class="headerlink" title="DOM&#x64CD;&#x4F5C;&#x6280;&#x672F;"></a>DOM&#x64CD;&#x4F5C;&#x6280;&#x672F;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#动态脚本"><span class="nav-number">2.2.1.</span> <span class="nav-text"><a href="#&#x52A8;&#x6001;&#x811A;&#x672C;" class="headerlink" title="&#x52A8;&#x6001;&#x811A;&#x672C;"></a>&#x52A8;&#x6001;&#x811A;&#x672C;</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十章-DOM"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x5341;&#x7AE0;-DOM" class="headerlink" title="&#x7B2C;&#x5341;&#x7AE0; DOM"></a>&#x7B2C;&#x5341;&#x7AE0; DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#节点层次"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x8282;&#x70B9;&#x5C42;&#x6B21;" class="headerlink" title="&#x8282;&#x70B9;&#x5C42;&#x6B21;"></a>&#x8282;&#x70B9;&#x5C42;&#x6B21;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node类型"><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#Node&#x7C7B;&#x578B;" class="headerlink" title="Node&#x7C7B;&#x578B;"></a>Node&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Document类型"><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#Document&#x7C7B;&#x578B;" class="headerlink" title="Document&#x7C7B;&#x578B;"></a>Document&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Element类型"><span class="nav-number">2.1.3.</span> <span class="nav-text"><a href="#Element&#x7C7B;&#x578B;" class="headerlink" title="Element&#x7C7B;&#x578B;"></a>Element&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Text类型"><span class="nav-number">2.1.4.</span> <span class="nav-text"><a href="#Text&#x7C7B;&#x578B;" class="headerlink" title="Text&#x7C7B;&#x578B;"></a>Text&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Comment类型"><span class="nav-number">2.1.5.</span> <span class="nav-text"><a href="#Comment&#x7C7B;&#x578B;" class="headerlink" title="Comment&#x7C7B;&#x578B;"></a>Comment&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CDATASection类型"><span class="nav-number">2.1.6.</span> <span class="nav-text"><a href="#CDATASection&#x7C7B;&#x578B;" class="headerlink" title="CDATASection&#x7C7B;&#x578B;"></a>CDATASection&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DocumentType类型"><span class="nav-number">2.1.7.</span> <span class="nav-text"><a href="#DocumentType&#x7C7B;&#x578B;" class="headerlink" title="DocumentType&#x7C7B;&#x578B;"></a>DocumentType&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DocumentFragment类型"><span class="nav-number">2.1.8.</span> <span class="nav-text"><a href="#DocumentFragment&#x7C7B;&#x578B;" class="headerlink" title="DocumentFragment&#x7C7B;&#x578B;"></a>DocumentFragment&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Attr类型"><span class="nav-number">2.1.9.</span> <span class="nav-text"><a href="#Attr&#x7C7B;&#x578B;" class="headerlink" title="Attr&#x7C7B;&#x578B;"></a>Attr&#x7C7B;&#x578B;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM操作技术"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#DOM&#x64CD;&#x4F5C;&#x6280;&#x672F;" class="headerlink" title="DOM&#x64CD;&#x4F5C;&#x6280;&#x672F;"></a>DOM&#x64CD;&#x4F5C;&#x6280;&#x672F;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#动态脚本"><span class="nav-number">2.2.1.</span> <span class="nav-text"><a href="#&#x52A8;&#x6001;&#x811A;&#x672C;" class="headerlink" title="&#x52A8;&#x6001;&#x811A;&#x672C;"></a>&#x52A8;&#x6001;&#x811A;&#x672C;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态样式"><span class="nav-number">2.2.2.</span> <span class="nav-text"><a href="#&#x52A8;&#x6001;&#x6837;&#x5F0F;" class="headerlink" title="&#x52A8;&#x6001;&#x6837;&#x5F0F;"></a>&#x52A8;&#x6001;&#x6837;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作表格"><span class="nav-number">2.2.3.</span> <span class="nav-text"><a href="#&#x64CD;&#x4F5C;&#x8868;&#x683C;" class="headerlink" title="&#x64CD;&#x4F5C;&#x8868;&#x683C;"></a>&#x64CD;&#x4F5C;&#x8868;&#x683C;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用NodeList"><span class="nav-number">2.2.4.</span> <span class="nav-text"><a href="#&#x4F7F;&#x7528;NodeList" class="headerlink" title="&#x4F7F;&#x7528;NodeList"></a>&#x4F7F;&#x7528;NodeList</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十一章-DOM扩展"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7B2C;&#x5341;&#x4E00;&#x7AE0;-DOM&#x6269;&#x5C55;" class="headerlink" title="&#x7B2C;&#x5341;&#x4E00;&#x7AE0; DOM&#x6269;&#x5C55;"></a>&#x7B2C;&#x5341;&#x4E00;&#x7AE0; DOM&#x6269;&#x5C55;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#选择符API"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#&#x9009;&#x62E9;&#x7B26;API" class="headerlink" title="&#x9009;&#x62E9;&#x7B26;API"></a>&#x9009;&#x62E9;&#x7B26;API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#querySelector-方法"><span class="nav-number">3.1.1.</span> <span class="nav-text"><a href="#querySelector-&#x65B9;&#x6CD5;" class="headerlink" title="querySelector()&#x65B9;&#x6CD5;"></a>querySelector()&#x65B9;&#x6CD5;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#querySelectorAll-方法"><span class="nav-number">3.1.2.</span> <span class="nav-text"><a href="#querySelectorAll-&#x65B9;&#x6CD5;" class="headerlink" title="querySelectorAll()&#x65B9;&#x6CD5;"></a>querySelectorAll()&#x65B9;&#x6CD5;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#matchesSelector-方法"><span class="nav-number">3.1.3.</span> <span class="nav-text"><a href="#matchesSelector-&#x65B9;&#x6CD5;" class="headerlink" title="matchesSelector()&#x65B9;&#x6CD5;"></a>matchesSelector()&#x65B9;&#x6CD5;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元素遍历"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#&#x5143;&#x7D20;&#x904D;&#x5386;" class="headerlink" title="&#x5143;&#x7D20;&#x904D;&#x5386;"></a>&#x5143;&#x7D20;&#x904D;&#x5386;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML5"><span class="nav-number">3.3.</span> <span class="nav-text"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与类相关的扩充"><span class="nav-number">3.3.1.</span> <span class="nav-text"><a href="#&#x4E0E;&#x7C7B;&#x76F8;&#x5173;&#x7684;&#x6269;&#x5145;" class="headerlink" title="&#x4E0E;&#x7C7B;&#x76F8;&#x5173;&#x7684;&#x6269;&#x5145;"></a>&#x4E0E;&#x7C7B;&#x76F8;&#x5173;&#x7684;&#x6269;&#x5145;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#焦点管理"><span class="nav-number">3.3.2.</span> <span class="nav-text"><a href="#&#x7126;&#x70B9;&#x7BA1;&#x7406;" class="headerlink" title="&#x7126;&#x70B9;&#x7BA1;&#x7406;"></a>&#x7126;&#x70B9;&#x7BA1;&#x7406;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTMLDocument的变化"><span class="nav-number">3.3.3.</span> <span class="nav-text"><a href="#HTMLDocument&#x7684;&#x53D8;&#x5316;" class="headerlink" title="HTMLDocument&#x7684;&#x53D8;&#x5316;"></a>HTMLDocument&#x7684;&#x53D8;&#x5316;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符集属性"><span class="nav-number">3.3.4.</span> <span class="nav-text"><a href="#&#x5B57;&#x7B26;&#x96C6;&#x5C5E;&#x6027;" class="headerlink" title="&#x5B57;&#x7B26;&#x96C6;&#x5C5E;&#x6027;"></a>&#x5B57;&#x7B26;&#x96C6;&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义数据属性"><span class="nav-number">3.3.5.</span> <span class="nav-text"><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x5C5E;&#x6027;" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x5C5E;&#x6027;"></a>&#x81EA;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入标记"><span class="nav-number">3.3.6.</span> <span class="nav-text"><a href="#&#x63D2;&#x5165;&#x6807;&#x8BB0;" class="headerlink" title="&#x63D2;&#x5165;&#x6807;&#x8BB0;"></a>&#x63D2;&#x5165;&#x6807;&#x8BB0;</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
