@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;10、11、12章研究都是DOM相关的知识点，在之前DOM编程艺术这本书中有过一定的了解；DOM:文档对象模型，是针对HTML和XML文档的一个API（应用程序接口）；描绘了一个层次化的节点树，允许开发人员添加、移除和修改页面的一部分">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-14T07:46:59.678Z">
+<meta property="og:updated_time" content="2018-04-17T09:22:45.901Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记（10-12）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;10、11、12章研究都是DOM相关的知识点，在之前DOM编程艺术这本书中有过一定的了解；DOM:文档对象模型，是针对HTML和XML文档的一个API（应用程序接口）；描绘了一个层次化的节点树，允许开发人员添加、移除和修改页面的一部分">
@@ -1121,7 +1121,264 @@
 <ul>
 <li>CSS规则，CSSRule对象表示样式表中的每一条规则；它是一个基类型；最常见的如CSSStyleRule对象，但是它包含的属性IE基本不支持（P318），其中较为常用的属性是：cssText、selectorText和style</li>
 <li>创建规则，使用insertRule方法，接受两个参数：规则文本和表示在哪里插入规则的索引；IE8及早期版本支持类似方法addRule，接受两个参数：选择符文本和CSS样式信息，一个可选参数：插入规则位置，addRule上限4095条样式规则；还是建议采用第十章的动态加载样式表的技术</li>
+<li>删除规则，deleteRule()，这个方法接受一个参数：要删除的规则的位置；与添加规则相似，这不是实际开发中常见的作法，所以<strong>慎用</strong></li>
 </ul>
+<h4 id="元素大小"><a href="#元素大小" class="headerlink" title="元素大小"></a>元素大小</h4><ul>
+<li>偏移量，包括元素在屏幕上占用的所有可见的空间；元素的可见大小由高度、宽度决定，包括所有内边距、滚动条、边框大小（<strong>不包括外边距*</strong>）；要想知道某个元素的在页面上的偏移量，可以将这个元素的offsetLeft和offsetTop与其offsetParent的相同属性相加，如此循环至根元素，可以得到一个基本准确的值</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">offsetHeight</td>
+<td style="text-align:left">元素在垂直方向上占用的空间大小，以像素计；包括高度、（可见的）水平滚动条的高度和上下边框的高度</td>
+</tr>
+<tr>
+<td style="text-align:left">offsetWidth</td>
+<td style="text-align:left">元素在水平方向上占用的空间大小，以像素计；包括宽度、（可见的）垂直滚动条的宽度、左右边框宽度</td>
+</tr>
+<tr>
+<td style="text-align:left">offsetLeft</td>
+<td style="text-align:left">元素的左外边框至包含元素的左内边框之间的像素距离</td>
+</tr>
+<tr>
+<td style="text-align:left">offsetTop</td>
+<td style="text-align:left">元素的上外边框至包含元素的上内边框之间的像素距离</td>
+</tr>
+<tr>
+<td style="text-align:left">offsetParent</td>
+<td style="text-align:left">此属性不一定与parentNode的值相等；如，<code>&lt;td&gt;</code>元素的offsetParent作为其祖先元素的table元素，因为<code>&lt;table&gt;</code>是DOM层次中距<code>&lt;td&gt;</code>最近的一个具有大小的元素</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">function getElementLeft(element)&#123;  </span><br><span class="line">    var actualLeft = element.offsetLeft;  </span><br><span class="line">    var current = element.offsetParent;  </span><br><span class="line">     </span><br><span class="line">    while (current !== null)&#123;          </span><br><span class="line">        actualLeft += current.offsetLeft;  </span><br><span class="line">        current = current.offsetParent;  </span><br><span class="line">    &#125;  </span><br><span class="line">    return actualLeft;  </span><br><span class="line">&#125;  </span><br><span class="line"> </span><br><span class="line">function getElementTop(element)&#123;  </span><br><span class="line">    var actualTop = element.offsetTop;  </span><br><span class="line">    var current = element.offsetParent;  </span><br><span class="line">     </span><br><span class="line">    while (current !== null)&#123;          </span><br><span class="line">        actualTop += current.offsetTop;  </span><br><span class="line">        current = current.offsetParent;  </span><br><span class="line">    &#125;  </span><br><span class="line">    return actualTop;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>客户区大小，指的是元素内容及其内边距所占据的空间大小（滚动条占用空间不算），有关客户区大小的属性有两个：clientWidth和clientHeight</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function getViewPort()&#123;  </span><br><span class="line">    if(document.compatMode == &quot;BackCompat&quot;)&#123;  </span><br><span class="line">        return &#123;  </span><br><span class="line">            width: document.body.clientWidth,  </span><br><span class="line">            height: document.body.clientHeight  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;else &#123;  </span><br><span class="line">        return &#123;  </span><br><span class="line">            width: document.documentElement.clientWIdth,  </span><br><span class="line">            height: document.documentElement.clientHeight  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>滚动大小，指的是包含滚动内容的元素大小；实际上，在不包含滚动条的页面中，scrollHeight和clientHeight并不和它们的定义一致；firefox：两组属性始终相等，等于文档内容区域的实际尺寸，而非视口尺寸；Opera、Safari、Chrome：scrollWidth和scrollHeight等于视口大小，而令两者等于文档内容区域的大小；IE：scrollWidth和scrollHeight等于文档内容区域的大小，而令两者等于视口大小；有毒；在确定文档的总高度时（包括基于视口的最小高度），必须取得他们的最大值，才能保证在跨浏览器的环境下取得精确的结果；注意，对于运行在混杂模式下的IE，需要用document.body代替document.documentElement；实际操作中，貌似clientWidth都是取到视口宽度…emmm是改过了么?? ；P324有一张图，可以比较方便的理解这几个属性之间的关系</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">scrollHeight</td>
+<td style="text-align:left">在没有滚动条的情况下，元素内容的总高度</td>
+</tr>
+<tr>
+<td style="text-align:left">scrollWidth</td>
+<td style="text-align:left">在没有滚动条的情况下，元素内容的总宽度</td>
+</tr>
+<tr>
+<td style="text-align:left">scrollLeft</td>
+<td style="text-align:left">被隐藏在内容区域左侧的像素数，通过设置这个属性可以改变元素的滚动位置；0是初始值，大于0则不在初始位置</td>
+</tr>
+<tr>
+<td style="text-align:left">scrollTop</td>
+<td style="text-align:left">被隐藏在内容区域上方的像素数，通过设置这个属性可以改变元素的滚动位置；同上</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>确定元素大小，getBoundingClient()，返回一个矩形属性，包含left、top、right、bottom；IR8及之前版本认为文档左上角左边是(2,2)，其他浏览器是（0,0）</li>
+</ul>
+<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><p>&#160; &#160; &#160;&#160;DOM遍历是深度优先的DOM结构遍历，移动的方向至少有两个（取决于使用遍历类型），遍历以给定节点为根，不可能向上超出DOM树的根节点；定义了两个辅助类型：NodeIterator和TreeWalker</p>
+<h4 id="NodeIterator"><a href="#NodeIterator" class="headerlink" title="NodeIterator"></a>NodeIterator</h4><p>&#160; &#160; &#160;&#160;该方法接受四个参数</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">root</td>
+<td style="text-align:left">想要作为搜索起点的树中的节点</td>
+</tr>
+<tr>
+<td style="text-align:left">whatToShow</td>
+<td style="text-align:left">表示要访问哪些节点的数字代码</td>
+</tr>
+<tr>
+<td style="text-align:left">filter</td>
+<td style="text-align:left">是一个NodeFilter对象，或者一个表示应该接受还是拒绝某种特定节点的函数</td>
+</tr>
+<tr>
+<td style="text-align:left">entityReferenceExpansion</td>
+<td style="text-align:left">布尔值，表示是否要扩展实体引用。这个参数在HTML页面中没有用，因为其中的实体引用不能扩展</td>
+</tr>
+</tbody>
+</table>
+<p>whatToShow参数是一个位掩码</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">常量</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">NodeFilter.SHOW_ALL</td>
+<td style="text-align:left">所有类型节点</td>
+</tr>
+<tr>
+<td style="text-align:left">NodeFilter.SHOW_ELEMENT</td>
+<td style="text-align:left">元素</td>
+</tr>
+<tr>
+<td style="text-align:left">NodeFilter.SHOW_ATTRIBUTE</td>
+<td style="text-align:left">特性</td>
+</tr>
+<tr>
+<td style="text-align:left">NodeFilter.SHOW_TEXT</td>
+<td style="text-align:left">文本</td>
+</tr>
+<tr>
+<td style="text-align:left">NodeFilter.SHOW_COMMENT</td>
+<td style="text-align:left">注释</td>
+</tr>
+<tr>
+<td style="text-align:left">NodeFilter.SHOW_DOCUMENT</td>
+<td style="text-align:left">根节点</td>
+</tr>
+<tr>
+<td style="text-align:left">NodeFilter.SHOW_DOCUMENT_TYPE</td>
+<td style="text-align:left">节点类型</td>
+</tr>
+<tr>
+<td style="text-align:left">NodeFilter.SHOW_DOCUMENT_FRAGMENT</td>
+<td style="text-align:left">文档片段</td>
+</tr>
+</tbody>
+</table>
+<p>可以使用按位或操作符来组合多个选项如：</p>
+<p><code>var whatToShow = NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT;</code></p>
+<ul>
+<li>可以通过createNodeIterator()方法的filter参数来指定自定义的NodeFilter对象；每个NodeFilter对象只有一个方法，应该访问的节点返回NodeFilter.FILTER_SKIP；可以创建包含acceptNode()方法的对象，然后将这个对象传入createNodeIterator()</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    var filter = &#123;</span><br><span class="line">    acceptNode: function(node) &#123;</span><br><span class="line">        return node.nodeName.toLowerCase() == &quot;p&quot; ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>也可以采用一个类似acceptNode()的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    var filter = function(node) &#123;</span><br><span class="line">    return node.nodeName.toLowerCase() == &quot;p&quot; ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果不指定过滤器，则传入null；P328-330，有几个遍历的例子</p>
+<h4 id="TreeWalker"><a href="#TreeWalker" class="headerlink" title="TreeWalker"></a>TreeWalker</h4><p>&#160; &#160; &#160;&#160;这是一个比前者高级的版本；除了包括nextNode()和previousNode()在内的相同的功能之外，这个类型还提供了一些不同方向上遍历DOM结构的方法</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">parentNode()</td>
+<td style="text-align:left">遍历到当前节点的父节点</td>
+</tr>
+<tr>
+<td style="text-align:left">firstChild()</td>
+<td style="text-align:left">到第一个子节点</td>
+</tr>
+<tr>
+<td style="text-align:left">lastChild()</td>
+<td style="text-align:left">到最后一个子节点</td>
+</tr>
+<tr>
+<td style="text-align:left">nextSibling()</td>
+<td style="text-align:left">到当前节点的下一个同辈节点</td>
+</tr>
+<tr>
+<td style="text-align:left">previousSibling()</td>
+<td style="text-align:left">到当前节点的上一个同辈节点</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>创建TreeWalker对象，要使用document.createTreeWalker()方法，该方法接受4个参数与document.createNodeIterator()方法相同；所以很多地方可以用该类型替代；该类型还有一个属性，叫做currentNode，表示任何遍历方法在上一次遍历中返回的节点，设置该属性可以修改遍历继续进行的起点</li>
+</ul>
+<h3 id="范围"><a href="#范围" class="headerlink" title="范围"></a>范围</h3><h4 id="DOM中的范围"><a href="#DOM中的范围" class="headerlink" title="DOM中的范围"></a>DOM中的范围</h4><p>&#160; &#160; &#160;&#160;DOM2级在Document类型中定义了createRange方法；使用hasFeature或直接检测该方法，可以确定浏览器是否支持范围；新创建的范围与创建它的文档关联，只能用于当前文档</p>
+<p>&#160; &#160; &#160;&#160;每个范围由一个Range类型的实例表示，下列属性提供了当前范围在文档中的位置信息</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">startContainer</td>
+<td style="text-align:left">包含范围起点的节点（选区中第一个子节点的父节点）</td>
+</tr>
+<tr>
+<td style="text-align:left">startOffset</td>
+<td style="text-align:left">范围在startContainer中起点的偏移量；若startContainer是文本节点，注释节点，CDATA节点，那么startOffset就是范围起点之前跳过的字符数量，否则就是范围中第一个子节点的索引</td>
+</tr>
+<tr>
+<td style="text-align:left">endContainer</td>
+<td style="text-align:left">包含范围终点的节点（选区中最后一个节点的父节点）</td>
+</tr>
+<tr>
+<td style="text-align:left">endOffset</td>
+<td style="text-align:left">范围在endContainer中终点的偏移量，与startOffset规则相同</td>
+</tr>
+<tr>
+<td style="text-align:left">commonAncestorContainer</td>
+<td style="text-align:left">startContainer和endContainer共同祖先节点在文档树位置最深的那个</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>使用DOM范围实现简单的选择</strong>，selectNode()和selectNodeContents方法，这两个方法都接受一个参数，即一个DOM节点，然后用该节点的信息来填充范围；前者选择整个节点，后者选择它的子节点；调用selectNode时，startContainer，endContainer，commonAncestorContainer都是传入的父节点，也就是document.body，startOffset等于给定节点在其父节点的childNodes集合中的索引，endOffset=startOffset+1，因为只选了一个节点；调用selectNodeContainer时，startContainer，endContainer，commonAncestorContainer都是传入的节点，也就是<p>元素，startOffset始终等于0，因为范围从给定节点的第一个子节点开始，endOffset等于子节点数量；P333还有一些更精细地控制方法</p></li>
+<li>用DOM范围实现复杂选择，使用setStart()和setEnd()方法创建复杂的范围；这两个方法都接受两个参数：一个参照节点和一个偏移量值；对前者来说，参照节点会变成startContainer，而偏移量值会变成startOffset；对后者来说，参照节点会变成endContainer，而偏移量值会变成endOffset；P334</li>
+<li>操作DOM范围中的内容，deleteContents()和extraContents()；后者会返回范围的文档片段，利用该值可以将内容插入到其他地方；也可以采用cloneContents()，返回范围中节点的副本</li>
+<li>插入DOM范围中的内容，insertNode()</li>
+<li>折叠DOM范围，collapse()方法，接受一个参数，布尔值，表示要折叠到范围的哪一端，true是起点</li>
+<li>比较DOM范围，compareBoundaryPoints()方法，接受两个参数：表示比较方法的常量值和要比较的范围</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">常量值</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Range.START_TO_START(0)</td>
+<td style="text-align:left">比较第一个范围和第二个范围的起点</td>
+</tr>
+<tr>
+<td style="text-align:left">Range.START_TO_END(1)</td>
+<td style="text-align:left">比较第一个范围的起点和第二个范围的终点</td>
+</tr>
+<tr>
+<td style="text-align:left">Range.END_TO_END(2)</td>
+<td style="text-align:left">比较第一个范围和第二个范围的终点</td>
+</tr>
+<tr>
+<td style="text-align:left">Range.END_TO_START(3)</td>
+<td style="text-align:left">比较第一个范围的终点和第二个范围的起点</td>
+</tr>
+</tbody>
+</table>
+<p>若第一个范围的点位于第二个范围中的点前，返回-1；相等，返回0；反之，返回1</p>
+<ul>
+<li>复制DOM范围，cloneRange()方法</li>
+<li>清理DOM范围，detach()方法，将范围从文档中分离，然后解除对范围的引用<code>range.detach(); range = null;</code></li>
+</ul>
+<h4 id="IE8及更早版本中的范围"><a href="#IE8及更早版本中的范围" class="headerlink" title="IE8及更早版本中的范围"></a>IE8及更早版本中的范围</h4><p>&#160; &#160; &#160;&#160;IE8及早期版本支持一种类似的概念，即文本范围。。。先当不存在吧</p>
 
       
     </div>
@@ -1320,7 +1577,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十章-DOM"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x5341;&#x7AE0;-DOM" class="headerlink" title="&#x7B2C;&#x5341;&#x7AE0; DOM"></a>&#x7B2C;&#x5341;&#x7AE0; DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#节点层次"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x8282;&#x70B9;&#x5C42;&#x6B21;" class="headerlink" title="&#x8282;&#x70B9;&#x5C42;&#x6B21;"></a>&#x8282;&#x70B9;&#x5C42;&#x6B21;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node类型"><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#Node&#x7C7B;&#x578B;" class="headerlink" title="Node&#x7C7B;&#x578B;"></a>Node&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Document类型"><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#Document&#x7C7B;&#x578B;" class="headerlink" title="Document&#x7C7B;&#x578B;"></a>Document&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Element类型"><span class="nav-number">2.1.3.</span> <span class="nav-text"><a href="#Element&#x7C7B;&#x578B;" class="headerlink" title="Element&#x7C7B;&#x578B;"></a>Element&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Text类型"><span class="nav-number">2.1.4.</span> <span class="nav-text"><a href="#Text&#x7C7B;&#x578B;" class="headerlink" title="Text&#x7C7B;&#x578B;"></a>Text&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Comment类型"><span class="nav-number">2.1.5.</span> <span class="nav-text"><a href="#Comment&#x7C7B;&#x578B;" class="headerlink" title="Comment&#x7C7B;&#x578B;"></a>Comment&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CDATASection类型"><span class="nav-number">2.1.6.</span> <span class="nav-text"><a href="#CDATASection&#x7C7B;&#x578B;" class="headerlink" title="CDATASection&#x7C7B;&#x578B;"></a>CDATASection&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DocumentType类型"><span class="nav-number">2.1.7.</span> <span class="nav-text"><a href="#DocumentType&#x7C7B;&#x578B;" class="headerlink" title="DocumentType&#x7C7B;&#x578B;"></a>DocumentType&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DocumentFragment类型"><span class="nav-number">2.1.8.</span> <span class="nav-text"><a href="#DocumentFragment&#x7C7B;&#x578B;" class="headerlink" title="DocumentFragment&#x7C7B;&#x578B;"></a>DocumentFragment&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Attr类型"><span class="nav-number">2.1.9.</span> <span class="nav-text"><a href="#Attr&#x7C7B;&#x578B;" class="headerlink" title="Attr&#x7C7B;&#x578B;"></a>Attr&#x7C7B;&#x578B;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM操作技术"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#DOM&#x64CD;&#x4F5C;&#x6280;&#x672F;" class="headerlink" title="DOM&#x64CD;&#x4F5C;&#x6280;&#x672F;"></a>DOM&#x64CD;&#x4F5C;&#x6280;&#x672F;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#动态脚本"><span class="nav-number">2.2.1.</span> <span class="nav-text"><a href="#&#x52A8;&#x6001;&#x811A;&#x672C;" class="headerlink" title="&#x52A8;&#x6001;&#x811A;&#x672C;"></a>&#x52A8;&#x6001;&#x811A;&#x672C;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态样式"><span class="nav-number">2.2.2.</span> <span class="nav-text"><a href="#&#x52A8;&#x6001;&#x6837;&#x5F0F;" class="headerlink" title="&#x52A8;&#x6001;&#x6837;&#x5F0F;"></a>&#x52A8;&#x6001;&#x6837;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作表格"><span class="nav-number">2.2.3.</span> <span class="nav-text"><a href="#&#x64CD;&#x4F5C;&#x8868;&#x683C;" class="headerlink" title="&#x64CD;&#x4F5C;&#x8868;&#x683C;"></a>&#x64CD;&#x4F5C;&#x8868;&#x683C;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用NodeList"><span class="nav-number">2.2.4.</span> <span class="nav-text"><a href="#&#x4F7F;&#x7528;NodeList" class="headerlink" title="&#x4F7F;&#x7528;NodeList"></a>&#x4F7F;&#x7528;NodeList</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十一章-DOM扩展"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7B2C;&#x5341;&#x4E00;&#x7AE0;-DOM&#x6269;&#x5C55;" class="headerlink" title="&#x7B2C;&#x5341;&#x4E00;&#x7AE0; DOM&#x6269;&#x5C55;"></a>&#x7B2C;&#x5341;&#x4E00;&#x7AE0; DOM&#x6269;&#x5C55;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#选择符API"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#&#x9009;&#x62E9;&#x7B26;API" class="headerlink" title="&#x9009;&#x62E9;&#x7B26;API"></a>&#x9009;&#x62E9;&#x7B26;API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#querySelector-方法"><span class="nav-number">3.1.1.</span> <span class="nav-text"><a href="#querySelector-&#x65B9;&#x6CD5;" class="headerlink" title="querySelector()&#x65B9;&#x6CD5;"></a>querySelector()&#x65B9;&#x6CD5;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#querySelectorAll-方法"><span class="nav-number">3.1.2.</span> <span class="nav-text"><a href="#querySelectorAll-&#x65B9;&#x6CD5;" class="headerlink" title="querySelectorAll()&#x65B9;&#x6CD5;"></a>querySelectorAll()&#x65B9;&#x6CD5;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#matchesSelector-方法"><span class="nav-number">3.1.3.</span> <span class="nav-text"><a href="#matchesSelector-&#x65B9;&#x6CD5;" class="headerlink" title="matchesSelector()&#x65B9;&#x6CD5;"></a>matchesSelector()&#x65B9;&#x6CD5;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元素遍历"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#&#x5143;&#x7D20;&#x904D;&#x5386;" class="headerlink" title="&#x5143;&#x7D20;&#x904D;&#x5386;"></a>&#x5143;&#x7D20;&#x904D;&#x5386;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML5"><span class="nav-number">3.3.</span> <span class="nav-text"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与类相关的扩充"><span class="nav-number">3.3.1.</span> <span class="nav-text"><a href="#&#x4E0E;&#x7C7B;&#x76F8;&#x5173;&#x7684;&#x6269;&#x5145;" class="headerlink" title="&#x4E0E;&#x7C7B;&#x76F8;&#x5173;&#x7684;&#x6269;&#x5145;"></a>&#x4E0E;&#x7C7B;&#x76F8;&#x5173;&#x7684;&#x6269;&#x5145;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#焦点管理"><span class="nav-number">3.3.2.</span> <span class="nav-text"><a href="#&#x7126;&#x70B9;&#x7BA1;&#x7406;" class="headerlink" title="&#x7126;&#x70B9;&#x7BA1;&#x7406;"></a>&#x7126;&#x70B9;&#x7BA1;&#x7406;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTMLDocument的变化"><span class="nav-number">3.3.3.</span> <span class="nav-text"><a href="#HTMLDocument&#x7684;&#x53D8;&#x5316;" class="headerlink" title="HTMLDocument&#x7684;&#x53D8;&#x5316;"></a>HTMLDocument&#x7684;&#x53D8;&#x5316;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符集属性"><span class="nav-number">3.3.4.</span> <span class="nav-text"><a href="#&#x5B57;&#x7B26;&#x96C6;&#x5C5E;&#x6027;" class="headerlink" title="&#x5B57;&#x7B26;&#x96C6;&#x5C5E;&#x6027;"></a>&#x5B57;&#x7B26;&#x96C6;&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义数据属性"><span class="nav-number">3.3.5.</span> <span class="nav-text"><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x5C5E;&#x6027;" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x5C5E;&#x6027;"></a>&#x81EA;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入标记"><span class="nav-number">3.3.6.</span> <span class="nav-text"><a href="#&#x63D2;&#x5165;&#x6807;&#x8BB0;" class="headerlink" title="&#x63D2;&#x5165;&#x6807;&#x8BB0;"></a>&#x63D2;&#x5165;&#x6807;&#x8BB0;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scrollIntoView-方法"><span class="nav-number">3.3.7.</span> <span class="nav-text"><a href="#scrollIntoView-&#x65B9;&#x6CD5;" class="headerlink" title="scrollIntoView()&#x65B9;&#x6CD5;"></a>scrollIntoView()&#x65B9;&#x6CD5;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#专有扩展"><span class="nav-number">3.4.</span> <span class="nav-text"><a href="#&#x4E13;&#x6709;&#x6269;&#x5C55;" class="headerlink" title="&#x4E13;&#x6709;&#x6269;&#x5C55;"></a>&#x4E13;&#x6709;&#x6269;&#x5C55;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文档模式"><span class="nav-number">3.4.1.</span> <span class="nav-text"><a href="#&#x6587;&#x6863;&#x6A21;&#x5F0F;" class="headerlink" title="&#x6587;&#x6863;&#x6A21;&#x5F0F;"></a>&#x6587;&#x6863;&#x6A21;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#children模式"><span class="nav-number">3.4.2.</span> <span class="nav-text"><a href="#children&#x6A21;&#x5F0F;" class="headerlink" title="children&#x6A21;&#x5F0F;"></a>children&#x6A21;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#contains-方法"><span class="nav-number">3.4.3.</span> <span class="nav-text"><a href="#contains-&#x65B9;&#x6CD5;" class="headerlink" title="contains()&#x65B9;&#x6CD5;"></a>contains()&#x65B9;&#x6CD5;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入文本"><span class="nav-number">3.4.4.</span> <span class="nav-text"><a href="#&#x63D2;&#x5165;&#x6587;&#x672C;" class="headerlink" title="&#x63D2;&#x5165;&#x6587;&#x672C;"></a>&#x63D2;&#x5165;&#x6587;&#x672C;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#滚动"><span class="nav-number">3.4.5.</span> <span class="nav-text"><a href="#&#x6EDA;&#x52A8;" class="headerlink" title="&#x6EDA;&#x52A8;"></a>&#x6EDA;&#x52A8;</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十二章-DOM2和DOM3"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7B2C;&#x5341;&#x4E8C;&#x7AE0;-DOM2&#x548C;DOM3" class="headerlink" title="&#x7B2C;&#x5341;&#x4E8C;&#x7AE0; DOM2&#x548C;DOM3"></a>&#x7B2C;&#x5341;&#x4E8C;&#x7AE0; DOM2&#x548C;DOM3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM变化"><span class="nav-number">4.1.</span> <span class="nav-text"><a href="#DOM&#x53D8;&#x5316;" class="headerlink" title="DOM&#x53D8;&#x5316;"></a>DOM&#x53D8;&#x5316;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#针对XML命名空间的变化"><span class="nav-number">4.1.1.</span> <span class="nav-text"><a href="#&#x9488;&#x5BF9;XML&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x7684;&#x53D8;&#x5316;" class="headerlink" title="&#x9488;&#x5BF9;XML&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x7684;&#x53D8;&#x5316;"></a>&#x9488;&#x5BF9;XML&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x7684;&#x53D8;&#x5316;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他方面的变化"><span class="nav-number">4.1.2.</span> <span class="nav-text"><a href="#&#x5176;&#x4ED6;&#x65B9;&#x9762;&#x7684;&#x53D8;&#x5316;" class="headerlink" title="&#x5176;&#x4ED6;&#x65B9;&#x9762;&#x7684;&#x53D8;&#x5316;"></a>&#x5176;&#x4ED6;&#x65B9;&#x9762;&#x7684;&#x53D8;&#x5316;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#样式"><span class="nav-number">4.2.</span> <span class="nav-text"><a href="#&#x6837;&#x5F0F;" class="headerlink" title="&#x6837;&#x5F0F;"></a>&#x6837;&#x5F0F;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#访问元素的样式"><span class="nav-number">4.2.1.</span> <span class="nav-text"><a href="#&#x8BBF;&#x95EE;&#x5143;&#x7D20;&#x7684;&#x6837;&#x5F0F;" class="headerlink" title="&#x8BBF;&#x95EE;&#x5143;&#x7D20;&#x7684;&#x6837;&#x5F0F;"></a>&#x8BBF;&#x95EE;&#x5143;&#x7D20;&#x7684;&#x6837;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作样式表"><span class="nav-number">4.2.2.</span> <span class="nav-text"><a href="#&#x64CD;&#x4F5C;&#x6837;&#x5F0F;&#x8868;" class="headerlink" title="&#x64CD;&#x4F5C;&#x6837;&#x5F0F;&#x8868;"></a>&#x64CD;&#x4F5C;&#x6837;&#x5F0F;&#x8868;</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十章-DOM"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x5341;&#x7AE0;-DOM" class="headerlink" title="&#x7B2C;&#x5341;&#x7AE0; DOM"></a>&#x7B2C;&#x5341;&#x7AE0; DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#节点层次"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x8282;&#x70B9;&#x5C42;&#x6B21;" class="headerlink" title="&#x8282;&#x70B9;&#x5C42;&#x6B21;"></a>&#x8282;&#x70B9;&#x5C42;&#x6B21;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node类型"><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#Node&#x7C7B;&#x578B;" class="headerlink" title="Node&#x7C7B;&#x578B;"></a>Node&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Document类型"><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#Document&#x7C7B;&#x578B;" class="headerlink" title="Document&#x7C7B;&#x578B;"></a>Document&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Element类型"><span class="nav-number">2.1.3.</span> <span class="nav-text"><a href="#Element&#x7C7B;&#x578B;" class="headerlink" title="Element&#x7C7B;&#x578B;"></a>Element&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Text类型"><span class="nav-number">2.1.4.</span> <span class="nav-text"><a href="#Text&#x7C7B;&#x578B;" class="headerlink" title="Text&#x7C7B;&#x578B;"></a>Text&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Comment类型"><span class="nav-number">2.1.5.</span> <span class="nav-text"><a href="#Comment&#x7C7B;&#x578B;" class="headerlink" title="Comment&#x7C7B;&#x578B;"></a>Comment&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CDATASection类型"><span class="nav-number">2.1.6.</span> <span class="nav-text"><a href="#CDATASection&#x7C7B;&#x578B;" class="headerlink" title="CDATASection&#x7C7B;&#x578B;"></a>CDATASection&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DocumentType类型"><span class="nav-number">2.1.7.</span> <span class="nav-text"><a href="#DocumentType&#x7C7B;&#x578B;" class="headerlink" title="DocumentType&#x7C7B;&#x578B;"></a>DocumentType&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DocumentFragment类型"><span class="nav-number">2.1.8.</span> <span class="nav-text"><a href="#DocumentFragment&#x7C7B;&#x578B;" class="headerlink" title="DocumentFragment&#x7C7B;&#x578B;"></a>DocumentFragment&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Attr类型"><span class="nav-number">2.1.9.</span> <span class="nav-text"><a href="#Attr&#x7C7B;&#x578B;" class="headerlink" title="Attr&#x7C7B;&#x578B;"></a>Attr&#x7C7B;&#x578B;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM操作技术"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#DOM&#x64CD;&#x4F5C;&#x6280;&#x672F;" class="headerlink" title="DOM&#x64CD;&#x4F5C;&#x6280;&#x672F;"></a>DOM&#x64CD;&#x4F5C;&#x6280;&#x672F;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#动态脚本"><span class="nav-number">2.2.1.</span> <span class="nav-text"><a href="#&#x52A8;&#x6001;&#x811A;&#x672C;" class="headerlink" title="&#x52A8;&#x6001;&#x811A;&#x672C;"></a>&#x52A8;&#x6001;&#x811A;&#x672C;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态样式"><span class="nav-number">2.2.2.</span> <span class="nav-text"><a href="#&#x52A8;&#x6001;&#x6837;&#x5F0F;" class="headerlink" title="&#x52A8;&#x6001;&#x6837;&#x5F0F;"></a>&#x52A8;&#x6001;&#x6837;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作表格"><span class="nav-number">2.2.3.</span> <span class="nav-text"><a href="#&#x64CD;&#x4F5C;&#x8868;&#x683C;" class="headerlink" title="&#x64CD;&#x4F5C;&#x8868;&#x683C;"></a>&#x64CD;&#x4F5C;&#x8868;&#x683C;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用NodeList"><span class="nav-number">2.2.4.</span> <span class="nav-text"><a href="#&#x4F7F;&#x7528;NodeList" class="headerlink" title="&#x4F7F;&#x7528;NodeList"></a>&#x4F7F;&#x7528;NodeList</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十一章-DOM扩展"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7B2C;&#x5341;&#x4E00;&#x7AE0;-DOM&#x6269;&#x5C55;" class="headerlink" title="&#x7B2C;&#x5341;&#x4E00;&#x7AE0; DOM&#x6269;&#x5C55;"></a>&#x7B2C;&#x5341;&#x4E00;&#x7AE0; DOM&#x6269;&#x5C55;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#选择符API"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#&#x9009;&#x62E9;&#x7B26;API" class="headerlink" title="&#x9009;&#x62E9;&#x7B26;API"></a>&#x9009;&#x62E9;&#x7B26;API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#querySelector-方法"><span class="nav-number">3.1.1.</span> <span class="nav-text"><a href="#querySelector-&#x65B9;&#x6CD5;" class="headerlink" title="querySelector()&#x65B9;&#x6CD5;"></a>querySelector()&#x65B9;&#x6CD5;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#querySelectorAll-方法"><span class="nav-number">3.1.2.</span> <span class="nav-text"><a href="#querySelectorAll-&#x65B9;&#x6CD5;" class="headerlink" title="querySelectorAll()&#x65B9;&#x6CD5;"></a>querySelectorAll()&#x65B9;&#x6CD5;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#matchesSelector-方法"><span class="nav-number">3.1.3.</span> <span class="nav-text"><a href="#matchesSelector-&#x65B9;&#x6CD5;" class="headerlink" title="matchesSelector()&#x65B9;&#x6CD5;"></a>matchesSelector()&#x65B9;&#x6CD5;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元素遍历"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#&#x5143;&#x7D20;&#x904D;&#x5386;" class="headerlink" title="&#x5143;&#x7D20;&#x904D;&#x5386;"></a>&#x5143;&#x7D20;&#x904D;&#x5386;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML5"><span class="nav-number">3.3.</span> <span class="nav-text"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与类相关的扩充"><span class="nav-number">3.3.1.</span> <span class="nav-text"><a href="#&#x4E0E;&#x7C7B;&#x76F8;&#x5173;&#x7684;&#x6269;&#x5145;" class="headerlink" title="&#x4E0E;&#x7C7B;&#x76F8;&#x5173;&#x7684;&#x6269;&#x5145;"></a>&#x4E0E;&#x7C7B;&#x76F8;&#x5173;&#x7684;&#x6269;&#x5145;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#焦点管理"><span class="nav-number">3.3.2.</span> <span class="nav-text"><a href="#&#x7126;&#x70B9;&#x7BA1;&#x7406;" class="headerlink" title="&#x7126;&#x70B9;&#x7BA1;&#x7406;"></a>&#x7126;&#x70B9;&#x7BA1;&#x7406;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTMLDocument的变化"><span class="nav-number">3.3.3.</span> <span class="nav-text"><a href="#HTMLDocument&#x7684;&#x53D8;&#x5316;" class="headerlink" title="HTMLDocument&#x7684;&#x53D8;&#x5316;"></a>HTMLDocument&#x7684;&#x53D8;&#x5316;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符集属性"><span class="nav-number">3.3.4.</span> <span class="nav-text"><a href="#&#x5B57;&#x7B26;&#x96C6;&#x5C5E;&#x6027;" class="headerlink" title="&#x5B57;&#x7B26;&#x96C6;&#x5C5E;&#x6027;"></a>&#x5B57;&#x7B26;&#x96C6;&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义数据属性"><span class="nav-number">3.3.5.</span> <span class="nav-text"><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x5C5E;&#x6027;" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x5C5E;&#x6027;"></a>&#x81EA;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入标记"><span class="nav-number">3.3.6.</span> <span class="nav-text"><a href="#&#x63D2;&#x5165;&#x6807;&#x8BB0;" class="headerlink" title="&#x63D2;&#x5165;&#x6807;&#x8BB0;"></a>&#x63D2;&#x5165;&#x6807;&#x8BB0;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scrollIntoView-方法"><span class="nav-number">3.3.7.</span> <span class="nav-text"><a href="#scrollIntoView-&#x65B9;&#x6CD5;" class="headerlink" title="scrollIntoView()&#x65B9;&#x6CD5;"></a>scrollIntoView()&#x65B9;&#x6CD5;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#专有扩展"><span class="nav-number">3.4.</span> <span class="nav-text"><a href="#&#x4E13;&#x6709;&#x6269;&#x5C55;" class="headerlink" title="&#x4E13;&#x6709;&#x6269;&#x5C55;"></a>&#x4E13;&#x6709;&#x6269;&#x5C55;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文档模式"><span class="nav-number">3.4.1.</span> <span class="nav-text"><a href="#&#x6587;&#x6863;&#x6A21;&#x5F0F;" class="headerlink" title="&#x6587;&#x6863;&#x6A21;&#x5F0F;"></a>&#x6587;&#x6863;&#x6A21;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#children模式"><span class="nav-number">3.4.2.</span> <span class="nav-text"><a href="#children&#x6A21;&#x5F0F;" class="headerlink" title="children&#x6A21;&#x5F0F;"></a>children&#x6A21;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#contains-方法"><span class="nav-number">3.4.3.</span> <span class="nav-text"><a href="#contains-&#x65B9;&#x6CD5;" class="headerlink" title="contains()&#x65B9;&#x6CD5;"></a>contains()&#x65B9;&#x6CD5;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入文本"><span class="nav-number">3.4.4.</span> <span class="nav-text"><a href="#&#x63D2;&#x5165;&#x6587;&#x672C;" class="headerlink" title="&#x63D2;&#x5165;&#x6587;&#x672C;"></a>&#x63D2;&#x5165;&#x6587;&#x672C;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#滚动"><span class="nav-number">3.4.5.</span> <span class="nav-text"><a href="#&#x6EDA;&#x52A8;" class="headerlink" title="&#x6EDA;&#x52A8;"></a>&#x6EDA;&#x52A8;</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十二章-DOM2和DOM3"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7B2C;&#x5341;&#x4E8C;&#x7AE0;-DOM2&#x548C;DOM3" class="headerlink" title="&#x7B2C;&#x5341;&#x4E8C;&#x7AE0; DOM2&#x548C;DOM3"></a>&#x7B2C;&#x5341;&#x4E8C;&#x7AE0; DOM2&#x548C;DOM3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM变化"><span class="nav-number">4.1.</span> <span class="nav-text"><a href="#DOM&#x53D8;&#x5316;" class="headerlink" title="DOM&#x53D8;&#x5316;"></a>DOM&#x53D8;&#x5316;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#针对XML命名空间的变化"><span class="nav-number">4.1.1.</span> <span class="nav-text"><a href="#&#x9488;&#x5BF9;XML&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x7684;&#x53D8;&#x5316;" class="headerlink" title="&#x9488;&#x5BF9;XML&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x7684;&#x53D8;&#x5316;"></a>&#x9488;&#x5BF9;XML&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x7684;&#x53D8;&#x5316;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他方面的变化"><span class="nav-number">4.1.2.</span> <span class="nav-text"><a href="#&#x5176;&#x4ED6;&#x65B9;&#x9762;&#x7684;&#x53D8;&#x5316;" class="headerlink" title="&#x5176;&#x4ED6;&#x65B9;&#x9762;&#x7684;&#x53D8;&#x5316;"></a>&#x5176;&#x4ED6;&#x65B9;&#x9762;&#x7684;&#x53D8;&#x5316;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#样式"><span class="nav-number">4.2.</span> <span class="nav-text"><a href="#&#x6837;&#x5F0F;" class="headerlink" title="&#x6837;&#x5F0F;"></a>&#x6837;&#x5F0F;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#访问元素的样式"><span class="nav-number">4.2.1.</span> <span class="nav-text"><a href="#&#x8BBF;&#x95EE;&#x5143;&#x7D20;&#x7684;&#x6837;&#x5F0F;" class="headerlink" title="&#x8BBF;&#x95EE;&#x5143;&#x7D20;&#x7684;&#x6837;&#x5F0F;"></a>&#x8BBF;&#x95EE;&#x5143;&#x7D20;&#x7684;&#x6837;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作样式表"><span class="nav-number">4.2.2.</span> <span class="nav-text"><a href="#&#x64CD;&#x4F5C;&#x6837;&#x5F0F;&#x8868;" class="headerlink" title="&#x64CD;&#x4F5C;&#x6837;&#x5F0F;&#x8868;"></a>&#x64CD;&#x4F5C;&#x6837;&#x5F0F;&#x8868;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元素大小"><span class="nav-number">4.2.3.</span> <span class="nav-text"><a href="#&#x5143;&#x7D20;&#x5927;&#x5C0F;" class="headerlink" title="&#x5143;&#x7D20;&#x5927;&#x5C0F;"></a>&#x5143;&#x7D20;&#x5927;&#x5C0F;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遍历"><span class="nav-number">4.3.</span> <span class="nav-text"><a href="#&#x904D;&#x5386;" class="headerlink" title="&#x904D;&#x5386;"></a>&#x904D;&#x5386;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NodeIterator"><span class="nav-number">4.3.1.</span> <span class="nav-text"><a href="#NodeIterator" class="headerlink" title="NodeIterator"></a>NodeIterator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TreeWalker"><span class="nav-number">4.3.2.</span> <span class="nav-text"><a href="#TreeWalker" class="headerlink" title="TreeWalker"></a>TreeWalker</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范围"><span class="nav-number">4.4.</span> <span class="nav-text"><a href="#&#x8303;&#x56F4;" class="headerlink" title="&#x8303;&#x56F4;"></a>&#x8303;&#x56F4;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM中的范围"><span class="nav-number">4.4.1.</span> <span class="nav-text"><a href="#DOM&#x4E2D;&#x7684;&#x8303;&#x56F4;" class="headerlink" title="DOM&#x4E2D;&#x7684;&#x8303;&#x56F4;"></a>DOM&#x4E2D;&#x7684;&#x8303;&#x56F4;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IE8及更早版本中的范围"><span class="nav-number">4.4.2.</span> <span class="nav-text"><a href="#IE8&#x53CA;&#x66F4;&#x65E9;&#x7248;&#x672C;&#x4E2D;&#x7684;&#x8303;&#x56F4;" class="headerlink" title="IE8&#x53CA;&#x66F4;&#x65E9;&#x7248;&#x672C;&#x4E2D;&#x7684;&#x8303;&#x56F4;"></a>IE8&#x53CA;&#x66F4;&#x65E9;&#x7248;&#x672C;&#x4E2D;&#x7684;&#x8303;&#x56F4;</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
