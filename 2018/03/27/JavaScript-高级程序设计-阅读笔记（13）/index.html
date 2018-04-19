@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;JavaScript与HTML之间的交互是通过事件实现的；事件，就是文档或浏览器窗口中发生的一些特定的交互瞬间；使用侦听器（或处理程序）来预定事件，在事件发生时执行相应的代码">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-18T14:07:05.870Z">
+<meta property="og:updated_time" content="2018-04-19T15:11:43.053Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记（13）">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;JavaScript与HTML之间的交互是通过事件实现的；事件，就是文档或浏览器窗口中发生的一些特定的交互瞬间；使用侦听器（或处理程序）来预定事件，在事件发生时执行相应的代码">
@@ -389,7 +389,107 @@
 <h4 id="DOM0级事件处理程序"><a href="#DOM0级事件处理程序" class="headerlink" title="DOM0级事件处理程序"></a>DOM0级事件处理程序</h4><p>&#160; &#160;&#160; &#160;将一个函数赋值给一个事件处理程序属性的一种传统方式；原因：简单，跨浏览器；需要获得操作对象的引用；每个元素都有自己的事件处理程序属性，通常全部小写（onclick）；DOM0级事件处理程序被认为是元素的方法，在元素作用域中运行，所以this指向当前元素；该方法添加的处理程序在冒泡阶段被处理</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var btn = document.getElementById(&quot;myBtn&quot;);</span><br><span class="line">btn.onclick = function()&#123;</span><br><span class="line">    alert(&quot;Clicked&quot;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>&#160; &#160;&#160; &#160;删除程序<code>btn.onclick = null;</code></p>
-<h4 id="DOM2级事件处理程序"><a href="#DOM2级事件处理程序" class="headerlink" title="DOM2级事件处理程序"></a>DOM2级事件处理程序</h4><p>&#160; &#160;&#160; &#160;addEventListener()和removeEventListener()被定义用于处理指定和删除时间处理程序的操作</p>
+<h4 id="DOM2级事件处理程序"><a href="#DOM2级事件处理程序" class="headerlink" title="DOM2级事件处理程序"></a>DOM2级事件处理程序</h4><p>&#160; &#160;&#160; &#160;addEventListener()和removeEventListener()被定义用于处理指定和删除时间处理程序的操作；所有DOM节点都包含这两个方法，且都接受3个参数：要处理的事件名、作为事件处理程序的函数和一个布尔值；若布尔值为true，则代表在捕获阶段调用程序，反之，则冒泡阶段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var btn = document.getElementById(&quot;myBtn&quot;);</span><br><span class="line">btn.addEventListener(&quot;click&quot;,function()&#123;</span><br><span class="line">    alert(this.id);</span><br><span class="line">&#125;,false);</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160;&#160; &#160;主要好处是可以添加多个程序，并且事件处理程序会按照添加它们的顺序触发；通过addEventListener添加的只能通过removeEventListener删除，所以，若添加的是匿名函数，则无法移除；匿名函数看似是相同但是实际不同；大多数情况下，将事件处理程序添加到冒泡阶段，可以最大限度兼容浏览器</p>
+<h4 id="IE事件处理程序"><a href="#IE事件处理程序" class="headerlink" title="IE事件处理程序"></a>IE事件处理程序</h4><p>&#160; &#160;&#160; &#160;类似DOM：attachEvent()和detachEvent()，接受两个参数：程序名称和程序函数；注意，第一个参数是”onclick”，不是DOM方法中的”click”；attachEvent在全局作用域运行，故this指向window；也可以添加多个处理程序，但是触发按添加相反顺序触发；也不能使用匿名函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    var btn = document.getElementById(&quot;myBtn&quot;);</span><br><span class="line">btn.attachEvent(&quot;onclick&quot;,function()&#123;</span><br><span class="line">    alert(this.id);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="跨浏览器的事件处理程序"><a href="#跨浏览器的事件处理程序" class="headerlink" title="跨浏览器的事件处理程序"></a>跨浏览器的事件处理程序</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">    //跨浏览器事件处理程序</span><br><span class="line">    var EventUtil = &#123;       </span><br><span class="line">        addHandler:function(element,type,handler)&#123;</span><br><span class="line">            if(element.addEventListener)&#123;</span><br><span class="line">                element.addEventListener(type,handler,false);   //DOM2级</span><br><span class="line">            &#125;else if(element.attachEvent)&#123;</span><br><span class="line">                element.attachEvent(&quot;on&quot; + type,handler); </span><br><span class="line">    //兼容IE8及更早版本，加上“on”</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                element[&quot;on&quot; + type] = handler;                 //DOM0级</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        removeHandler:function(element,type,handler)&#123;</span><br><span class="line">            if(element.removeEventListener)&#123;</span><br><span class="line">                element.removeEventListener(type,handler,false);//DOM2级</span><br><span class="line">            &#125;else if(element.detachEvent)&#123;</span><br><span class="line">                element.detachEvent(&quot;on&quot; + type,handler)        </span><br><span class="line">    //兼容IE8及更早版本，加上“on”</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                element[&quot;on&quot; + type] = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">=================================================</span><br><span class="line">    //使用方法</span><br><span class="line">    var btn = document.getElementById(&quot;myBtn&quot;);</span><br><span class="line">    var handler = function()&#123;</span><br><span class="line">        alert(&quot;hello&quot;);</span><br><span class="line">    &#125;;</span><br><span class="line">    EventUtil.addHandler(btn,&quot;click&quot;,handler);</span><br><span class="line">    //省略了其他代码</span><br><span class="line">    EventUtil.removeHandler(btn,&quot;click&quot;,handler);</span><br></pre></td></tr></table></figure>
+<h3 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h3><p>&#160; &#160;&#160; &#160;触发DOM上的一个事件时，会产生一个事件对象event，这个对象上包含着所有与事件有关的信息</p>
+<h4 id="DOM中的事件对象"><a href="#DOM中的事件对象" class="headerlink" title="DOM中的事件对象"></a>DOM中的事件对象</h4><p>&#160; &#160;&#160; &#160;兼容DOM的浏览器会将一个event对象传入到事件处理程序中；event对象包含与创建它的特定事件有关的属性方法；触发的事件类型不一样，可用的属性方法也不一样</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性/方法</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">读/写</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">bubbles</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">只读</td>
+<td style="text-align:left">是否冒泡</td>
+</tr>
+<tr>
+<td style="text-align:left">cancelable</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">只读</td>
+<td style="text-align:left">是否可取消事件的默认行为</td>
+</tr>
+<tr>
+<td style="text-align:left">currentTarget</td>
+<td style="text-align:left">Element</td>
+<td style="text-align:left">只读</td>
+<td style="text-align:left">当前处理事件的元素</td>
+</tr>
+<tr>
+<td style="text-align:left">defaultPrevented</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">只读</td>
+<td style="text-align:left">true表示已调用preventDefault方法(DOM3事件新增)</td>
+</tr>
+<tr>
+<td style="text-align:left">detail</td>
+<td style="text-align:left">Integer</td>
+<td style="text-align:left">只读</td>
+<td style="text-align:left">与事件相关细节信息</td>
+</tr>
+<tr>
+<td style="text-align:left">eventPhase</td>
+<td style="text-align:left">Integer</td>
+<td style="text-align:left">只读</td>
+<td style="text-align:left">1捕获阶段，2处于目标，3冒泡阶段</td>
+</tr>
+<tr>
+<td style="text-align:left">preventDefault</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">只读</td>
+<td style="text-align:left">取消事件默认行为，cancelable为true时可使用</td>
+</tr>
+<tr>
+<td style="text-align:left">stopImmediatePropagation</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">只读</td>
+<td style="text-align:left">取消事件的进一步捕获或冒泡，同时阻止任何事件处理程序被调用(DOM3新增)</td>
+</tr>
+<tr>
+<td style="text-align:left">stopPropagation</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">只读</td>
+<td style="text-align:left">取消事件进一步捕获或冒泡，若bubbles为true，可使用</td>
+</tr>
+<tr>
+<td style="text-align:left">target</td>
+<td style="text-align:left">Element</td>
+<td style="text-align:left">只读</td>
+<td style="text-align:left">事件的目标</td>
+</tr>
+<tr>
+<td style="text-align:left">trusted</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">只读</td>
+<td style="text-align:left">true表示事件由浏览器生成，false表示事件由js生成（DOM3新增）</td>
+</tr>
+<tr>
+<td style="text-align:left">type</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">只读</td>
+<td style="text-align:left">被触发事件类型</td>
+</tr>
+<tr>
+<td style="text-align:left">view</td>
+<td style="text-align:left">AbstractView</td>
+<td style="text-align:left">只读</td>
+<td style="text-align:left">与事件关联的抽象视图，等同于发生事件的window对象</td>
+</tr>
+</tbody>
+</table>
+<p>&#160; &#160;&#160; &#160;在事件处理程序内部，对象this始终等于currentTarget，target只包含事件实际目标；若将事件处理程序指定给了目标元素，则this、currentTarget和target包含相同的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var btn = document.getElementById(&quot;myBtn&quot;);</span><br><span class="line">btn.onclick = function(event)&#123;</span><br><span class="line">    alert(event.currentTarget === this);        //true</span><br><span class="line">    alert(event.target === this);               //true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160;&#160; &#160;</p>
 
       
     </div>
@@ -588,7 +688,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十三章-事件"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x5341;&#x4E09;&#x7AE0;-&#x4E8B;&#x4EF6;" class="headerlink" title="&#x7B2C;&#x5341;&#x4E09;&#x7AE0; &#x4E8B;&#x4EF6;"></a>&#x7B2C;&#x5341;&#x4E09;&#x7AE0; &#x4E8B;&#x4EF6;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件流"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x4E8B;&#x4EF6;&#x6D41;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x6D41;"></a>&#x4E8B;&#x4EF6;&#x6D41;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事件冒泡"><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#&#x4E8B;&#x4EF6;&#x5192;&#x6CE1;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x5192;&#x6CE1;"></a>&#x4E8B;&#x4EF6;&#x5192;&#x6CE1;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件捕获"><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#&#x4E8B;&#x4EF6;&#x6355;&#x83B7;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x6355;&#x83B7;"></a>&#x4E8B;&#x4EF6;&#x6355;&#x83B7;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM事件流"><span class="nav-number">2.1.3.</span> <span class="nav-text"><a href="#DOM&#x4E8B;&#x4EF6;&#x6D41;" class="headerlink" title="DOM&#x4E8B;&#x4EF6;&#x6D41;"></a>DOM&#x4E8B;&#x4EF6;&#x6D41;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件处理程序"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;"></a>&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML事件处理程序"><span class="nav-number">2.2.1.</span> <span class="nav-text"><a href="#HTML&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;" class="headerlink" title="HTML&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;"></a>HTML&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM0级事件处理程序"><span class="nav-number">2.2.2.</span> <span class="nav-text"><a href="#DOM0&#x7EA7;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;" class="headerlink" title="DOM0&#x7EA7;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;"></a>DOM0&#x7EA7;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM2级事件处理程序"><span class="nav-number">2.2.3.</span> <span class="nav-text"><a href="#DOM2&#x7EA7;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;" class="headerlink" title="DOM2&#x7EA7;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;"></a>DOM2&#x7EA7;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十三章-事件"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x5341;&#x4E09;&#x7AE0;-&#x4E8B;&#x4EF6;" class="headerlink" title="&#x7B2C;&#x5341;&#x4E09;&#x7AE0; &#x4E8B;&#x4EF6;"></a>&#x7B2C;&#x5341;&#x4E09;&#x7AE0; &#x4E8B;&#x4EF6;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件流"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x4E8B;&#x4EF6;&#x6D41;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x6D41;"></a>&#x4E8B;&#x4EF6;&#x6D41;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事件冒泡"><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#&#x4E8B;&#x4EF6;&#x5192;&#x6CE1;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x5192;&#x6CE1;"></a>&#x4E8B;&#x4EF6;&#x5192;&#x6CE1;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件捕获"><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#&#x4E8B;&#x4EF6;&#x6355;&#x83B7;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x6355;&#x83B7;"></a>&#x4E8B;&#x4EF6;&#x6355;&#x83B7;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM事件流"><span class="nav-number">2.1.3.</span> <span class="nav-text"><a href="#DOM&#x4E8B;&#x4EF6;&#x6D41;" class="headerlink" title="DOM&#x4E8B;&#x4EF6;&#x6D41;"></a>DOM&#x4E8B;&#x4EF6;&#x6D41;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件处理程序"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;"></a>&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML事件处理程序"><span class="nav-number">2.2.1.</span> <span class="nav-text"><a href="#HTML&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;" class="headerlink" title="HTML&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;"></a>HTML&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM0级事件处理程序"><span class="nav-number">2.2.2.</span> <span class="nav-text"><a href="#DOM0&#x7EA7;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;" class="headerlink" title="DOM0&#x7EA7;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;"></a>DOM0&#x7EA7;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM2级事件处理程序"><span class="nav-number">2.2.3.</span> <span class="nav-text"><a href="#DOM2&#x7EA7;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;" class="headerlink" title="DOM2&#x7EA7;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;"></a>DOM2&#x7EA7;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IE事件处理程序"><span class="nav-number">2.2.4.</span> <span class="nav-text"><a href="#IE&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;" class="headerlink" title="IE&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;"></a>IE&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跨浏览器的事件处理程序"><span class="nav-number">2.2.5.</span> <span class="nav-text"><a href="#&#x8DE8;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;" class="headerlink" title="&#x8DE8;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;"></a>&#x8DE8;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件对象"><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;"></a>&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM中的事件对象"><span class="nav-number">2.3.1.</span> <span class="nav-text"><a href="#DOM&#x4E2D;&#x7684;&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;" class="headerlink" title="DOM&#x4E2D;&#x7684;&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;"></a>DOM&#x4E2D;&#x7684;&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
