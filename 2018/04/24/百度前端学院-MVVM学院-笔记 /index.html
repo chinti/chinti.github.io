@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;主要记录百度前端学院MVVM学院部分的内容，貌似学的是百度自家的开源框架san……">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-24T06:59:36.293Z">
+<meta property="og:updated_time" content="2018-04-24T12:43:15.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百度前端学院 MVVM学院 笔记">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;主要记录百度前端学院MVVM学院部分的内容，貌似学的是百度自家的开源框架san……">
@@ -372,6 +372,19 @@
 <p>以前在知乎上看到一个简易版github介绍，觉得挺有意思：</p>
 <p><a href="https://www.zhihu.com/question/20070065" target="_blank" rel="noopener">怎样使用Github</a></p>
 <hr>
+<h2 id="1-2-用webpack4-parcel快速搭建开发san-helloworld"><a href="#1-2-用webpack4-parcel快速搭建开发san-helloworld" class="headerlink" title="1.2 用webpack4/parcel快速搭建开发san helloworld"></a>1.2 用webpack4/parcel快速搭建开发san helloworld</h2><p>&#160; &#160;&#160; &#160;按照任务给的学习资料弄一个hello world</p>
+<p>资料：</p>
+<p><a href="https://github.com/baidu/san" target="_blank" rel="noopener">https://github.com/baidu/san</a>，san主页<br><a href="https://webpack.js.org" target="_blank" rel="noopener">https://webpack.js.org</a>，webpack4主页<br><a href="https://medium.com/webpack" target="_blank" rel="noopener">https://medium.com/webpack</a>，这个得用vpn<br><a href="https://parceljs.org/" target="_blank" rel="noopener">https://parceljs.org/</a>，parcel主页</p>
+<p>&#160; &#160;&#160; &#160;英文看的稍微有点吃力，先用Parcel做起来再回过头搞webpack吧；</p>
+<p><code>npm install -g parcel-bundler</code> ，安装，需要等一会别着急<br><code>npm init -y</code>，在正在使用的项目下创建<br><code>npm install san</code>，安装san；引用<code>&lt;script src=&quot;node_modules/san/dist/san.js&quot;&gt;&lt;/script&gt;</code></p>
+<p>利用CDN引用：<br>开发版本：<code>&lt;script src=&quot;https://unpkg.com/san@latest/dist/san.dev.js&quot;&gt;&lt;/script&gt;</code><br>生产版本：<code>&lt;script src=&quot;https://unpkg.com/san@latest&quot;&gt;&lt;/script&gt;</code><br>注：分为开发版本（san.dev.js）和生产版本(sam.js)，生产版本提供了有助于开发的错误提示和警告；尝试了，的确可以报错</p>
+<p>安装Babel CLI 和env preset<br><code>npm install --save-dev babel-cli babel-preset-env</code></p>
+<p>然后<code>touch .babelrc</code>，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&quot;presets&quot;: [&quot;env&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>利用npm script设置，<a href="http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html" target="_blank" rel="noopener">npm scripts使用指南</a></p>
+<p>npm允许在package.json文件里面，使用script字段定义脚本命令，所以只有配置了才能执行诸如npm run dev/build这样的命令；不过我暂时用的是parcel，好像用不到官网上的这个东西。。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;: &quot;my-san-app&quot;,</span><br><span class="line">    &quot;scripts&quot;: &#123;</span><br><span class="line">        &quot;dev&quot;: &quot;NODE_ENV=development webpack-dev-server --config webpack.config.js&quot;,</span><br><span class="line">        &quot;build&quot;: &quot;NODE_ENV=production webpack --config webpack.config.js&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意NODE_ENV<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">    &#123;</span><br><span class="line">    module: &#123;</span><br><span class="line">        loaders: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: /\.san$/,</span><br><span class="line">                loader: &apos;san-loader&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    resolve: &#123;</span><br><span class="line">        alias: &#123;</span><br><span class="line">            san: process.env.NODE_ENV === &apos;production&apos;</span><br><span class="line">                ? &apos;san/dist/san.js&apos;</span><br><span class="line">                : &apos;san/dist/san.dev.js&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -410,8 +423,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/24/百度前端学院-零基础学院-笔记/" rel="next" title="百度前端学院 零基础学院 笔记">
-                <i class="fa fa-chevron-left"></i> 百度前端学院 零基础学院 笔记
+              <a href="/2018/03/27/JavaScript-高级程序设计-阅读笔记（13）/" rel="next" title="JavaScript 高级程序设计 阅读笔记（13）">
+                <i class="fa fa-chevron-left"></i> JavaScript 高级程序设计 阅读笔记（13）
               </a>
             
           </div>
@@ -419,6 +432,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/24/百度前端学院-零基础学院-笔记/" rel="prev" title="百度前端学院 零基础学院 笔记">
+                百度前端学院 零基础学院 笔记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -570,7 +587,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-github使用并star-san"><span class="nav-number">2.</span> <span class="nav-text"><a href="#1-1-github&#x4F7F;&#x7528;&#x5E76;star-san" class="headerlink" title="1.1 github&#x4F7F;&#x7528;&#x5E76;star san"></a>1.1 github&#x4F7F;&#x7528;&#x5E76;star san</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-github使用并star-san"><span class="nav-number">2.</span> <span class="nav-text"><a href="#1-1-github&#x4F7F;&#x7528;&#x5E76;star-san" class="headerlink" title="1.1 github&#x4F7F;&#x7528;&#x5E76;star san"></a>1.1 github&#x4F7F;&#x7528;&#x5E76;star san</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-用webpack4-parcel快速搭建开发san-helloworld"><span class="nav-number">3.</span> <span class="nav-text"><a href="#1-2-&#x7528;webpack4-parcel&#x5FEB;&#x901F;&#x642D;&#x5EFA;&#x5F00;&#x53D1;san-helloworld" class="headerlink" title="1.2 &#x7528;webpack4/parcel&#x5FEB;&#x901F;&#x642D;&#x5EFA;&#x5F00;&#x53D1;san helloworld"></a>1.2 &#x7528;webpack4/parcel&#x5FEB;&#x901F;&#x642D;&#x5EFA;&#x5F00;&#x53D1;san helloworld</span></a></li></ol></div>
             
 
           </div>
