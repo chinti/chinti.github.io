@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;主要记录百度前端学院设计师学院部分的内容；设计师学院代码地址；Demo地址">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-28T12:43:32.035Z">
+<meta property="og:updated_time" content="2018-04-28T12:45:05.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百度前端学院 设计师学院 笔记">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;主要记录百度前端学院设计师学院部分的内容；设计师学院代码地址；Demo地址">
@@ -445,6 +445,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">    $(document).ready(function() &#123;</span><br><span class="line">	lottie.loadAnimation(&#123;</span><br><span class="line">		container:		$(&quot;.stage&quot;)[0],</span><br><span class="line">		renderer:		&apos;svg&apos;,</span><br><span class="line">		loop:			true,</span><br><span class="line">		autoplay:		true,</span><br><span class="line">		path:			&apos;./assets/data1.json&apos;,</span><br><span class="line">	&#125;); </span><br><span class="line">	var ani = lottie.loadAnimation(&#123;</span><br><span class="line">		container:		$(&quot;.stage&quot;)[1],</span><br><span class="line">		renderer:		&apos;svg&apos;,</span><br><span class="line">		loop:			false,</span><br><span class="line">		autoplay:		false,</span><br><span class="line">		path:			&apos;./assets/data2.json&apos;,</span><br><span class="line">	&#125;); </span><br><span class="line">	</span><br><span class="line">	$(&quot;.rectangle&quot;).mouseenter(function()&#123;</span><br><span class="line">		ani.play();</span><br><span class="line">	&#125;);</span><br><span class="line">	$(&quot;.rectangle&quot;).mouseleave(function()&#123;</span><br><span class="line">		ani.stop();</span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <ul>
 <li>本来想用mouseover和mouseout的，但是效果有点微妙。。。</li>
+<li>才发现，box-shadow可以设置三条边</li>
 </ul>
 
       
