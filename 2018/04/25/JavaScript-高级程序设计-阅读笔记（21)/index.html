@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;Ajax技术的核心是XMLHttpRequest对象，能够以异步的方式从服务器获取更多的信息，就是无需刷新页面即可从服务器取得数据">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 高级程序设计 阅读笔记（21）">
+<meta property="og:url" content="http://chinti.xyz/2018/04/25/JavaScript-高级程序设计-阅读笔记（21)/index.html">
+<meta property="og:site_name" content="ChinTi&#39;s Blog">
+<meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;Ajax技术的核心是XMLHttpRequest对象，能够以异步的方式从服务器获取更多的信息，就是无需刷新页面即可从服务器取得数据">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-10T09:42:25.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 高级程序设计 阅读笔记（21）">
+<meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;Ajax技术的核心是XMLHttpRequest对象，能够以异步的方式从服务器获取更多的信息，就是无需刷新页面即可从服务器取得数据">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://chinti.xyz/2018/04/25/JavaScript-高级程序设计-阅读笔记（21)/"/>
+
+
+
+
+
+  <title>JavaScript 高级程序设计 阅读笔记（21） | ChinTi's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ChinTi's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">欢迎来到我的个人站</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chinti.xyz/2018/04/25/JavaScript-高级程序设计-阅读笔记（21)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chinti">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChinTi's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript 高级程序设计 阅读笔记（21）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-25T18:22:31+08:00">
+                2018-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/25/JavaScript-高级程序设计-阅读笔记（21)/" class="leancloud_visitors" data-flag-title="JavaScript 高级程序设计 阅读笔记（21）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&#160; &#160;&#160; &#160;Ajax技术的核心是XMLHttpRequest对象，能够以异步的方式从服务器获取更多的信息，就是无需刷新页面即可从服务器取得数据</p>
+<a id="more"></a>
+<hr>
+<h2 id="第21章-Ajax与Comet"><a href="#第21章-Ajax与Comet" class="headerlink" title="第21章 Ajax与Comet"></a>第21章 Ajax与Comet</h2><h3 id="XMLHttpRequest对象"><a href="#XMLHttpRequest对象" class="headerlink" title="XMLHttpRequest对象"></a>XMLHttpRequest对象</h3><ul>
+<li>浏览器兼容</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">    function createXHR()&#123;</span><br><span class="line">    if(typeof XMLHttpRequest != &quot;undefined&quot;)&#123;</span><br><span class="line">        return new XMLHttpRequest;</span><br><span class="line">    &#125;else if(typeof ActiveXObject != &quot;undefined&quot;)&#123;</span><br><span class="line">        if(typeof arguments.callee.activeXString != &quot;string&quot;)&#123;</span><br><span class="line">            var versions = [&quot;MSXML2.XMLHttp.6.0&quot;,&quot;MSXML2.XMLHttp.3.0&quot;,&quot;MSXML2.XMLHttp&quot;],i,len;</span><br><span class="line">            for(i=0,len=versions.length;i &lt; len;i++)&#123;</span><br><span class="line">                try&#123;</span><br><span class="line">                    new ActiveXObject(versions[i]);</span><br><span class="line">                    arguments.callee.activeXString = versions[i];</span><br><span class="line">                    break;</span><br><span class="line">                &#125;catch(ex)&#123;</span><br><span class="line">                    //跳过</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return new ActiveXObject(arguments.callee.activeXString);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        throw new Error(&quot;No XHR Object available&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//使用</span><br><span class="line">var xhr = createXHR();</span><br></pre></td></tr></table></figure>
+<h4 id="XHR用法"><a href="#XHR用法" class="headerlink" title="XHR用法"></a>XHR用法</h4><p>&#160; &#160;&#160; &#160;第一个方法：open，接受3个参数：1，要发送的请求类型（get，post等），2，请求的URL，3，表示是否异步发送请求的布尔值；url相对于执行代码的当前页面（也可以使用绝对路径），并不会真正发送请求，而是启动一个请求以备发送<br><code>xhr.open(&quot;get&quot;,&quot;example.php&quot;,false);</code></p>
+<p>&#160; &#160;&#160; &#160;使用send()方法发送特定请求，<code>xhr.send(null);</code>；send接受一个参数：作为请求主体发送的数据，不需要则要传入null；响应的数据会被填充到XHR对象的属性</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">responseText</td>
+<td style="text-align:left">作为响应主体被返回的文本</td>
+</tr>
+<tr>
+<td style="text-align:left">responseXML</td>
+<td style="text-align:left">响应内容类型若是”text/xml”或”application/xml”，将保存包含着响应数据的XML DOM文档</td>
+</tr>
+<tr>
+<td style="text-align:left">status</td>
+<td style="text-align:left">响应的HTTP状态</td>
+</tr>
+<tr>
+<td style="text-align:left">statusText</td>
+<td style="text-align:left">HTTP状态说明</td>
+</tr>
+</tbody>
+</table>
+<p>&#160; &#160;&#160; &#160;接到响应后，首先检查status属性，一般来说，可以将HTTP状态码200,作为成功的标志，状态码304表示请求资源并没有被修改，可以直接使用浏览器中缓存的版本；检查响应</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    xhr.open(&quot;get&quot;,&quot;example.php&quot;,false);               //同步请求</span><br><span class="line">    xhr.send(null);</span><br><span class="line"></span><br><span class="line">    if((xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300) || xhr.status == 304)&#123;</span><br><span class="line">        alert(xhr.resopnseText);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">        alert(&quot;Request was unsuccessful: &quot;+xhr.status);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160;&#160; &#160;多数情况下，还是要发送异步请求，才能让JS继续执行而不必等待响应；可以检测readyState属性：0，未初始化，尚未调用open，1，启动，已调用open，未调用send，2，发送，已调用send，未收到响应，3，接收，已接收部分数据，4，完成，接收全部数据，可以在客户端使用了；只要该属性的值变化，就会触发readystatechange事件；在调用open()前，需要指定onreadystatechange事件处理程序确保浏览器兼容性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var xhr = createXHR();</span><br><span class="line">xhr.onreadystatechange = function()&#123;             //DOM0级方法，不是所有浏览器都支持DOM2级方法</span><br><span class="line">    if(xhr.readyState == 4)&#123;</span><br><span class="line">        if((xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300) || xhr.status == 304)&#123;</span><br><span class="line">            alert(xhr.resopnseText);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            alert(&quot;Request was unsuccessful: &quot;+xhr.status);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(&quot;get&quot;,&quot;example.php&quot;,true);                         //异步请求</span><br><span class="line">xhr.send(null);</span><br><span class="line"></span><br><span class="line">xhr.abort();  //停止触发事件，不建议重用xhr对象</span><br></pre></td></tr></table></figure>
+<h4 id="HTTP头部信息"><a href="#HTTP头部信息" class="headerlink" title="HTTP头部信息"></a>HTTP头部信息</h4><p>&#160; &#160;&#160; &#160;默认情况下，发送XHR请求的同时，还会发送下列头部信息；通过setRequestHeader方法设置自定义的请求头部信息，接收两个参数：头部字段名称，头部字段值；要成功发送请求头部信息，必须在调用open方法之后，调用send方法之前调用setRequestHeader</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">头部信息</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Accept</td>
+<td style="text-align:left">浏览器能够处理的内容类型</td>
+</tr>
+<tr>
+<td style="text-align:left">Accept-Charset</td>
+<td style="text-align:left">浏览器能够显示的字符集</td>
+</tr>
+<tr>
+<td style="text-align:left">Accept-Encoding</td>
+<td style="text-align:left">浏览器能够处理的压缩编码</td>
+</tr>
+<tr>
+<td style="text-align:left">Accept-Language</td>
+<td style="text-align:left">浏览器当前设置语言</td>
+</tr>
+<tr>
+<td style="text-align:left">Connection</td>
+<td style="text-align:left">浏览器与服务器之间的链接类型</td>
+</tr>
+<tr>
+<td style="text-align:left">Cookie</td>
+<td style="text-align:left">当前页面设置的热河Cookie</td>
+</tr>
+<tr>
+<td style="text-align:left">Host</td>
+<td style="text-align:left">发出请求的页面所在的域</td>
+</tr>
+<tr>
+<td style="text-align:left">Referer</td>
+<td style="text-align:left">发出请求的页面的URI(23333规范拼错了)</td>
+</tr>
+<tr>
+<td style="text-align:left">User-Agent</td>
+<td style="text-align:left">浏览器的用户代理字符串</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var xhr = createXHR();</span><br><span class="line">xhr.onreadystatechange = function()&#123;</span><br><span class="line">    if(xhr.readyState == 4)&#123;</span><br><span class="line">        if((xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300) || xhr.status == 304)&#123;</span><br><span class="line">            alert(xhr.resopnseText);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            alert(&quot;Request was unsuccessful: &quot;+xhr.status);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(&quot;get&quot;,&quot;example.php&quot;,true);</span><br><span class="line">xhr.setRequestHeader(&quot;MyHeader&quot;,&quot;MyValue&quot;);</span><br><span class="line">xhr.send(null);</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160;&#160; &#160;调用XHR对象的getRequestHeader方法并传入头部字段名称，可以取得相应头部信息，调用getAllResponseHeaders()方法则可以获得一个包含所有头部信息的长字符串</p>
+<h4 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h4><p>&#160; &#160;&#160; &#160;用于向服务器查询某些信息，使用GET请求经常发生的一个错误，就是查询字符串的格式有问题，查询字符串的每个参数的名称和值都必须使用encodeURIComponent()进行编码，然后放到URL末尾，而且所有名-值对都必须使用和号（&amp;）分隔；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(&quot;get&quot;,&quot;example.php?name1=value1&amp;name2=value2&quot;,true);</span><br><span class="line"></span><br><span class="line">//下面这个函数可以辅助向现有URL的末尾添加查询字符串字符</span><br><span class="line">function addURLParam(url,name,value) &#123;</span><br><span class="line">    url += (url.indexOf(&quot;?&quot;) == -1 ? &quot;?&quot; : &quot;&amp;&quot;);</span><br><span class="line">    url += encodeURIComponent(name) + &quot;=&quot; + encodeURIComponent(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//使用方法</span><br><span class="line">var url = &quot;example.php&quot;;</span><br><span class="line"></span><br><span class="line">url = addURLParam(url,&quot;name&quot;,&quot;Nicholas&quot;);</span><br><span class="line">url = addURLParam(url,&quot;book&quot;,&quot;Professional JavaScript&quot;);</span><br><span class="line"></span><br><span class="line">xhr.open(&quot;get&quot;,url,false);</span><br></pre></td></tr></table></figure>
+<h4 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h4><p>&#160; &#160;&#160; &#160;通常用于向服务器发送应该保存的数据，应该把数据作为请求的主体提交，可以包含非常多的数据，且格式不限；若要将页面中的表单数据进行序列化，然后通过XHR放到服务器，可使用14章的serialize函数来创建字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">    function submitData()&#123;</span><br><span class="line">        var xhr = createXHR();</span><br><span class="line">        xhr.onreadystatechange = function()&#123;</span><br><span class="line">            if(xhr.readyState == 4)&#123;</span><br><span class="line">                if((xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300) || xhr.status == 304)&#123;</span><br><span class="line">                    alert(xhr.resopnseText);</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    alert(&quot;Request was unsuccessful: &quot;+xhr.status);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        xhr.open(&quot;post&quot;,&quot;postExample.php&quot;,true);</span><br><span class="line">        xhr.setRequestHeader(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded&quot;);</span><br><span class="line">        var form = document.getElementById(&quot;user-info&quot;);</span><br><span class="line">        xhr.send(serialize(form));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    //示例php</span><br><span class="line">    &lt;?php</span><br><span class="line">    header(&quot;Content-Type:text/plain&quot;);</span><br><span class="line">    echo &lt;&lt;&lt;EOF</span><br><span class="line">    Name:&#123;$_POST[&apos;user-name&apos;]&#125;</span><br><span class="line">    Email:&#123;$_POST[&apos;user-email&apos;]&#125;</span><br><span class="line">    EOF;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qcode.jpg" alt="Chinti wechat" style="width: 200px; max-width: 100%;"/>
+    <div>=。=</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/24/百度前端学院-设计师学院-笔记/" rel="next" title="百度前端学院 设计师学院 笔记">
+                <i class="fa fa-chevron-left"></i> 百度前端学院 设计师学院 笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/1.gif"
+                alt="Chinti" />
+            
+              <p class="site-author-name" itemprop="name">Chinti</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Chinti" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:qinty12345@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第21章-Ajax与Comet"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;21&#x7AE0;-Ajax&#x4E0E;Comet" class="headerlink" title="&#x7B2C;21&#x7AE0; Ajax&#x4E0E;Comet"></a>&#x7B2C;21&#x7AE0; Ajax&#x4E0E;Comet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XMLHttpRequest对象"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#XMLHttpRequest&#x5BF9;&#x8C61;" class="headerlink" title="XMLHttpRequest&#x5BF9;&#x8C61;"></a>XMLHttpRequest&#x5BF9;&#x8C61;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XHR用法"><span class="nav-number">2.1.1.</span> <span class="nav-text"><a href="#XHR&#x7528;&#x6CD5;" class="headerlink" title="XHR&#x7528;&#x6CD5;"></a>XHR&#x7528;&#x6CD5;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP头部信息"><span class="nav-number">2.1.2.</span> <span class="nav-text"><a href="#HTTP&#x5934;&#x90E8;&#x4FE1;&#x606F;" class="headerlink" title="HTTP&#x5934;&#x90E8;&#x4FE1;&#x606F;"></a>HTTP&#x5934;&#x90E8;&#x4FE1;&#x606F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GET请求"><span class="nav-number">2.1.3.</span> <span class="nav-text"><a href="#GET&#x8BF7;&#x6C42;" class="headerlink" title="GET&#x8BF7;&#x6C42;"></a>GET&#x8BF7;&#x6C42;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#POST请求"><span class="nav-number">2.1.4.</span> <span class="nav-text"><a href="#POST&#x8BF7;&#x6C42;" class="headerlink" title="POST&#x8BF7;&#x6C42;"></a>POST&#x8BF7;&#x6C42;</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chinti</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("mMNtL0Pa4C7AKDTwkdDUuzg8-gzGzoHsz", "8yLqU0jMN4HFSP38ceo0nWMD");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
