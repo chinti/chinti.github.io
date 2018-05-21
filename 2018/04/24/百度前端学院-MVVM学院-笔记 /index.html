@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;主要记录百度前端学院MVVM学院部分的内容，貌似学的是百度自家的开源框架san……；MVVM学院代码地址；Demo地址">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-25T06:28:15.691Z">
+<meta property="og:updated_time" content="2018-05-13T02:15:14.087Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百度前端学院 MVVM学院 笔记">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;主要记录百度前端学院MVVM学院部分的内容，貌似学的是百度自家的开源框架san……；MVVM学院代码地址；Demo地址">
@@ -366,13 +366,13 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&#160; &#160;&#160; &#160;主要记录百度前端学院MVVM学院部分的内容，貌似学的是百度自家的开源框架san……；<a href="https://github.com/chinti/2018BaiduIFE/tree/master/MVVM" target="_blank" rel="noopener">MVVM学院代码地址</a>；<a href="http://chinti.xyz/2018BaiduIFE/">Demo地址</a></p>
 <a id="more"></a>
 <hr>
-<h2 id="1-1-github使用并star-san"><a href="#1-1-github使用并star-san" class="headerlink" title="1.1 github使用并star san"></a>1.1 github使用并star san</h2><p>&#160; &#160;&#160; &#160;需要深入学习github和准备IDE</p>
+<h2 id="1-1-课程系列引导及准备工作"><a href="#1-1-课程系列引导及准备工作" class="headerlink" title="1.1 课程系列引导及准备工作"></a>1.1 课程系列引导及准备工作</h2><p>&#160; &#160;&#160; &#160;需要深入学习github和准备IDE</p>
 <p>资料：</p>
-<p><a href="https://git-scm.com/docs" target="_blank" rel="noopener">git文档</a><br><a href="https://baidu.github.io/san/" target="_blank" rel="noopener">san的主页</a></p>
+<p><a href="https://git-scm.com/docs" target="_blank" rel="noopener">git文档</a><br><a href="https://baidu.github.io/san/" target="_blank" rel="noopener">san的主页</a><br><a href="http://zhangwenli.com/blog/2016/02/19/ask-for-technical-help/" target="_blank" rel="noopener">江湖救急指南上</a>，<a href="http://zhangwenli.com/blog/2016/02/21/ask-for-technical-help/" target="_blank" rel="noopener">江湖救急指南下</a></p>
 <p>以前在知乎上看到一个简易版github介绍，觉得挺有意思：</p>
 <p><a href="https://www.zhihu.com/question/20070065" target="_blank" rel="noopener">怎样使用Github</a></p>
 <hr>
-<h2 id="1-2-用webpack4-parcel快速搭建开发san-helloworld"><a href="#1-2-用webpack4-parcel快速搭建开发san-helloworld" class="headerlink" title="1.2 用webpack4/parcel快速搭建开发san helloworld"></a>1.2 用webpack4/parcel快速搭建开发san helloworld</h2><p>&#160; &#160;&#160; &#160;按照任务给的学习资料弄一个hello world</p>
+<h2 id="1-2-用parcel快速搭建开发san-helloworld"><a href="#1-2-用parcel快速搭建开发san-helloworld" class="headerlink" title="1.2 用parcel快速搭建开发san helloworld"></a>1.2 用parcel快速搭建开发san helloworld</h2><p>&#160; &#160;&#160; &#160;按照任务给的学习资料弄一个hello world</p>
 <p>资料：</p>
 <p><a href="https://github.com/baidu/san" target="_blank" rel="noopener">https://github.com/baidu/san</a>，san主页<br><a href="https://webpack.js.org" target="_blank" rel="noopener">https://webpack.js.org</a>，webpack4主页<br><a href="https://medium.com/webpack" target="_blank" rel="noopener">https://medium.com/webpack</a>，这个得用vpn<br><a href="https://parceljs.org/" target="_blank" rel="noopener">https://parceljs.org/</a>，parcel主页</p>
 <p>&#160; &#160;&#160; &#160;英文看的稍微有点吃力，先用Parcel做起来再回过头搞webpack吧；</p>
@@ -385,6 +385,18 @@
 <p>npm允许在package.json文件里面，使用script字段定义脚本命令，所以只有配置了才能执行诸如npm run dev/build这样的命令；不过我暂时用的是parcel，好像用不到官网上的这个东西。。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;: &quot;my-san-app&quot;,</span><br><span class="line">    &quot;scripts&quot;: &#123;</span><br><span class="line">        &quot;dev&quot;: &quot;NODE_ENV=development webpack-dev-server --config webpack.config.js&quot;,</span><br><span class="line">        &quot;build&quot;: &quot;NODE_ENV=production webpack --config webpack.config.js&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>注意NODE_ENV<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">    &#123;</span><br><span class="line">    module: &#123;</span><br><span class="line">        loaders: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: /\.san$/,</span><br><span class="line">                loader: &apos;san-loader&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    resolve: &#123;</span><br><span class="line">        alias: &#123;</span><br><span class="line">            san: process.env.NODE_ENV === &apos;production&apos;</span><br><span class="line">                ? &apos;san/dist/san.js&apos;</span><br><span class="line">                : &apos;san/dist/san.dev.js&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="1-2-用webpack快速搭建开发san-helloworld"><a href="#1-2-用webpack快速搭建开发san-helloworld" class="headerlink" title="1.2 用webpack快速搭建开发san helloworld"></a>1.2 用webpack快速搭建开发san helloworld</h2><p><a href="https://legacy.gitbook.com/book/zhaoda/webpack/details" target="_blank" rel="noopener">webpack中文说明</a>（按照官方例程npx webpack后就是不出那个hello webpack。。。，我现在大概知道原因了，好像是中文目录的锅）<br><a href="https://segmentfault.com/a/1190000014142975" target="_blank" rel="noopener">Webpack 4x之路（一）</a>（可以照着这个博客做，目录中不要有中文文件夹）<br><a href="https://segmentfault.com/a/1190000014168594" target="_blank" rel="noopener">Webpack 4x之路（二）</a>，这段是安装热更新的工具，以及使用html打包工具<br><a href="https://segmentfault.com/a/1190000014170428" target="_blank" rel="noopener">Webpack 4x之路（三）</a>，这段配置style-loader和css-loader还有js压缩功能<br><a href="https://segmentfault.com/a/1190000014174757" target="_blank" rel="noopener">Webpack 4x之路（四）</a>，这段主要是处理图片和css文件分离，url-loader，mini-css-extract-plugin<br><a href="https://segmentfault.com/a/1190000014216776" target="_blank" rel="noopener">Webpack 4x之路（五）</a>，这篇前面将如何处理html中的img标签的图片如何处理，但是不好用，我采用了另一篇讲的方法；后面是将less和sass的处理还有postcss前缀处理以及最后的babel标签，进行js翻译，使用一些新锐下一代的代码<br><a href="https://segmentfault.com/q/1010000012743623" target="_blank" rel="noopener">如何打包图片文件</a>，利用html-loader可以直接处理img的src</p>
+<ul>
+<li><strong>还有，san官网中使用规则时一定要用rules: test:…,use:…，不要用他给的loaders，这个也坑了好久，一直外部的san文件读不了。。</strong></li>
+</ul>
+<p>为了在开发环境组织好碎片化的代码和资源，并且保证他们在浏览器端快速、优雅的加载和更新，需要一个模块化的系统</p>
+<ul>
+<li>Webpack的特点：代码拆分，Webpack有两种组织模块依赖的方式，同步和异步，异步依赖作为分割点，形成一个新的块，在优化了依赖树后，每个异步区块都作为一个文件被打包；Loader转换器可以将各种类型资源转换为JS模块；智能解析器，几乎可以处理任何第三方库，动态表达式<code>require(&quot;./templates/&quot; + name + &quot;.jade&quot;)</code>；插件系统，Webpack拥有功能丰富的插件系统；快速运行，采取异步I/O和多级缓存提高运行效率</li>
+<li><code>npm install webpack -g</code>，全局安装webpack</li>
+<li><code>npm init</code>创建package.json，然后<code>npm install webpack --save-dev</code>安装webpack依赖</li>
+<li><code>npm info webpack</code>查看版本信息，<code>npm install webpack-dev-server --save-dev</code>安装开发工具</li>
+</ul>
 
       
     </div>
@@ -516,7 +528,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -538,7 +550,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -587,7 +599,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-github使用并star-san"><span class="nav-number">2.</span> <span class="nav-text"><a href="#1-1-github&#x4F7F;&#x7528;&#x5E76;star-san" class="headerlink" title="1.1 github&#x4F7F;&#x7528;&#x5E76;star san"></a>1.1 github&#x4F7F;&#x7528;&#x5E76;star san</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-用webpack4-parcel快速搭建开发san-helloworld"><span class="nav-number">3.</span> <span class="nav-text"><a href="#1-2-&#x7528;webpack4-parcel&#x5FEB;&#x901F;&#x642D;&#x5EFA;&#x5F00;&#x53D1;san-helloworld" class="headerlink" title="1.2 &#x7528;webpack4/parcel&#x5FEB;&#x901F;&#x642D;&#x5EFA;&#x5F00;&#x53D1;san helloworld"></a>1.2 &#x7528;webpack4/parcel&#x5FEB;&#x901F;&#x642D;&#x5EFA;&#x5F00;&#x53D1;san helloworld</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-课程系列引导及准备工作"><span class="nav-number">2.</span> <span class="nav-text"><a href="#1-1-&#x8BFE;&#x7A0B;&#x7CFB;&#x5217;&#x5F15;&#x5BFC;&#x53CA;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;" class="headerlink" title="1.1 &#x8BFE;&#x7A0B;&#x7CFB;&#x5217;&#x5F15;&#x5BFC;&#x53CA;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;"></a>1.1 &#x8BFE;&#x7A0B;&#x7CFB;&#x5217;&#x5F15;&#x5BFC;&#x53CA;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-用parcel快速搭建开发san-helloworld"><span class="nav-number">3.</span> <span class="nav-text"><a href="#1-2-&#x7528;parcel&#x5FEB;&#x901F;&#x642D;&#x5EFA;&#x5F00;&#x53D1;san-helloworld" class="headerlink" title="1.2 &#x7528;parcel&#x5FEB;&#x901F;&#x642D;&#x5EFA;&#x5F00;&#x53D1;san helloworld"></a>1.2 &#x7528;parcel&#x5FEB;&#x901F;&#x642D;&#x5EFA;&#x5F00;&#x53D1;san helloworld</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-用webpack快速搭建开发san-helloworld"><span class="nav-number">4.</span> <span class="nav-text"><a href="#1-2-&#x7528;webpack&#x5FEB;&#x901F;&#x642D;&#x5EFA;&#x5F00;&#x53D1;san-helloworld" class="headerlink" title="1.2 &#x7528;webpack&#x5FEB;&#x901F;&#x642D;&#x5EFA;&#x5F00;&#x53D1;san helloworld"></a>1.2 &#x7528;webpack&#x5FEB;&#x901F;&#x642D;&#x5EFA;&#x5F00;&#x53D1;san helloworld</span></a></li></ol></div>
             
 
           </div>
