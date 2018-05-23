@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ChinTi&#39;s Blog">
 <meta property="og:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;jQuery将JS的大量DOM操作进行了封装，能使用户更方便地处理HTML documents、event、动效以及进行ajax交互；同时还具有一个非常强大的选择器，不过现在dom也同样推出了querySelector和querySelectorAll，这方面的优势小了不少；兼容性好，到新版为止，应该可以兼容IE8；jQuery的压缩包只有1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-17T02:31:50.357Z">
+<meta property="og:updated_time" content="2018-05-23T07:12:10.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="锋利的jQuery 阅读笔记">
 <meta name="twitter:description" content="前言&amp;#160; &amp;#160;&amp;#160; &amp;#160;jQuery将JS的大量DOM操作进行了封装，能使用户更方便地处理HTML documents、event、动效以及进行ajax交互；同时还具有一个非常强大的选择器，不过现在dom也同样推出了querySelector和querySelectorAll，这方面的优势小了不少；兼容性好，到新版为止，应该可以兼容IE8；jQuery的压缩包只有1">
@@ -481,7 +481,127 @@
 <li>scrollTop()，获取滚动条到顶端的距离；scrollLeft()，获取滚动条到左端的距离；输入数字，表示滚动到某个地方</li>
 </ul>
 <hr>
-<h2 id="第四章-jQuery中的事件和动画"><a href="#第四章-jQuery中的事件和动画" class="headerlink" title="第四章 jQuery中的事件和动画"></a>第四章 jQuery中的事件和动画</h2>
+<h2 id="第四章-jQuery中的事件和动画"><a href="#第四章-jQuery中的事件和动画" class="headerlink" title="第四章 jQuery中的事件和动画"></a>第四章 jQuery中的事件和动画</h2><p>###jQuery中的事件###</p>
+<p><strong>加载DOM</strong></p>
+<p><code>$(document).ready()</code>和<code>window.onload</code></p>
+<ul>
+<li>执行时机，window.onload实在网页中所有元素包括元素的所有关联文件，完全加载到浏览器后才执行；另一个则是在DOM完全就绪时就可以被调用，所以此时这些元素的关联文件未必已经下载完毕；jQuery中<code>$(window).load(function(){})</code>与前者等价</li>
+<li>多次使用，<code>$(document).ready()</code>，每次调用会追加；而另一个不会，需要将所有的行为都写在一个里面，否则会被覆盖</li>
+<li>简写，<code>$(function(){//编写代码})</code>，<code>$().ready(function(){//编写代码})</code></li>
+</ul>
+<p><strong>事件绑定</strong></p>
+<ul>
+<li><code>bind([type]， [data] ,fn);</code>，可多次调用，可绑定自定义事件；is()方法</li>
+<li>简写绑定事件，<code>.click() .mouseover() .mouseout()</code></li>
+</ul>
+<p><strong>合成事件</strong></p>
+<ul>
+<li><code>hover(enter,leave)</code>，用于模拟光标悬停，移动到元素上时触发第一个函数，移出触发第二个</li>
+<li><code>toggle(fn1,fn2,...fnN);</code>，单击并按顺序轮番调用事件；另一个作用，切换元素的可见状态</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;</span><br><span class="line">    $(&quot;#panel h5.head&quot;).toggle(function()&#123;</span><br><span class="line">        $(this).next().toggle();</span><br><span class="line">    &#125;,function()&#123;</span><br><span class="line">        $(this).next().toggle();</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>事件冒泡</strong></p>
+<ul>
+<li>停止事件冒泡，<code>stopPropagation()</code></li>
+<li>阻止默认行为，<code>preventDefault()</code></li>
+<li>若要同时阻止冒泡和默认行为，则可以<code>return false</code></li>
+<li>不支持事件捕获</li>
+</ul>
+<p><strong>事件对象的属性</strong></p>
+<ul>
+<li>event.type</li>
+<li>event.target</li>
+<li>event.relatedTarget</li>
+<li>event.pageX和event.pageY，获取光标相对于页面的x坐标和y坐标</li>
+<li>e.which，获取鼠标左中右键（1,2,3）</li>
+<li>e.metaKey，获取ctrl按键</li>
+</ul>
+<p><strong>移除事件</strong></p>
+<ul>
+<li><code>unbind([type],[data])</code>，没有参数删除全部，提供事件类型，则只删除该类型，将绑定的参数作为第2个参数，则只删除该处理函数（为匿名函数指定一个变量）</li>
+<li><code>one([type],[data],fn)</code>，只触发一次的事件可以用该方法</li>
+</ul>
+<p><strong>模拟操作</strong></p>
+<ul>
+<li>常用模拟，<code>$(&#39;#btn&#39;).trigger(&quot;click&quot;);</code>，简化写法，<code>$(&#39;btn&#39;).click();</code></li>
+<li>触发自定义事件，<code>$(&#39;btn&#39;).bind(&quot;myClick&quot;,function(){}); $(&#39;btn&#39;).trigger(&quot;myClick&quot;);</code>； trigger[type,data]第二个参数可以传递数据</li>
+<li>执行默认操作，若不想触发默认操作，<code>triggerHandler()</code>只触发绑定的事件</li>
+</ul>
+<p><strong>其他用法</strong></p>
+<ul>
+<li>绑定多个事件类型</li>
+<li>添加事件命名空间，便于管理，<code>.bind(&quot;click.plugin&quot;,function(){});</code>；<code>trigger(&#39;click!&#39;)</code>，感叹号用于匹配所有不包含在命名空间内的click方法</li>
+</ul>
+<p>###jQuery动画###</p>
+<ul>
+<li>注意，需要头部包含DTD定义，否则可能会动画抖动</li>
+<li>show()和hide()，可以为它们指定速度参数，比如slow，normal，fast，也可以指定数字，单位是毫秒</li>
+<li>fadeIn()和fadeOut()，改变不透明度</li>
+<li>slideUp()和slideDown()，改变元素高度</li>
+<li>自定义动画animate()，<code>animate(params,speed,callback);</code>，params:<code>{property1 : &#39;value1&#39; ,property2 : &#39;value2&#39;},</code>，若需要累加累减动画，可以类似于animate({left: “+=500px”},300)；分开写animate可以按顺序执行多个动画</li>
+<li>动画回调函数，非动画方法是不加入动画序列的，所以必须写在最后一个动画的回调函数内，这样可以在最后一步时执行这个函数</li>
+<li>停止动画和判断是否处于动画状态，<code>stop([clearQueue],[gotoEnd]);</code>，这两个参数都是bool型，前者代表是否要清空未执行完的动画序列，后者表示是否要将正在执行的动画跳转到末尾；<code>is(&quot;:animated&quot;)</code>，delay()可以用来延迟动画</li>
+<li>其他动画方法，toggle(speed,[callback])，slideToggle(speed,[easing],[callback])，fadeTo(speed,opacity,[callback])，fadeToggle(speed,[easing],[callback])</li>
+</ul>
+<hr>
+<h2 id="第5章-jQuery对表单、表格的操作及更多应用"><a href="#第5章-jQuery对表单、表格的操作及更多应用" class="headerlink" title="第5章 jQuery对表单、表格的操作及更多应用"></a>第5章 jQuery对表单、表格的操作及更多应用</h2><p>###表单应用###</p>
+<p>表单：表单标签，表单域，表单按钮</p>
+<ul>
+<li>单行文本框应用，focus()，blur()</li>
+<li>多行文本框应用，高度变化：用animate替代直接修改height，<code>animate({ height: &quot;+=50&quot;}, 400)</code>，注意要判断是否存在动画，避免动画效果的堆积；滚动条高度变化，<code>animate({ scrollTop: &quot;+=50&quot; }, 400)</code></li>
+<li>复选框应用，<code>attr(&#39;checked&#39;,true)</code>设置选中，<code>.att(&#39;checked&#39;)</code>获取值；反选可以利用取非，这里采用js的DOM操作可能会更加简洁，<code>.each(function(){//something})</code>，遍历jQuery元素</li>
+<li>prop()，返回true/false，第一个原则，只添加属性名称该属性就会生效，第二个原则，只存在true/false的属性，都应该使用prop()替代attr()</li>
+<li>下拉框应用，删除和追加可以利用appendTo()直接完成；dbclick(fn)，双击事件；$(“option:selected”,this)，后者代表作用域，默认是document</li>
+<li>表单验证，利用trigger再次触发blur()中的验证；客户端的验证主要是为了用户体验，服务器端，仍需要对输入的数据进行合法性检验</li>
+</ul>
+<p>###表格应用###</p>
+<ul>
+<li>表格变色<ul>
+<li>普通的隔行变色，<code>$(&#39;tr:odd&#39;).addClass(&#39;odd&#39;)</code>；<code>$(&#39;tr:contains(&quot;王五&quot;)&#39;).addClass(&quot;selected&quot;);</code>，选取包含指定字符串的字符；.end()方法，可以结束当前链条中的最近筛选操作，并将匹配元素返回到之前状态；<code>:has()</code>选择器</li>
+<li>复选框控制表格高亮，<code>var hasSelected = $(this).hasClass(&#39;selected&#39;)  ; $(this)[hasSelected ? &quot;removeClass&quot;: &quot;addClass&quot;](&#39;selected&#39;)</code>，有时候可以使用三目运算符</li>
+</ul>
+</li>
+<li>表格展开和关闭，利用toggle()和click()</li>
+<li>表格内容筛选，利用filter和:contain，制作筛选器；表单元素有个特性，刷新不会清空值，但是下拉的表格内容会还原，所以在DOM加载完时，可以立即执行一次事件</li>
+</ul>
+<p>###其他应用###</p>
+<ul>
+<li>网页字体大小，利用slice(-2)将获取的字体大小，去除px，然后就是改变css，<code>.css()</code></li>
+<li>网页选项卡，通过隐藏和显示来切换不同内容</li>
+<li>网页换肤，切换不同的样式表，attr(‘href’, ‘css/‘ + this.id + ‘.css’)；操纵cookie用以保存用户信息，第七章有关于cookie插件的引入</li>
+</ul>
+<hr>
+<h2 id="第六章-jQuery和Ajax"><a href="#第六章-jQuery和Ajax" class="headerlink" title="第六章 jQuery和Ajax"></a>第六章 jQuery和Ajax</h2><p>###Ajax的优势和不足###</p>
+<ul>
+<li>不需要插件支持，优秀的用户体验，提高Web程序的性能，减轻服务器和带宽的负担</li>
+<li><p>浏览器对XMLHttpRequest对象的支持度不足，破坏浏览器前进、“后退”按钮的正常功能，对搜索引擎的支持的不足，开发和调试工具的缺乏</p>
+</li>
+<li><p>传统JS</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type = &quot;button&quot; value = &quot;Ajax提交&quot; onclick = &quot;Ajax();&quot;/&gt;</span><br><span class="line">&lt;div id = &quot;resText&quot;&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">funciton Ajax() &#123;</span><br><span class="line">    var xmlHttpReq = null;</span><br><span class="line">    if(window.ActiveXObject) &#123;</span><br><span class="line">        xmlHttpReg = new Active XObject(&quot;Microsoft.XMLHTTP&quot;);</span><br><span class="line">    &#125; else if(window.XMLHttpRequest) &#123;</span><br><span class="line">        xmlHttpReg = new XMLHttpRequest();</span><br><span class="line">    &#125;</span><br><span class="line">    xmlHttpReq.open(&quot;GET&quot;,&quot;test.php&quot;,true);</span><br><span class="line">    xmlHttpReq.onreadystatechange = RequestCallBack;</span><br><span class="line">    xmlHttpReq.send(null);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function RequestCallBack() &#123;</span><br><span class="line">    if(xmlHttpReq.readyState == 4) &#123;</span><br><span class="line">        if(xmlHttpReq.status == 200 ) &#123;</span><br><span class="line">            document.getElementById(&quot;resText&quot;).innerHTML = xmlHttp Req.responseText;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###jQuery 中的Ajax###</p>
+<ul>
+<li>load()方法，<code>load(url ,[data],[callback])</code>，url请求HTML页面的URL地址，data发送至服务器的key/value数据，callback，请求完成时的回调函数，无论请求成功还是失败，无参数使用GET，有参数自动转为POST方式</li>
+<li><code>$.get()</code>和<code>$.post()</code>，<code>$.get(url,[data],[callback],[type])</code>，url请求的URL地址，data发送至服务器的key/value会作为QueryString的附加值到请求URL中，callback载入成功时回调函数自动将请求结果传递给该方法，type服务器返回的格式，xml、html、script、json、text和_default</li>
+<li>get与post区别，get请求会将参数在url后进行转换，post请求，则是作为消息的实体内容；get方式对传输数据有大小限制(&lt;2kb)， 而post理论上不受限制；get方式的请求会被浏览器缓存起来，post方式相对安全</li>
+<li><code>$.getScript(&#39;text.js&#39;,[callback])</code>，加载指定js，并可以执行回调函数</li>
+<li><code>$.getJSON(url,[callback])</code>，与getScript类似，只是只用于加载json文件</li>
+<li><code>$.each()</code>不同于jQuery对象的each()方法，是一个全局函数，不操作对象，一个数组或对象作为第一个参数，一个回调函数作为第二个参数；回掉函数拥有两个参数，第一个为对象的成员或数组的索引，第二个为对应变量或内容</li>
+<li><code>$.ajax(options)</code>，包含了所有的参数：url type timeout data dataType beforeSend complete success error global</li>
+</ul>
+<p>###序列化元素###</p>
+<ul>
+<li>serialize()方法，将DOM元素内容序列化为字符串</li>
+<li>serializeArray()方法，序列化后返回JSON格式的数据</li>
+<li><code>$.param(obj)</code>，用来对一个数组或对象按照key/value进行序列化</li>
+</ul>
+<p>###Ajax全局事件###</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;#loading&apos;).ajaxStart(function()&#123;</span><br><span class="line">    $(this).show();</span><br><span class="line">    &#125;).ajaxStop(function()&#123;</span><br><span class="line">        $(this).hide();</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ajaxComplete(callback)，ajaxError()，ajaxSend()，ajaxSuccess()</li>
+</ul>
+
       
     </div>
     
@@ -679,7 +799,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章-认识jquery"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E00;&#x7AE0;-&#x8BA4;&#x8BC6;jquery" class="headerlink" title="&#x7B2C;&#x4E00;&#x7AE0; &#x8BA4;&#x8BC6;jquery"></a>&#x7B2C;&#x4E00;&#x7AE0; &#x8BA4;&#x8BC6;jquery</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章-jQuery选择器"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E8C;&#x7AE0;-jQuery&#x9009;&#x62E9;&#x5668;" class="headerlink" title="&#x7B2C;&#x4E8C;&#x7AE0; jQuery&#x9009;&#x62E9;&#x5668;"></a>&#x7B2C;&#x4E8C;&#x7AE0; jQuery&#x9009;&#x62E9;&#x5668;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章-jQuery中的DOM操作"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E09;&#x7AE0;-jQuery&#x4E2D;&#x7684;DOM&#x64CD;&#x4F5C;" class="headerlink" title="&#x7B2C;&#x4E09;&#x7AE0; jQuery&#x4E2D;&#x7684;DOM&#x64CD;&#x4F5C;"></a>&#x7B2C;&#x4E09;&#x7AE0; jQuery&#x4E2D;&#x7684;DOM&#x64CD;&#x4F5C;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章-jQuery中的事件和动画"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x7B2C;&#x56DB;&#x7AE0;-jQuery&#x4E2D;&#x7684;&#x4E8B;&#x4EF6;&#x548C;&#x52A8;&#x753B;" class="headerlink" title="&#x7B2C;&#x56DB;&#x7AE0; jQuery&#x4E2D;&#x7684;&#x4E8B;&#x4EF6;&#x548C;&#x52A8;&#x753B;"></a>&#x7B2C;&#x56DB;&#x7AE0; jQuery&#x4E2D;&#x7684;&#x4E8B;&#x4EF6;&#x548C;&#x52A8;&#x753B;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x524D;&#x8A00;" class="headerlink" title="&#x524D;&#x8A00;"></a>&#x524D;&#x8A00;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章-认识jquery"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E00;&#x7AE0;-&#x8BA4;&#x8BC6;jquery" class="headerlink" title="&#x7B2C;&#x4E00;&#x7AE0; &#x8BA4;&#x8BC6;jquery"></a>&#x7B2C;&#x4E00;&#x7AE0; &#x8BA4;&#x8BC6;jquery</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章-jQuery选择器"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E8C;&#x7AE0;-jQuery&#x9009;&#x62E9;&#x5668;" class="headerlink" title="&#x7B2C;&#x4E8C;&#x7AE0; jQuery&#x9009;&#x62E9;&#x5668;"></a>&#x7B2C;&#x4E8C;&#x7AE0; jQuery&#x9009;&#x62E9;&#x5668;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章-jQuery中的DOM操作"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7B2C;&#x4E09;&#x7AE0;-jQuery&#x4E2D;&#x7684;DOM&#x64CD;&#x4F5C;" class="headerlink" title="&#x7B2C;&#x4E09;&#x7AE0; jQuery&#x4E2D;&#x7684;DOM&#x64CD;&#x4F5C;"></a>&#x7B2C;&#x4E09;&#x7AE0; jQuery&#x4E2D;&#x7684;DOM&#x64CD;&#x4F5C;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章-jQuery中的事件和动画"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x7B2C;&#x56DB;&#x7AE0;-jQuery&#x4E2D;&#x7684;&#x4E8B;&#x4EF6;&#x548C;&#x52A8;&#x753B;" class="headerlink" title="&#x7B2C;&#x56DB;&#x7AE0; jQuery&#x4E2D;&#x7684;&#x4E8B;&#x4EF6;&#x548C;&#x52A8;&#x753B;"></a>&#x7B2C;&#x56DB;&#x7AE0; jQuery&#x4E2D;&#x7684;&#x4E8B;&#x4EF6;&#x548C;&#x52A8;&#x753B;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第5章-jQuery对表单、表格的操作及更多应用"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x7B2C;5&#x7AE0;-jQuery&#x5BF9;&#x8868;&#x5355;&#x3001;&#x8868;&#x683C;&#x7684;&#x64CD;&#x4F5C;&#x53CA;&#x66F4;&#x591A;&#x5E94;&#x7528;" class="headerlink" title="&#x7B2C;5&#x7AE0; jQuery&#x5BF9;&#x8868;&#x5355;&#x3001;&#x8868;&#x683C;&#x7684;&#x64CD;&#x4F5C;&#x53CA;&#x66F4;&#x591A;&#x5E94;&#x7528;"></a>&#x7B2C;5&#x7AE0; jQuery&#x5BF9;&#x8868;&#x5355;&#x3001;&#x8868;&#x683C;&#x7684;&#x64CD;&#x4F5C;&#x53CA;&#x66F4;&#x591A;&#x5E94;&#x7528;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章-jQuery和Ajax"><span class="nav-number">7.</span> <span class="nav-text"><a href="#&#x7B2C;&#x516D;&#x7AE0;-jQuery&#x548C;Ajax" class="headerlink" title="&#x7B2C;&#x516D;&#x7AE0; jQuery&#x548C;Ajax"></a>&#x7B2C;&#x516D;&#x7AE0; jQuery&#x548C;Ajax</span></a></li></ol></div>
             
 
           </div>
